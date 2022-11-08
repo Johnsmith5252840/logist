@@ -1,0 +1,67 @@
+.request{
+    background-image: url("../assets/menu.png");
+    width: 44px;
+    height: 36px;
+    background-position: 0px 0px;
+    margin:0px 20px;
+    border-bottom-color:#39badf;
+    border-left:1px solid #191a1b;
+}
+.order{
+    background-image: url("../assets/menu.png");
+    width: 42px;
+    height: 36px;
+    background-position: -44px 0px;
+    margin:0px 20px;
+    border-bottom-color:#55df39;
+    border-left:1px solid #191a1b;
+}
+.finance{
+    background-image: url("../assets/menu.png");
+    width: 36px;
+    height: 36px;
+    background-position: -36px -77px;
+    margin:0px 20px;
+    border-bottom-color:#67cdbb;
+}
+.client{
+    background-image: url("../assets/menu.png");
+    width: 49px;
+    height: 36px;
+    background-position: -125px 0px;
+    margin:0px 20px;
+    border-bottom-color:#faa502;
+}
+.carrier{
+    background-image: url("../assets/menu.png");
+    width: 40px;
+    height: 36px;
+    background-position: -85px 0px;
+    margin:0px 20px;
+    border-bottom-color:#efca02;
+}
+.report{
+    background-image: url("../assets/menu.png");
+    width: 32px;
+    height: 36px;
+    background-position: -175px 0px;
+    margin:0px 20px;
+    border-bottom-color:#e4322f;
+}
+.task{
+    background-image: url("../assets/menu.png");
+    width: 36px;
+    height: 36px;
+    background-position: 0px -77px;
+    margin:0px 20px;
+    border-bottom-color:#4f74fc;
+}
+
+.setting{
+    background-image: url("../assets/menu.png");
+    width: 34px;
+    height: 36px;
+    background-position: -207px 0px;
+    margin:0px 20px;
+    border-bottom-color:#8e3adf;
+}
