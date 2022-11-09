@@ -5,8 +5,11 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Active from "./Active";
-import Archive from "./Archive";
+import Issued from "./Issued";
+import Received from "./Received";
+import Acts from "./Acts";
+import Payments from "./Payments";
+import Made from "./Made";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -58,30 +61,66 @@ export default function Index() {
             style={{ backgroundColor: "#23282a" }}
           >
             <Tab
-              icon={<span className="active" />}
+              icon={<span className="orders" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Active</span>
+                  <span style={{ color: "white" }}>Issued</span>
                 </Box>
               }
               {...a11yProps(0)}
             />
             <Tab
-              icon={<span className="archive" />}
+              icon={<span className="cargos" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Archive</span>
+                  <span style={{ color: "white" }}>Received</span>
                 </Box>
               }
               {...a11yProps(1)}
             />
+            <Tab
+              icon={<span className="trips" />}
+              label={
+                <Box className="tabBtn">
+                  <span style={{ color: "white" }}>Acts</span>
+                </Box>
+              }
+              {...a11yProps(2)}
+            />
+            <Tab
+              icon={<span className="trips" />}
+              label={
+                <Box className="tabBtn">
+                  <span style={{ color: "white" }}>Payments</span>
+                </Box>
+              }
+              {...a11yProps(3)}
+            />
+            <Tab
+              icon={<span className="trips" />}
+              label={
+                <Box className="tabBtn">
+                  <span style={{ color: "white" }}>Payments made</span>
+                </Box>
+              }
+              {...a11yProps(4)}
+            />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Active />
+          <Issued />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Archive />
+          <Received />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <Acts />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <Payments />
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <Made />
         </TabPanel>
       </Box>
     </>

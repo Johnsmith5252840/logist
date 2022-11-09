@@ -65,3 +65,13 @@
     margin:0px 20px;
     border-bottom-color:#8e3adf;
 }
+.tabBtn{
+    border-radius: 10px;
+    background-color: #39badf;
+    padding: 10px;
+}
+.filterBox{
+    display:flex;
+    align-items: center;
+    margin-top: 10px;
+}
