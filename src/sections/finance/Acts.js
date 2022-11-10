@@ -11,7 +11,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -85,68 +84,13 @@ const rows = [
   },
 ];
 
-const IOSSwitch = styled((props) => (
-  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme }) => ({
-  width: 42,
-  height: 26,
-  padding: 0,
-  "& .MuiSwitch-switchBase": {
-    padding: 0,
-    margin: 2,
-    transitionDuration: "300ms",
-    "&.Mui-checked": {
-      transform: "translateX(16px)",
-      color: "#fff",
-      "& + .MuiSwitch-track": {
-        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
-        opacity: 1,
-        border: 0,
-      },
-      "&.Mui-disabled + .MuiSwitch-track": {
-        opacity: 0.5,
-      },
-    },
-    "&.Mui-focusVisible .MuiSwitch-thumb": {
-      color: "#33cf4d",
-      border: "6px solid #fff",
-    },
-    "&.Mui-disabled .MuiSwitch-thumb": {
-      color:
-        theme.palette.mode === "light"
-          ? theme.palette.grey[100]
-          : theme.palette.grey[600],
-    },
-    "&.Mui-disabled + .MuiSwitch-track": {
-      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
-    },
-  },
-  "& .MuiSwitch-thumb": {
-    boxSizing: "border-box",
-    width: 22,
-    height: 22,
-  },
-  "& .MuiSwitch-track": {
-    borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
-    opacity: 1,
-    transition: theme.transitions.create(["background-color"], {
-      duration: 500,
-    }),
-  },
-}));
 export default function Acts() {
-  const [loadingValue, setLoadingValue] = React.useState([null, null]);
-  const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
-  const [orderValue, setOrderValue] = React.useState([null, null]);
-  const [orderStatusValue, setOrderStatusValue] = React.useState([null, null]);
+  const [creationValue, setCreationValue] = React.useState([null, null]);
+  const [actValue, setActValue] = React.useState([null, null]);
   const [filterID, setFilterID] = React.useState(true);
   const [filterDate, setFilterDate] = React.useState(false);
-  const [filterCarriers, setFilterCarriers] = React.useState(false);
-  const [filterTrips, setFilterTrips] = React.useState(false);
-  const [filterOther, setFilterOther] = React.useState(false);
-  const [filterStatuses, setFilterStatuses] = React.useState(false);
-  const [filterSort, setFilterSort] = React.useState(false);
+  const [filterClients, setFilterClients] = React.useState(false);
+  const [filterUsers, setFilterUsers] = React.useState(false);
   const Delete = (filterItem) => {
     switch (filterItem) {
       case 1:
@@ -156,19 +100,10 @@ export default function Acts() {
         setFilterDate(false);
         break;
       case 3:
-        setFilterCarriers(false);
+        setFilterClients(false);
         break;
       case 4:
-        setFilterTrips(false);
-        break;
-      case 5:
-        setFilterOther(false);
-        break;
-      case 6:
-        setFilterSort(false);
-        break;
-      case 7:
-        setFilterStatuses(false);
+        setFilterUsers(false);
         break;
     }
   };
@@ -181,19 +116,10 @@ export default function Acts() {
         setFilterDate(true);
         break;
       case 3:
-        setFilterCarriers(true);
+        setFilterClients(true);
         break;
       case 4:
-        setFilterTrips(true);
-        break;
-      case 5:
-        setFilterOther(true);
-        break;
-      case 6:
-        setFilterSort(true);
-        break;
-      case 7:
-        setFilterStatuses(true);
+        setFilterUsers(true);
         break;
     }
   };
@@ -219,34 +145,16 @@ export default function Acts() {
               Date
             </Button>
             <Button
-              variant={filterCarriers === false ? "outlined" : "contained"}
+              variant={filterClients === false ? "outlined" : "contained"}
               onClick={() => Display(3)}
             >
-              Carriers
+              Clients
             </Button>
             <Button
-              variant={filterTrips === false ? "outlined" : "contained"}
+              variant={filterUsers === false ? "outlined" : "contained"}
               onClick={() => Display(4)}
             >
-              Trips
-            </Button>
-            <Button
-              variant={filterOther === false ? "outlined" : "contained"}
-              onClick={() => Display(5)}
-            >
-              Other
-            </Button>
-            <Button
-              variant={filterSort === false ? "outlined" : "contained"}
-              onClick={() => Display(6)}
-            >
-              Sort
-            </Button>
-            <Button
-              variant={filterStatuses === false ? "outlined" : "contained"}
-              onClick={() => Display(7)}
-            >
-              Statuses
+              Users
             </Button>
           </Box>
 
@@ -266,12 +174,57 @@ export default function Acts() {
             >
               Del
             </Button>
-            <TextField
-              id="outlined-basic"
-              label="Trip Number"
-              variant="outlined"
-              sx={{ ml: "60px" }}
-            />
+            <Box sx={{ ml: "60px" }}>
+              <Box display="flex" gap={1}>
+                <TextField
+                  id="outlined-basic"
+                  label="Order Number"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Number Invoices"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Act Number"
+                  variant="outlined"
+                />
+              </Box>
+              <Box display="flex" gap={1}>
+                <FormControl sx={{ mt: 1, minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Tags
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="User"
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Group by
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="User"
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
           </Box>
           <Divider
             sx={{ mt: 1, display: filterID === true ? "flex" : "none" }}
@@ -294,13 +247,34 @@ export default function Acts() {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Box ml="60px">
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                  Order date From:
+                  Act Creation date From:
                 </Typography>
                 <DateRangePicker
                   calendars={1}
-                  value={orderValue}
+                  value={creationValue}
                   onChange={(newValue) => {
-                    setOrderValue(newValue);
+                    setCreationValue(newValue);
+                  }}
+                  renderInput={(startProps, endProps) => (
+                    <React.Fragment>
+                      <TextField {...startProps} />
+                      <Box sx={{ mx: 2 }}> to </Box>
+                      <TextField {...endProps} />
+                    </React.Fragment>
+                  )}
+                />
+              </Box>
+            </LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Box ml="60px">
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Act Date From:
+                </Typography>
+                <DateRangePicker
+                  calendars={1}
+                  value={actValue}
+                  onChange={(newValue) => {
+                    setActValue(newValue);
                   }}
                   renderInput={(startProps, endProps) => (
                     <React.Fragment>
@@ -322,9 +296,9 @@ export default function Acts() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterCarriers == true ? "flex" : "none"}
+            display={filterClients == true ? "flex" : "none"}
           >
-            <Typography sx={{ position: "absolute" }}>Carriers: </Typography>
+            <Typography sx={{ position: "absolute" }}>Clients: </Typography>
             <Button
               variant="contained"
               color="warning"
@@ -334,22 +308,32 @@ export default function Acts() {
             >
               Del
             </Button>
-            <TextField
-              id="outlined-basic"
-              label="Carrier"
-              variant="outlined"
-              sx={{ ml: "60px" }}
-            />
+            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Select Value
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Age"
+              >
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
+
           <Divider
-            sx={{ mt: 1, display: filterCarriers === true ? "flex" : "none" }}
+            sx={{ mt: 1, display: filterClients === true ? "flex" : "none" }}
           />
           <Box
             className="filterBox"
             gap={1}
-            display={filterTrips == true ? "flex" : "none"}
+            display={filterUsers == true ? "flex" : "none"}
           >
-            <Typography sx={{ position: "absolute" }}>Trips: </Typography>
+            <Typography sx={{ position: "absolute" }}>Users: </Typography>
             <Button
               variant="contained"
               color="warning"
@@ -359,384 +343,52 @@ export default function Acts() {
             >
               Del
             </Button>
-            <Box>
-              <Box display="flex" gap={3} mt={1}>
-                <Button variant="contained" sx={{ ml: "60px" }}>
-                  Loading place
-                </Button>
-                <TextField
-                  id="outlined-basic"
-                  label="Place/Company"
-                  variant="outlined"
-                />
-                <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
-                    <InputLabel id="demo-simple-select-helper-label">
-                      Country
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      label="Age"
-                    >
-                      <MenuItem value={1}>VIP</MenuItem>
-                      <MenuItem value={2}>SUper klientas</MenuItem>
-                      <MenuItem value={3}>Paprastas klientas</MenuItem>
-                      <MenuItem value={4}>NEDIRBTI</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-                <TextField
-                  id="outlined-basic"
-                  label="Post Code"
-                  variant="outlined"
-                />
-                <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
-                    <InputLabel id="demo-simple-select-helper-label">
-                      Region
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      label="Age"
-                    >
-                      <MenuItem value={1}>VIP</MenuItem>
-                      <MenuItem value={2}>SUper klientas</MenuItem>
-                      <MenuItem value={3}>Paprastas klientas</MenuItem>
-                      <MenuItem value={4}>NEDIRBTI</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-
-                <TextField
-                  id="outlined-basic"
-                  label="City"
-                  variant="outlined"
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Address"
-                  variant="outlined"
-                />
-              </Box>
-              <Box display="flex" gap={3} ml="60px">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box>
-                    <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                      Loading date From:
-                    </Typography>
-                    <DateRangePicker
-                      calendars={1}
-                      value={loadingValue}
-                      onChange={(newValue) => {
-                        setLoadingValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
-                    />
-                  </Box>
-                </LocalizationProvider>
-              </Box>
-              <Divider sx={{ mt: 1 }} />
-              <Box display="flex" gap={3} mt={1}>
-                <Button variant="contained" sx={{ ml: "60px" }}>
-                  Unloading place
-                </Button>
-                <TextField
-                  id="outlined-basic"
-                  label="Place/Company"
-                  variant="outlined"
-                />
-                <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
-                    <InputLabel id="demo-simple-select-helper-label">
-                      Country
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      label="Age"
-                    >
-                      <MenuItem value={1}>VIP</MenuItem>
-                      <MenuItem value={2}>SUper klientas</MenuItem>
-                      <MenuItem value={3}>Paprastas klientas</MenuItem>
-                      <MenuItem value={4}>NEDIRBTI</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-                <TextField
-                  id="outlined-basic"
-                  label="Post Code"
-                  variant="outlined"
-                />
-                <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
-                    <InputLabel id="demo-simple-select-helper-label">
-                      Region
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      label="Age"
-                    >
-                      <MenuItem value={1}>VIP</MenuItem>
-                      <MenuItem value={2}>SUper klientas</MenuItem>
-                      <MenuItem value={3}>Paprastas klientas</MenuItem>
-                      <MenuItem value={4}>NEDIRBTI</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-
-                <TextField
-                  id="outlined-basic"
-                  label="City"
-                  variant="outlined"
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Address"
-                  variant="outlined"
-                />
-              </Box>
-              <Box display="flex" gap={3} ml="60px">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box>
-                    <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                      Unloading date From:
-                    </Typography>
-                    <DateRangePicker
-                      calendars={1}
-                      value={unloadingValue}
-                      onChange={(newValue) => {
-                        setUnloadingValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
-                    />
-                  </Box>
-                </LocalizationProvider>
-              </Box>
-            </Box>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterTrips === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterOther == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Other: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(5)}
-            >
-              Del
-            </Button>
-            <Box>
-              <Box display="flex" gap={3}>
-                <TextField
-                  id="outlined-basic"
-                  label="Vehicle Number"
-                  variant="outlined"
-                  sx={{ ml: "60px" }}
-                />
-                <FormControl sx={{ minWidth: 320 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Forwarder
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="Age"
-                  >
-                    <MenuItem value={1}>ALL</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField
-                  id="outlined-basic"
-                  label="Driver"
-                  variant="outlined"
-                  sx={{ ml: "60px" }}
-                />
-                <FormControlLabel
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="No receive invoice"
-                />
-              </Box>
-              <Box display="flex" gap={3} ml="60px" mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Consolidation
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="Age"
-                  >
-                    <MenuItem value={1}>ALL</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Tags
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="Age"
-                  >
-                    <MenuItem value={1}>ALL</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-            </Box>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterOther === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterSort == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Sort: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(6)}
-            >
-              Del
-            </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
-              <InputLabel id="demo-simple-select-helper-label">By</InputLabel>
+            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+              <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 label="Age"
               >
-                <MenuItem value={1}>ALL</MenuItem>
-                <MenuItem value={2}>Yes</MenuItem>
-                <MenuItem value={3}>No</MenuItem>
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
               <InputLabel id="demo-simple-select-helper-label">
-                Order
+                Company
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 label="Age"
               >
-                <MenuItem value={1}>ALL</MenuItem>
-                <MenuItem value={2}>Yes</MenuItem>
-                <MenuItem value={3}>No</MenuItem>
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Seller
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Age"
+              >
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
           </Box>
           <Divider
-            sx={{ mt: 1, display: filterSort === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterStatuses == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Statuses: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(7)}
-            >
-              Del
-            </Button>
-            <Box ml="60px">
-              <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                Trip Status:
-              </Typography>
-              <FormControl sx={{ minWidth: 320 }}>
-                <InputLabel id="demo-simple-select-helper-label">
-                  Trip Status
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  label="Age"
-                >
-                  <MenuItem value={1}>ALL</MenuItem>
-                  <MenuItem value={2}>Yes</MenuItem>
-                  <MenuItem value={3}>No</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box>
-                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                  Order Status date From:
-                </Typography>
-                <DateRangePicker
-                  calendars={1}
-                  value={orderStatusValue}
-                  onChange={(newValue) => {
-                    setOrderStatusValue(newValue);
-                  }}
-                  renderInput={(startProps, endProps) => (
-                    <React.Fragment>
-                      <TextField {...startProps} />
-                      <Box sx={{ mx: 2 }}> to </Box>
-                      <TextField {...endProps} />
-                    </React.Fragment>
-                  )}
-                />
-              </Box>
-            </LocalizationProvider>
-            <Box>
-              <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                Distribution:
-              </Typography>
-              <FormControl sx={{ minWidth: 320 }}>
-                <InputLabel id="demo-simple-select-helper-label">
-                  Distribution
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  label="Age"
-                >
-                  <MenuItem value={1}>ALL</MenuItem>
-                  <MenuItem value={2}>Yes</MenuItem>
-                  <MenuItem value={3}>No</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterStatuses === true ? "flex" : "none" }}
+            sx={{ mt: 1, display: filterUsers === true ? "flex" : "none" }}
           />
         </Box>
         <Box
@@ -763,25 +415,21 @@ export default function Acts() {
             </Button>
           </Box>
           <Box display="flex" gap={1} alignItems="center">
-            <Typography>Cost of Trips:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
-            >
-              500
-            </span>
-            <Typography>USD</Typography>
             <Button
               variant="outlined"
               color="success"
               startIcon={<AddIcon />}
               sx={{ borderRadius: "20px" }}
             >
-              Auto Trip
+              Download all acts
+            </Button>
+            <Button
+              variant="outlined"
+              color="success"
+              startIcon={<AddIcon />}
+              sx={{ borderRadius: "20px" }}
+            >
+              Excel
             </Button>
           </Box>
         </Box>

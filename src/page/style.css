@@ -75,3 +75,9 @@
     align-items: center;
     margin-top: 10px;
 }
+.tree{
+    margin: 8px;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 2px;
+}

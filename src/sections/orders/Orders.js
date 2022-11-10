@@ -7,20 +7,57 @@ import Button from "@mui/material/Button";
 import { TextField, Divider } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { styled } from '@mui/material/styles';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import { styled } from "@mui/material/styles";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import Select from "@mui/material/Select";
 import { DataGrid } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Modal from "@mui/material/Modal";
 import ClearIcon from "@mui/icons-material/Clear";
+import Basic from "./Basic";
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
 const columns = [
   { field: "id", headerName: "Order Number", width: 120 },
   { field: "date", headerName: "Order Date" },
@@ -80,57 +117,68 @@ const rows = [
     document: "Darius",
   },
 ];
-const label = { inputProps: { 'aria-label': 'Size switch demo' } };
+const label = { inputProps: { "aria-label": "Size switch demo" } };
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
   height: 26,
   padding: 0,
-  '& .MuiSwitch-switchBase': {
+  "& .MuiSwitch-switchBase": {
     padding: 0,
     margin: 2,
-    transitionDuration: '300ms',
-    '&.Mui-checked': {
-      transform: 'translateX(16px)',
-      color: '#fff',
-      '& + .MuiSwitch-track': {
-        backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+    transitionDuration: "300ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
         opacity: 1,
         border: 0,
       },
-      '&.Mui-disabled + .MuiSwitch-track': {
+      "&.Mui-disabled + .MuiSwitch-track": {
         opacity: 0.5,
       },
     },
-    '&.Mui-focusVisible .MuiSwitch-thumb': {
-      color: '#33cf4d',
-      border: '6px solid #fff',
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
     },
-    '&.Mui-disabled .MuiSwitch-thumb': {
+    "&.Mui-disabled .MuiSwitch-thumb": {
       color:
-        theme.palette.mode === 'light'
+        theme.palette.mode === "light"
           ? theme.palette.grey[100]
           : theme.palette.grey[600],
     },
-    '&.Mui-disabled + .MuiSwitch-track': {
-      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
     },
   },
-  '& .MuiSwitch-thumb': {
-    boxSizing: 'border-box',
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
     width: 22,
     height: 22,
   },
-  '& .MuiSwitch-track': {
+  "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
     opacity: 1,
-    transition: theme.transitions.create(['background-color'], {
+    transition: theme.transitions.create(["background-color"], {
       duration: 500,
     }),
   },
 }));
+const style = {
+  position: "absolute",
+  top: "5%",
+  left: "3%",
+  width: "90%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
 export default function Orders() {
   const [orderValue, setOrderValue] = React.useState([null, null]);
   const [creationValue, setCreationValue] = React.useState([null, null]);
@@ -149,10 +197,19 @@ export default function Orders() {
   const [tripUnloadingCountry, setTripUnloadingCountry] = React.useState("");
   const [tripregion, setTripRegion] = React.useState("");
   const [tripunregion, setTripUnregion] = React.useState("");
-  const [cargosLoadingValue, setCargosLoadingValue] = React.useState([null, null]);
-  const [cargosUnloadingValue, setCargosUnloadingValue] = React.useState([null, null]);
+  const [cargosLoadingValue, setCargosLoadingValue] = React.useState([
+    null,
+    null,
+  ]);
+  const [cargosUnloadingValue, setCargosUnloadingValue] = React.useState([
+    null,
+    null,
+  ]);
   const [tripLoadingValue, setTripLoadingValue] = React.useState([null, null]);
-  const [tripUnloadingValue, setTripUnloadingValue] = React.useState([null, null]);
+  const [tripUnloadingValue, setTripUnloadingValue] = React.useState([
+    null,
+    null,
+  ]);
   const [manager, setManager] = React.useState("");
   const [partial, setPartial] = React.useState("");
   const [forwarder, setForwarder] = React.useState("");
@@ -176,6 +233,14 @@ export default function Orders() {
   const [filterTrips, setFilterTrips] = React.useState(true);
   const [filterDocuments, setFilterDocuments] = React.useState(true);
   const [filterSort, setFilterSort] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const handleChange = (event) => {
     setClient(event.target.value);
   };
@@ -192,17 +257,17 @@ export default function Orders() {
     setTripLoadingCountry(event.target.value);
   };
   const handlePartialChange = (event) => {
-    setPartial(event.target.value)
-  }
+    setPartial(event.target.value);
+  };
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
-  }
+  };
   const handleIdChange = (event) => {
-    setId(event.target.value)
-  }
+    setId(event.target.value);
+  };
   const handleOrderChange = (event) => {
-    setOrder(event.target.value)
-  }
+    setOrder(event.target.value);
+  };
   const handleCargoUnloadingCountryChange = (event) => {
     setCargoUnloadingCountry(event.target.value);
   };
@@ -550,13 +615,21 @@ export default function Orders() {
                   <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                     Week:
                   </Typography>
-                  <TextField id="outlined-basic" label="Week" variant="outlined" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Week"
+                    variant="outlined"
+                  />
                 </Box>
                 <Box>
                   <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                     Year:
                   </Typography>
-                  <TextField id="outlined-basic" label="Year" variant="outlined" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Year"
+                    variant="outlined"
+                  />
                 </Box>
 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -581,7 +654,6 @@ export default function Orders() {
                   </Box>
                 </LocalizationProvider>
               </Box>
-
             </Box>
           </Box>
           <Divider
@@ -646,7 +718,6 @@ export default function Orders() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-
           </Box>
           <Divider
             sx={{ mt: 1, display: filterClients === true ? "flex" : "none" }}
@@ -668,13 +739,14 @@ export default function Orders() {
             </Button>
             <Box>
               <Box display="flex" gap={3}>
-                <Button
-                  variant="contained"
-                  sx={{ ml: "60px" }}
-                >
+                <Button variant="contained" sx={{ ml: "60px" }}>
                   Loading place
                 </Button>
-                <TextField id="outlined-basic" label="Place/Company" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Place/Company"
+                  variant="outlined"
+                />
                 <Box>
                   <FormControl sx={{ minWidth: 320 }}>
                     <InputLabel id="demo-simple-select-helper-label">
@@ -724,10 +796,13 @@ export default function Orders() {
                   label="City"
                   variant="outlined"
                 />
-                <TextField id="outlined-basic" label="Address" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Address"
+                  variant="outlined"
+                />
               </Box>
               <Box display="flex" gap={3} ml="60px">
-
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -752,13 +827,14 @@ export default function Orders() {
               </Box>
               <Divider sx={{ mt: 1 }} />
               <Box display="flex" gap={3} mt={1}>
-                <Button
-                  variant="contained"
-                  sx={{ ml: "60px" }}
-                >
+                <Button variant="contained" sx={{ ml: "60px" }}>
                   Unloading place
                 </Button>
-                <TextField id="outlined-basic" label="Place/Company" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Place/Company"
+                  variant="outlined"
+                />
                 <Box>
                   <FormControl sx={{ minWidth: 320 }}>
                     <InputLabel id="demo-simple-select-helper-label">
@@ -808,10 +884,13 @@ export default function Orders() {
                   label="City"
                   variant="outlined"
                 />
-                <TextField id="outlined-basic" label="Address" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Address"
+                  variant="outlined"
+                />
               </Box>
               <Box display="flex" gap={3} ml="60px">
-
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -853,8 +932,16 @@ export default function Orders() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <TextField id="outlined-basic" label="Cargo Name" variant="outlined" />
-                <TextField id="outlined-basic" label="Container Number" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Cargo Name"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Container Number"
+                  variant="outlined"
+                />
               </Box>
             </Box>
           </Box>
@@ -898,13 +985,14 @@ export default function Orders() {
               </Box>
               <Divider sx={{ mt: 1 }} />
               <Box display="flex" gap={3} mt={1}>
-                <Button
-                  variant="contained"
-                  sx={{ ml: "60px" }}
-                >
+                <Button variant="contained" sx={{ ml: "60px" }}>
                   Loading place
                 </Button>
-                <TextField id="outlined-basic" label="Place/Company" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Place/Company"
+                  variant="outlined"
+                />
                 <Box>
                   <FormControl sx={{ minWidth: 320 }}>
                     <InputLabel id="demo-simple-select-helper-label">
@@ -954,10 +1042,13 @@ export default function Orders() {
                   label="City"
                   variant="outlined"
                 />
-                <TextField id="outlined-basic" label="Address" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Address"
+                  variant="outlined"
+                />
               </Box>
               <Box display="flex" gap={3} ml="60px">
-
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -982,13 +1073,14 @@ export default function Orders() {
               </Box>
               <Divider sx={{ mt: 1 }} />
               <Box display="flex" gap={3} mt={1}>
-                <Button
-                  variant="contained"
-                  sx={{ ml: "60px" }}
-                >
+                <Button variant="contained" sx={{ ml: "60px" }}>
                   Unloading place
                 </Button>
-                <TextField id="outlined-basic" label="Place/Company" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Place/Company"
+                  variant="outlined"
+                />
                 <Box>
                   <FormControl sx={{ minWidth: 320 }}>
                     <InputLabel id="demo-simple-select-helper-label">
@@ -1038,10 +1130,13 @@ export default function Orders() {
                   label="City"
                   variant="outlined"
                 />
-                <TextField id="outlined-basic" label="Address" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Address"
+                  variant="outlined"
+                />
               </Box>
               <Box display="flex" gap={3} ml="60px">
-
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -1215,8 +1310,16 @@ export default function Orders() {
                 </FormControl>
               </Box>
               <Box display="flex" gap={3} ml="60px" mt={1}>
-                <TextField id="outlined-basic" label="Invoice number" variant="outlined" />
-                <TextField id="outlined-basic" label="Contract number" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Invoice number"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Contract number"
+                  variant="outlined"
+                />
                 <FormControl sx={{ minWidth: 320 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     There is an act
@@ -1233,10 +1336,13 @@ export default function Orders() {
                     <MenuItem value={3}>No</MenuItem>
                   </Select>
                 </FormControl>
-                <TextField id="outlined-basic" label="CMR number" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="CMR number"
+                  variant="outlined"
+                />
               </Box>
             </Box>
-
           </Box>
           <Divider
             sx={{ mt: 1, display: filterDocuments === true ? "flex" : "none" }}
@@ -1283,11 +1389,7 @@ export default function Orders() {
               label="Vehicle Number"
               variant="outlined"
             />
-            <TextField
-              id="outlined-basic"
-              label="Driver"
-              variant="outlined"
-            />
+            <TextField id="outlined-basic" label="Driver" variant="outlined" />
           </Box>
           <Divider
             sx={{ mt: 1, display: filterTransport === true ? "flex" : "none" }}
@@ -1354,9 +1456,7 @@ export default function Orders() {
               Del
             </Button>
             <FormControl sx={{ minWidth: 320, ml: "60px" }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                By
-              </InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">By</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
@@ -1397,6 +1497,7 @@ export default function Orders() {
               color="success"
               startIcon={<AddIcon />}
               sx={{ borderRadius: "20px" }}
+              onClick={handleOpen}
             >
               New Order
             </Button>
@@ -1460,8 +1561,13 @@ export default function Orders() {
             </Button>
           </Box>
         </Box>
-        <Box display="flex" justifyContent="end" alignItems="center" gap={2} mt={2}>
-
+        <Box
+          display="flex"
+          justifyContent="end"
+          alignItems="center"
+          gap={2}
+          mt={2}
+        >
           <Typography>Orders:</Typography>
           <span
             style={{
@@ -1499,7 +1605,7 @@ export default function Orders() {
               backgroundColor: "#e0dddd",
               borderRadius: "5px",
               padding: "10px 20px",
-              color: "green"
+              color: "green",
             }}
           >
             12000
@@ -1510,7 +1616,7 @@ export default function Orders() {
               backgroundColor: "#e0dddd",
               borderRadius: "5px",
               padding: "10px 20px",
-              color: "green"
+              color: "green",
             }}
           >
             0
@@ -1551,6 +1657,53 @@ export default function Orders() {
             />
           </div>
         </Box>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography
+              id="modal-modal-title"
+              variant="h4"
+              fontWeight="700"
+              component="h2"
+            >
+              New Order
+            </Typography>
+            <Box sx={{ width: "100%" }}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <Tabs
+                  value={value}
+                  onChange={handleTabChange}
+                  aria-label="basic tabs example"
+                >
+                  <Tab
+                    icon={<span className="active" />}
+                    label={
+                      <Box className="tabBtn">
+                        <span style={{ color: "white" }}>
+                          Basic Information
+                        </span>
+                      </Box>
+                    }
+                    {...a11yProps(0)}
+                  />
+                </Tabs>
+              </Box>
+              <TabPanel value={value} index={0}>
+                <Basic />
+              </TabPanel>
+            </Box>
+
+            <Box display="flex" justifyContent="end" m={2}>
+              <Button variant="contained" color="success" onClick={handleClose}>
+                Save
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
       </div>
     </>
   );

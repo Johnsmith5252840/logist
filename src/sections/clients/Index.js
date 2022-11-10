@@ -5,9 +5,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Orders from "./Orders";
-import Cargos from "./Cargos";
-import Trips from "./Trips";
+import Clients from "./Clients";
+import Access from "./Access";
+import Search from "./Search";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -62,7 +62,7 @@ export default function Index() {
               icon={<span className="orders" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Orders</span>
+                  <span style={{ color: "white" }}>Clients</span>
                 </Box>
               }
               {...a11yProps(0)}
@@ -71,7 +71,7 @@ export default function Index() {
               icon={<span className="cargos" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Cargos</span>
+                  <span style={{ color: "white" }}>Access for Clients</span>
                 </Box>
               }
               {...a11yProps(1)}
@@ -80,7 +80,7 @@ export default function Index() {
               icon={<span className="trips" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Trips</span>
+                  <span style={{ color: "white" }}>Search for duplicates</span>
                 </Box>
               }
               {...a11yProps(3)}
@@ -88,13 +88,13 @@ export default function Index() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Orders />
+          <Clients />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Cargos />
+          <Access />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Trips />
+          <Search />
         </TabPanel>
       </Box>
     </>

@@ -1,101 +1,179 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Orders from "./Orders";
-import Cargos from "./Cargos";
-import Trips from "./Trips";
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
+import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import { Select } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 export default function Index() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const [show, setShow] = React.useState(false);
+  const handleHide = () => {
+    setShow(false);
   };
-
+  const handleShow = () => {
+    setShow(true);
+  };
   return (
     <>
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            style={{ backgroundColor: "#23282a" }}
+      <Box sx={{ width: "100%", textAlign: "left", padding: "50px" }}>
+        <Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          sx={{ borderRadius: "3px" }}
+        >
+          Add
+        </Button>
+        <Box display="flex" gap={2} alignItems="center" mt={2}>
+          <Typography>Filter</Typography>
+          <Button
+            variant="outlined"
+            startIcon={
+              show === true ? <VisibilityIcon /> : <VisibilityOffIcon />
+            }
+            sx={{ borderRadius: "3px" }}
+            onClick={show === true ? () => handleHide() : () => handleShow()}
           >
-            <Tab
-              icon={<span className="orders" />}
-              label={
-                <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Orders</span>
-                </Box>
-              }
-              {...a11yProps(0)}
-            />
-            <Tab
-              icon={<span className="cargos" />}
-              label={
-                <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Cargos</span>
-                </Box>
-              }
-              {...a11yProps(1)}
-            />
-            <Tab
-              icon={<span className="trips" />}
-              label={
-                <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Trips</span>
-                </Box>
-              }
-              {...a11yProps(3)}
-            />
-          </Tabs>
+            {show === true ? "Show" : "Hide"}
+          </Button>
+          <Button variant="contained" sx={{ borderRadius: "3px" }}>
+            To Filter
+          </Button>
         </Box>
-        <TabPanel value={value} index={0}>
-          <Orders />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Cargos />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Trips />
-        </TabPanel>
+        {show === false ? (
+          <Box>
+            <Box display="flex" gap={2}>
+              <Box>
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Author:
+                </Typography>
+                <FormControl sx={{ minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Select Value
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="Age"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box>
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Assigned to:
+                </Typography>
+                <FormControl sx={{ minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Select Value
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="Age"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box>
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Contragent:
+                </Typography>
+                <FormControl sx={{ minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Select Value
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="Age"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box>
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Deadline:
+                </Typography>
+                <FormControl sx={{ minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Select Value
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="Age"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
+            <Box display="flex" gap={2}>
+              <Box>
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Status:
+                </Typography>
+                <FormControl sx={{ minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Select Value
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="Age"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box>
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Label:
+                </Typography>
+                <FormControl sx={{ minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Select Value
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="Age"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
+          </Box>
+        ) : (
+          <></>
+        )}
       </Box>
     </>
   );

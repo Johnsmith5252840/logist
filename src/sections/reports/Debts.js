@@ -11,6 +11,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -84,29 +85,12 @@ const rows = [
   },
 ];
 
-export default function Payments() {
-  const [paymentValue, setPaymentValue] = React.useState([null, null]);
+export default function Debts() {
   const [filterID, setFilterID] = React.useState(true);
-  const [filterDate, setFilterDate] = React.useState(false);
-  const [filterClients, setFilterClients] = React.useState(false);
-  const [filterUsers, setFilterUsers] = React.useState(false);
-  const [filterPayments, setFilterPayments] = React.useState(false);
   const Delete = (filterItem) => {
     switch (filterItem) {
       case 1:
         setFilterID(false);
-        break;
-      case 2:
-        setFilterDate(false);
-        break;
-      case 3:
-        setFilterClients(false);
-        break;
-      case 4:
-        setFilterUsers(false);
-        break;
-      case 5:
-        setFilterPayments(false);
         break;
     }
   };
@@ -114,18 +98,6 @@ export default function Payments() {
     switch (filterItem) {
       case 1:
         setFilterID(true);
-        break;
-      case 2:
-        setFilterDate(true);
-        break;
-      case 3:
-        setFilterClients(true);
-        break;
-      case 4:
-        setFilterUsers(true);
-        break;
-      case 5:
-        setFilterPayments(true);
         break;
     }
   };
@@ -143,30 +115,6 @@ export default function Payments() {
               onClick={() => Display(1)}
             >
               ID
-            </Button>
-            <Button
-              variant={filterDate === false ? "outlined" : "contained"}
-              onClick={() => Display(2)}
-            >
-              Date
-            </Button>
-            <Button
-              variant={filterClients === false ? "outlined" : "contained"}
-              onClick={() => Display(3)}
-            >
-              Clients
-            </Button>
-            <Button
-              variant={filterUsers === false ? "outlined" : "contained"}
-              onClick={() => Display(4)}
-            >
-              Users
-            </Button>
-            <Button
-              variant={filterPayments === false ? "outlined" : "contained"}
-              onClick={() => Display(5)}
-            >
-              Payments
             </Button>
           </Box>
 
@@ -188,155 +136,57 @@ export default function Payments() {
             </Button>
             <TextField
               id="outlined-basic"
-              label="Order Number"
+              label="Clients"
               variant="outlined"
               sx={{ ml: "60px" }}
             />
-            <TextField
-              id="outlined-basic"
-              label="Invoices Number"
-              variant="outlined"
-            />
+            <TextField id="outlined-basic" label="TIN" variant="outlined" />
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
+              <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="User"
+              >
+                <MenuItem value={1}>Admin</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Order Status
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="User"
+              >
+                <MenuItem value={1}>Admin</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Invoicing Company
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="User"
+              >
+                <MenuItem value={1}>Admin</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
           <Divider
             sx={{ mt: 1, display: filterID === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterDate == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Date: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(2)}
-            >
-              Del
-            </Button>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
-                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                  Payment date From:
-                </Typography>
-                <DateRangePicker
-                  calendars={1}
-                  value={paymentValue}
-                  onChange={(newValue) => {
-                    setPaymentValue(newValue);
-                  }}
-                  renderInput={(startProps, endProps) => (
-                    <React.Fragment>
-                      <TextField {...startProps} />
-                      <Box sx={{ mx: 2 }}> to </Box>
-                      <TextField {...endProps} />
-                    </React.Fragment>
-                  )}
-                />
-              </Box>
-            </LocalizationProvider>
-          </Box>
-          <Divider
-            sx={{
-              mt: 1,
-              display: filterDate === true ? "flex" : "none",
-            }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterClients == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Clients: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(3)}
-            >
-              Del
-            </Button>
-            <TextField
-              id="outlined-basic"
-              label="Client"
-              variant="outlined"
-              sx={{ ml: "60px" }}
-            />
-          </Box>
-
-          <Divider
-            sx={{ mt: 1, display: filterClients === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterUsers == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Users: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(4)}
-            >
-              Del
-            </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Seller
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>VIP</MenuItem>
-                <MenuItem value={2}>SUper klientas</MenuItem>
-                <MenuItem value={3}>Paprastas klientas</MenuItem>
-                <MenuItem value={4}>NEDIRBTI</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterUsers === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterPayments == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Payments: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(4)}
-            >
-              Del
-            </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Payment Type
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>VIP</MenuItem>
-                <MenuItem value={2}>SUper klientas</MenuItem>
-                <MenuItem value={3}>Paprastas klientas</MenuItem>
-                <MenuItem value={4}>NEDIRBTI</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterPayments === true ? "flex" : "none" }}
           />
         </Box>
         <Box
@@ -363,18 +213,14 @@ export default function Payments() {
             </Button>
           </Box>
           <Box display="flex" gap={1} alignItems="center">
-            <Typography>Payments sum:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
+            <Button
+              variant="outlined"
+              color="success"
+              startIcon={<AddIcon />}
+              sx={{ borderRadius: "20px" }}
             >
-              0
-            </span>
-            <Typography>USD</Typography>
+              Excel
+            </Button>
           </Box>
         </Box>
         <Box mt={2}>

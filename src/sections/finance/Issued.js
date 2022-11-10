@@ -136,42 +136,26 @@ const IOSSwitch = styled((props) => (
   },
 }));
 export default function Issued() {
-  const [loadingValue, setLoadingValue] = React.useState([null, null]);
-  const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
-  const [cargo, setCargoValue] = React.useState([null, null]);
+  const [payValue, setPayValue] = React.useState([null, null]);
+  const [issueValue, setIssueValue] = React.useState([null, null]);
+  const [orderValue, setOrderValue] = React.useState([null, null]);
   const [filterID, setFilterID] = React.useState(true);
-  const [filterContragents, setFilterContragents] = React.useState(false);
-  const [filterLoading, setFilterLoading] = React.useState(false);
-  const [filterUnloading, setFilterUnloading] = React.useState(false);
-  const [filterCargoStatuses, setFilterCargosStatuses] = React.useState(false);
-  const [filterOrders, setFilterOrders] = React.useState(false);
-  const [filterCargos, setFilterCargos] = React.useState(false);
-  const [filterSort, setFilterSort] = React.useState(false);
+  const [filterDate, setFilterDate] = React.useState(false);
+  const [filterClients, setFilterClients] = React.useState(false);
+  const [filterUsers, setFilterUsers] = React.useState(false);
   const Delete = (filterItem) => {
     switch (filterItem) {
       case 1:
         setFilterID(false);
         break;
       case 2:
-        setFilterContragents(false);
+        setFilterDate(false);
         break;
       case 3:
-        setFilterLoading(false);
+        setFilterClients(false);
         break;
       case 4:
-        setFilterUnloading(false);
-        break;
-      case 5:
-        setFilterCargosStatuses(false);
-        break;
-      case 6:
-        setFilterOrders(false);
-        break;
-      case 7:
-        setFilterCargos(false);
-        break;
-      case 8:
-        setFilterSort(false);
+        setFilterUsers(false);
         break;
     }
   };
@@ -181,25 +165,13 @@ export default function Issued() {
         setFilterID(true);
         break;
       case 2:
-        setFilterContragents(true);
+        setFilterDate(true);
         break;
       case 3:
-        setFilterLoading(true);
+        setFilterClients(true);
         break;
       case 4:
-        setFilterUnloading(true);
-        break;
-      case 5:
-        setFilterCargosStatuses(true);
-        break;
-      case 6:
-        setFilterOrders(true);
-        break;
-      case 7:
-        setFilterCargos(true);
-        break;
-      case 8:
-        setFilterSort(true);
+        setFilterUsers(true);
         break;
     }
   };
@@ -219,46 +191,22 @@ export default function Issued() {
               ID
             </Button>
             <Button
-              variant={filterContragents === false ? "outlined" : "contained"}
+              variant={filterDate === false ? "outlined" : "contained"}
               onClick={() => Display(2)}
             >
-              Contragents
+              Date
             </Button>
             <Button
-              variant={filterLoading === false ? "outlined" : "contained"}
+              variant={filterClients === false ? "outlined" : "contained"}
               onClick={() => Display(3)}
             >
-              Loading
+              Clients
             </Button>
             <Button
-              variant={filterUnloading === false ? "outlined" : "contained"}
+              variant={filterUsers === false ? "outlined" : "contained"}
               onClick={() => Display(4)}
             >
-              Unloading
-            </Button>
-            <Button
-              variant={filterCargoStatuses === false ? "outlined" : "contained"}
-              onClick={() => Display(5)}
-            >
-              Cargo Statuses
-            </Button>
-            <Button
-              variant={filterCargos === false ? "outlined" : "contained"}
-              onClick={() => Display(6)}
-            >
-              Cargos
-            </Button>
-            <Button
-              variant={filterOrders === false ? "outlined" : "contained"}
-              onClick={() => Display(7)}
-            >
-              Orders
-            </Button>
-            <Button
-              variant={filterSort === false ? "outlined" : "contained"}
-              onClick={() => Display(8)}
-            >
-              Sort
+              Users
             </Button>
           </Box>
 
@@ -278,8 +226,188 @@ export default function Issued() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
-              <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
+            <Box>
+              <Box display="flex" gap={1}>
+                <TextField
+                  id="outlined-basic"
+                  label="Order Number"
+                  variant="outlined"
+                  sx={{ ml: "60px" }}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Number Invoices"
+                  variant="outlined"
+                />
+                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Invoices are seen
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="User"
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Group by
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="User"
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Invoice type
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="User"
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box display="flex" gap={1} ml="60px">
+                <FormControlLabel
+                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                  label="Hide negative invoices"
+                />
+                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Order Status
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="User"
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Tags
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="User"
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
+          </Box>
+          <Divider
+            sx={{ mt: 1, display: filterID === true ? "flex" : "none" }}
+          />
+          <Box
+            className="filterBox"
+            gap={1}
+            display={filterDate == true ? "flex" : "none"}
+          >
+            <Typography sx={{ position: "absolute" }}>Date: </Typography>
+            <Button
+              variant="contained"
+              color="warning"
+              startIcon={<ClearIcon />}
+              sx={{ ml: "120px" }}
+              onClick={() => Delete(2)}
+            >
+              Del
+            </Button>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Box ml="60px">
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Pay until From:
+                </Typography>
+                <DateRangePicker
+                  calendars={1}
+                  value={payValue}
+                  onChange={(newValue) => {
+                    setPayValue(newValue);
+                  }}
+                  renderInput={(startProps, endProps) => (
+                    <React.Fragment>
+                      <TextField {...startProps} />
+                      <Box sx={{ mx: 2 }}> to </Box>
+                      <TextField {...endProps} />
+                    </React.Fragment>
+                  )}
+                />
+              </Box>
+            </LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Box ml="60px">
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Issued From:
+                </Typography>
+                <DateRangePicker
+                  calendars={1}
+                  value={issueValue}
+                  onChange={(newValue) => {
+                    setIssueValue(newValue);
+                  }}
+                  renderInput={(startProps, endProps) => (
+                    <React.Fragment>
+                      <TextField {...startProps} />
+                      <Box sx={{ mx: 2 }}> to </Box>
+                      <TextField {...endProps} />
+                    </React.Fragment>
+                  )}
+                />
+              </Box>
+            </LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Box ml="60px">
+                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                  Order Status date From:
+                </Typography>
+                <DateRangePicker
+                  calendars={1}
+                  value={orderValue}
+                  onChange={(newValue) => {
+                    setOrderValue(newValue);
+                  }}
+                  renderInput={(startProps, endProps) => (
+                    <React.Fragment>
+                      <TextField {...startProps} />
+                      <Box sx={{ mx: 2 }}> to </Box>
+                      <TextField {...endProps} />
+                    </React.Fragment>
+                  )}
+                />
+              </Box>
+            </LocalizationProvider>
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Payment type
+              </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
@@ -293,43 +421,17 @@ export default function Issued() {
             </FormControl>
           </Box>
           <Divider
-            sx={{ mt: 1, display: filterID === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterContragents == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Contragents: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(2)}
-            >
-              Del
-            </Button>
-            <TextField
-              id="outlined-basic"
-              label="Client"
-              variant="outlined"
-              sx={{ ml: "60px" }}
-            />
-            <TextField id="outlined-basic" label="Carrier" variant="outlined" />
-          </Box>
-          <Divider
             sx={{
               mt: 1,
-              display: filterContragents === true ? "flex" : "none",
+              display: filterDate === true ? "flex" : "none",
             }}
           />
           <Box
             className="filterBox"
             gap={1}
-            display={filterLoading == true ? "flex" : "none"}
+            display={filterClients == true ? "flex" : "none"}
           >
-            <Typography sx={{ position: "absolute" }}>Loading: </Typography>
+            <Typography sx={{ position: "absolute" }}>Clients: </Typography>
             <Button
               variant="contained"
               color="warning"
@@ -339,59 +441,22 @@ export default function Issued() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Country
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>VIP</MenuItem>
-                <MenuItem value={2}>SUper klientas</MenuItem>
-                <MenuItem value={3}>Paprastas klientas</MenuItem>
-                <MenuItem value={4}>NEDIRBTI</MenuItem>
-              </Select>
-            </FormControl>
             <TextField
               id="outlined-basic"
-              label="Post Code"
+              label="Client"
               variant="outlined"
+              sx={{ ml: "60px" }}
             />
-            <TextField id="outlined-basic" label="City" variant="outlined" />
-            <TextField id="outlined-basic" label="Address" variant="outlined" />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box>
-                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                  Loading date From:
-                </Typography>
-                <DateRangePicker
-                  calendars={1}
-                  value={loadingValue}
-                  onChange={(newValue) => {
-                    setLoadingValue(newValue);
-                  }}
-                  renderInput={(startProps, endProps) => (
-                    <React.Fragment>
-                      <TextField {...startProps} />
-                      <Box sx={{ mx: 2 }}> to </Box>
-                      <TextField {...endProps} />
-                    </React.Fragment>
-                  )}
-                />
-              </Box>
-            </LocalizationProvider>
           </Box>
           <Divider
-            sx={{ mt: 1, display: filterLoading === true ? "flex" : "none" }}
+            sx={{ mt: 1, display: filterClients === true ? "flex" : "none" }}
           />
           <Box
             className="filterBox"
             gap={1}
-            display={filterUnloading == true ? "flex" : "none"}
+            display={filterUsers == true ? "flex" : "none"}
           >
-            <Typography sx={{ position: "absolute" }}>Unloading: </Typography>
+            <Typography sx={{ position: "absolute" }}>Users: </Typography>
             <Button
               variant="contained"
               color="warning"
@@ -402,8 +467,21 @@ export default function Issued() {
               Del
             </Button>
             <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+              <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Age"
+              >
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
               <InputLabel id="demo-simple-select-helper-label">
-                Country
+                Department
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -416,79 +494,9 @@ export default function Issued() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <TextField
-              id="outlined-basic"
-              label="Post Code"
-              variant="outlined"
-            />
-            <TextField id="outlined-basic" label="City" variant="outlined" />
-            <TextField id="outlined-basic" label="Address" variant="outlined" />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box>
-                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                  Unloading date From:
-                </Typography>
-                <DateRangePicker
-                  calendars={1}
-                  value={unloadingValue}
-                  onChange={(newValue) => {
-                    setUnloadingValue(newValue);
-                  }}
-                  renderInput={(startProps, endProps) => (
-                    <React.Fragment>
-                      <TextField {...startProps} />
-                      <Box sx={{ mx: 2 }}> to </Box>
-                      <TextField {...endProps} />
-                    </React.Fragment>
-                  )}
-                />
-              </Box>
-            </LocalizationProvider>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterUnloading === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterCargoStatuses == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>
-              Cargo Statuses:{" "}
-            </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(5)}
-            >
-              Del
-            </Button>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
-                <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                  Cargo status setting date From:
-                </Typography>
-                <DateRangePicker
-                  calendars={1}
-                  value={cargo}
-                  onChange={(newValue) => {
-                    setCargoValue(newValue);
-                  }}
-                  renderInput={(startProps, endProps) => (
-                    <React.Fragment>
-                      <TextField {...startProps} />
-                      <Box sx={{ mx: 2 }}> to </Box>
-                      <TextField {...endProps} />
-                    </React.Fragment>
-                  )}
-                />
-              </Box>
-            </LocalizationProvider>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
               <InputLabel id="demo-simple-select-helper-label">
-                Cargo Statuses
+                Seller
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -503,216 +511,7 @@ export default function Issued() {
             </FormControl>
           </Box>
           <Divider
-            sx={{
-              mt: 1,
-              display: filterCargoStatuses === true ? "flex" : "none",
-            }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterOrders == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Orders: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(6)}
-            >
-              Del
-            </Button>
-            <TextField
-              id="outlined-basic"
-              label="Order Number"
-              variant="outlined"
-              sx={{ ml: "60px" }}
-            />
-            <FormControl sx={{ minWidth: 320 }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Status
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>ALL</MenuItem>
-                <MenuItem value={2}>Yes</MenuItem>
-                <MenuItem value={3}>No</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Issued invoice in order
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>ALL</MenuItem>
-                <MenuItem value={2}>Yes</MenuItem>
-                <MenuItem value={3}>No</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
-              <InputLabel id="demo-simple-select-helper-label">Tags</InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>ALL</MenuItem>
-                <MenuItem value={2}>Yes</MenuItem>
-                <MenuItem value={3}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterOrders === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterCargos == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Cargos: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(7)}
-            >
-              Del
-            </Button>
-            <Box>
-              <Box display="flex" gap={3}>
-                <TextField
-                  id="outlined-basic"
-                  label="Vehicle Number"
-                  variant="outlined"
-                  sx={{ ml: "60px" }}
-                />
-                <FormControl sx={{ minWidth: 320 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Invoice for cargos
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="Age"
-                  >
-                    <MenuItem value={1}>ALL</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Trip
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="Age"
-                  >
-                    <MenuItem value={1}>ALL</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControlLabel
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="Consignment without trip"
-                />
-              </Box>
-              <Box display="flex" gap={3} ml="60px" mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Consignment with consolidation
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="Age"
-                  >
-                    <MenuItem value={1}>ALL</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField
-                  id="outlined-basic"
-                  label="Cargo Name"
-                  variant="outlined"
-                />
-                <FormControl sx={{ minWidth: 320 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Attributes
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="Age"
-                  >
-                    <MenuItem value={1}>ALL</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-            </Box>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterCargos === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterSort == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Sort: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(8)}
-            >
-              Del
-            </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
-              <InputLabel id="demo-simple-select-helper-label">By</InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>ALL</MenuItem>
-                <MenuItem value={2}>Yes</MenuItem>
-                <MenuItem value={3}>No</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Order
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>ALL</MenuItem>
-                <MenuItem value={2}>Yes</MenuItem>
-                <MenuItem value={3}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterSort === true ? "flex" : "none" }}
+            sx={{ mt: 1, display: filterUsers === true ? "flex" : "none" }}
           />
         </Box>
         <Box
@@ -745,6 +544,22 @@ export default function Issued() {
               startIcon={<AddIcon />}
               sx={{ borderRadius: "20px" }}
             >
+              Send all invoices
+            </Button>
+            <Button
+              variant="outlined"
+              color="success"
+              startIcon={<AddIcon />}
+              sx={{ borderRadius: "20px" }}
+            >
+              XML unloading
+            </Button>
+            <Button
+              variant="outlined"
+              color="success"
+              startIcon={<AddIcon />}
+              sx={{ borderRadius: "20px" }}
+            >
               Excel
             </Button>
             <Button
@@ -753,29 +568,7 @@ export default function Issued() {
               startIcon={<AddIcon />}
               sx={{ borderRadius: "20px" }}
             >
-              Import
-            </Button>
-            <FormControl sx={{ minWidth: 320 }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Make out a detailed invoice
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>VIP</MenuItem>
-                <MenuItem value={2}>SUper klientas</MenuItem>
-                <MenuItem value={3}>Paprastas klientas</MenuItem>
-                <MenuItem value={4}>NEDIRBTI</MenuItem>
-              </Select>
-            </FormControl>
-            <Button
-              variant="contained"
-              color="success"
-              sx={{ borderRadius: "20px" }}
-            >
-              Perform actions
+              Add
             </Button>
           </Box>
         </Box>

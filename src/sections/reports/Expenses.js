@@ -1,18 +1,19 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { TextField, Divider } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import { styled } from "@mui/material/styles";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DataGrid } from "@mui/x-data-grid";
@@ -21,67 +22,62 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const columns = [
-  { field: "id", headerName: "Request Number", width: 120 },
-  { field: "status", headerName: "Status" },
-  { field: "purpose", headerName: "Request Purpose", width: 150 },
-  { field: "created", headerName: "Created" },
-  { field: "transport", headerName: "Transport Type", width: 120 },
-  { field: "cargo", headerName: "Cargo Information", width: 150 },
-  { field: "loading", headerName: "Loading Place", width: 150 },
-  { field: "unloading", headerName: "Unloading Place", width: 150 },
-  { field: "ldate", headerName: "Loading Date", width: 150 },
-  { field: "udate", headerName: "Unloading Date", width: 150 },
-  { field: "status", headerName: "Status" },
-  { field: "client", headerName: "Client" },
-  { field: "seller", headerName: "Seller" },
-  { field: "price", headerName: "Price propoals", width: 150 },
+  { field: "id", headerName: "Order Number", width: 120 },
+  { field: "date", headerName: "Order Date" },
+  { field: "status", headerName: "Order Status", width: 150 },
+  { field: "cient", headerName: "Client" },
+  { field: "carriers", headerName: "Carriers", width: 120 },
+  { field: "trip", headerName: "Trip Number", width: 150 },
+  { field: "routes", headerName: "Routes", width: 100 },
+  { field: "cargo", headerName: "Cargo parameters", width: 150 },
+  { field: "freight", headerName: "Freight", width: 100 },
+  { field: "additional", headerName: "Additional expenses", width: 150 },
+  { field: "profit", headerName: "Profit" },
+  { field: "document", headerName: "Documents" },
 ];
 
 const rows = [
   {
     id: 1,
-    status: "Snow",
-    purpose: "Jon",
-    created: "",
-    transport: "",
-    cargo: "",
-    loading: "IE",
-    unloading: "AM",
-    ldate: "",
+    date: "Snow",
+    status: "Jon",
+    carriers: "",
+    trip: "",
+    routes: "",
+    cargo: "IE",
+    freight: "AM",
+    additional: "",
     udate: "",
-    client: "UAB",
-    seller: "Darius",
-    price: "",
+    profit: "UAB",
+    document: "Darius",
   },
   {
     id: 2,
-    status: "Snow",
-    purpose: "Jon",
-    created: "",
-    transport: "",
-    cargo: "",
-    loading: "IE",
-    unloading: "AM",
-    ldate: "",
+    date: "Snow",
+    status: "Jon",
+    carriers: "",
+    trip: "",
+    routes: "",
+    cargo: "IE",
+    freight: "AM",
+    additional: "",
     udate: "",
-    client: "UAB",
-    seller: "Darius",
-    price: "",
+    profit: "UAB",
+    document: "Darius",
   },
   {
     id: 3,
-    status: "Snow",
-    purpose: "Jon",
-    created: "",
-    transport: "",
-    cargo: "",
-    loading: "IE",
-    unloading: "AM",
-    ldate: "",
+    date: "Snow",
+    status: "Jon",
+    carriers: "",
+    trip: "",
+    routes: "",
+    cargo: "IE",
+    freight: "AM",
+    additional: "",
     udate: "",
-    client: "UAB",
-    seller: "Darius",
-    price: "",
+    profit: "UAB",
+    document: "Darius",
   },
 ];
 
@@ -135,15 +131,14 @@ const IOSSwitch = styled((props) => (
     }),
   },
 }));
-export default function Received() {
-  const [payValue, setPayValue] = React.useState([null, null]);
-  const [issueValue, setIssueValue] = React.useState([null, null]);
+export default function Expenses() {
   const [orderValue, setOrderValue] = React.useState([null, null]);
-  const [receivedValue, setReceivedValue] = React.useState([null, null]);
+  const [issuedValue, setIssuedValue] = React.useState([null, null]);
+  const [expensesValue, setExpensesValue] = React.useState([null, null]);
+  const [orderStatusValue, setOrderStatusValue] = React.useState([null, null]);
   const [filterID, setFilterID] = React.useState(true);
-  const [filterDate, setFilterDate] = React.useState(false);
-  const [filterContragents, setFilterContragents] = React.useState(false);
-  const [filterOther, setFilterOther] = React.useState(false);
+  const [filterDate, setFilterDate] = React.useState(true);
+  const [filterContragents, setFilterContragents] = React.useState(true);
   const Delete = (filterItem) => {
     switch (filterItem) {
       case 1:
@@ -154,9 +149,6 @@ export default function Received() {
         break;
       case 3:
         setFilterContragents(false);
-        break;
-      case 4:
-        setFilterOther(false);
         break;
     }
   };
@@ -171,16 +163,13 @@ export default function Received() {
       case 3:
         setFilterContragents(true);
         break;
-      case 4:
-        setFilterOther(true);
-        break;
     }
   };
   return (
     <>
       <div>
         <Box p={1}>
-          <Box className="filterBox" gap={1}>
+          <Box className="filterBox" gap={3}>
             <Typography sx={{ position: "absolute" }}>
               Show Filters:{" "}
             </Typography>
@@ -203,17 +192,10 @@ export default function Received() {
             >
               Contragents
             </Button>
-            <Button
-              variant={filterOther === false ? "outlined" : "contained"}
-              onClick={() => Display(4)}
-            >
-              Other
-            </Button>
           </Box>
-
           <Box
             className="filterBox"
-            gap={1}
+            gap={3}
             mt="30px"
             display={filterID == true ? "flex" : "none"}
           >
@@ -240,81 +222,91 @@ export default function Received() {
                   label="Number Invoices"
                   variant="outlined"
                 />
-                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                <TextField
+                  id="outlined-basic"
+                  label="Name"
+                  variant="outlined"
+                />
+                <FormControl sx={{ minWidth: 320 }}>
                   <InputLabel id="demo-simple-select-helper-label">
-                    Invoices are seen
+                    Expenses
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    label="User"
+                    label="Age"
                   >
-                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={1}>VIP</MenuItem>
                     <MenuItem value={2}>SUper klientas</MenuItem>
                     <MenuItem value={3}>Paprastas klientas</MenuItem>
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320 }}>
                   <InputLabel id="demo-simple-select-helper-label">
-                    Prepayment
+                    Show if
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    label="User"
+                    label="Age"
                   >
-                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={1}>VIP</MenuItem>
                     <MenuItem value={2}>SUper klientas</MenuItem>
                     <MenuItem value={3}>Paprastas klientas</MenuItem>
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={1} ml="60px">
-                <FormControlLabel
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="Group by contragents"
-                />
-                <FormControl sx={{ m: 1, minWidth: 320 }}>
+              <Box display="flex" gap={1} mt={1}>
+                <FormControl sx={{ minWidth: 320, ml: "60px" }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Order Status
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    label="User"
+                    label="Age"
                   >
-                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={1}>VIP</MenuItem>
                     <MenuItem value={2}>SUper klientas</MenuItem>
                     <MenuItem value={3}>Paprastas klientas</MenuItem>
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320 }}>
                   <InputLabel id="demo-simple-select-helper-label">
-                    Tags
+                    Invoicing company
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    label="User"
+                    label="Age"
                   >
-                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={1}>VIP</MenuItem>
                     <MenuItem value={2}>SUper klientas</MenuItem>
                     <MenuItem value={3}>Paprastas klientas</MenuItem>
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
+                <FormControlLabel
+                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                  label="Group by contragents"
+                />
+                <FormControlLabel
+                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                  label="Debt"
+                />
               </Box>
             </Box>
           </Box>
           <Divider
             sx={{ mt: 1, display: filterID === true ? "flex" : "none" }}
           />
+
           <Box
             className="filterBox"
-            gap={1}
+            gap={3}
             display={filterDate == true ? "flex" : "none"}
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
@@ -323,81 +315,16 @@ export default function Received() {
               color="warning"
               startIcon={<ClearIcon />}
               sx={{ ml: "120px" }}
-              onClick={() => Delete(2)}
+              onClick={() => Delete(1)}
             >
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={1}>
+              <Box display="flex" gap={3}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box ml="60px">
+                  <Box sx={{ ml: "60px" }}>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                      Pay until From:
-                    </Typography>
-                    <DateRangePicker
-                      calendars={1}
-                      value={payValue}
-                      onChange={(newValue) => {
-                        setPayValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
-                    />
-                  </Box>
-                </LocalizationProvider>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box ml="60px">
-                    <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                      Issued From:
-                    </Typography>
-                    <DateRangePicker
-                      calendars={1}
-                      value={issueValue}
-                      onChange={(newValue) => {
-                        setIssueValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
-                    />
-                  </Box>
-                </LocalizationProvider>
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box ml="60px">
-                    <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                      Received From:
-                    </Typography>
-                    <DateRangePicker
-                      calendars={1}
-                      value={receivedValue}
-                      onChange={(newValue) => {
-                        setReceivedValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
-                    />
-                  </Box>
-                </LocalizationProvider>
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box ml="60px">
-                    <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                      Order Status date From:
+                      Order date From:
                     </Typography>
                     <DateRangePicker
                       calendars={1}
@@ -415,35 +342,80 @@ export default function Received() {
                     />
                   </Box>
                 </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Box>
+                    <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                      Issued From:
+                    </Typography>
+                    <DateRangePicker
+                      calendars={1}
+                      value={issuedValue}
+                      onChange={(newValue) => {
+                        setIssuedValue(newValue);
+                      }}
+                      renderInput={(startProps, endProps) => (
+                        <React.Fragment>
+                          <TextField {...startProps} />
+                          <Box sx={{ mx: 2 }}> to </Box>
+                          <TextField {...endProps} />
+                        </React.Fragment>
+                      )}
+                    />
+                  </Box>
+                </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Box>
+                    <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                      Expenses date From:
+                    </Typography>
+                    <DateRangePicker
+                      calendars={1}
+                      value={expensesValue}
+                      onChange={(newValue) => {
+                        setExpensesValue(newValue);
+                      }}
+                      renderInput={(startProps, endProps) => (
+                        <React.Fragment>
+                          <TextField {...startProps} />
+                          <Box sx={{ mx: 2 }}> to </Box>
+                          <TextField {...endProps} />
+                        </React.Fragment>
+                      )}
+                    />
+                  </Box>
+                </LocalizationProvider>
               </Box>
-              <Box display="flex" gap={1}>
-                <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Payment type
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="User"
-                  >
-                    <MenuItem value={1}>Admin</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
+              <Box display="flex" gap={3} ml="60px">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Box>
+                    <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
+                      Order Status date From:
+                    </Typography>
+                    <DateRangePicker
+                      calendars={1}
+                      value={orderStatusValue}
+                      onChange={(newValue) => {
+                        setOrderStatusValue(newValue);
+                      }}
+                      renderInput={(startProps, endProps) => (
+                        <React.Fragment>
+                          <TextField {...startProps} />
+                          <Box sx={{ mx: 2 }}> to </Box>
+                          <TextField {...endProps} />
+                        </React.Fragment>
+                      )}
+                    />
+                  </Box>
+                </LocalizationProvider>
               </Box>
             </Box>
           </Box>
           <Divider
-            sx={{
-              mt: 1,
-              display: filterDate === true ? "flex" : "none",
-            }}
+            sx={{ mt: 1, display: filterDate === true ? "flex" : "none" }}
           />
           <Box
             className="filterBox"
-            gap={1}
+            gap={3}
             display={filterContragents == true ? "flex" : "none"}
           >
             <Typography sx={{ position: "absolute" }}>Contragents: </Typography>
@@ -458,7 +430,22 @@ export default function Received() {
             </Button>
             <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
               <InputLabel id="demo-simple-select-helper-label">
-                Received from
+                Contragent
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Age"
+              >
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 320 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Customer
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -478,69 +465,9 @@ export default function Received() {
               display: filterContragents === true ? "flex" : "none",
             }}
           />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterOther == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Other: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(4)}
-            >
-              Del
-            </Button>
-
-            <FormControlLabel
-              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-              label="No receive invoice"
-              sx={{ ml: "60px" }}
-            />
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Category
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>VIP</MenuItem>
-                <MenuItem value={2}>SUper klientas</MenuItem>
-                <MenuItem value={3}>Paprastas klientas</MenuItem>
-                <MenuItem value={4}>NEDIRBTI</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                SubCategory
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Age"
-              >
-                <MenuItem value={1}>VIP</MenuItem>
-                <MenuItem value={2}>SUper klientas</MenuItem>
-                <MenuItem value={3}>Paprastas klientas</MenuItem>
-                <MenuItem value={4}>NEDIRBTI</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Divider
-            sx={{ mt: 1, display: filterOther === true ? "flex" : "none" }}
-          />
         </Box>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          mt={2}
-          alignItems="center"
-        >
-          <Box display="flex" gap={1}>
+        <Box display="flex" justifyContent="space-between" mt={2}>
+          <Box display="flex" gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -555,40 +482,6 @@ export default function Received() {
               sx={{ borderRadius: "20px" }}
             >
               To Filter
-            </Button>
-          </Box>
-          <Box display="flex" gap={1} alignItems="center">
-            <Button
-              variant="outlined"
-              color="success"
-              startIcon={<AddIcon />}
-              sx={{ borderRadius: "20px" }}
-            >
-              Send all invoices
-            </Button>
-            <Button
-              variant="outlined"
-              color="success"
-              startIcon={<AddIcon />}
-              sx={{ borderRadius: "20px" }}
-            >
-              XML unloading
-            </Button>
-            <Button
-              variant="outlined"
-              color="success"
-              startIcon={<AddIcon />}
-              sx={{ borderRadius: "20px" }}
-            >
-              Excel
-            </Button>
-            <Button
-              variant="outlined"
-              color="success"
-              startIcon={<AddIcon />}
-              sx={{ borderRadius: "20px" }}
-            >
-              Add
             </Button>
           </Box>
         </Box>

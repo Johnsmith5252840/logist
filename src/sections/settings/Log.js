@@ -10,29 +10,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DataGrid } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
-import Modal from "@mui/material/Modal";
-import Basic from "./Basic";
-import Cargo from "./Cargo";
-const style = {
-  position: "absolute",
-  top: "5%",
-  left: "5%",
-  width: "90%",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  borderRadius: "10px",
-  boxShadow: 24,
-  p: 4,
-};
+
 const columns = [
   { field: "id", headerName: "Request Number", width: 120 },
   { field: "status", headerName: "Status" },
@@ -98,39 +82,6 @@ const rows = [
   },
 ];
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
 export default function Active() {
   const [requestValue, setRequestValue] = React.useState([null, null]);
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
@@ -157,14 +108,6 @@ export default function Active() {
   const [filterCargos, setFilterCargos] = React.useState(false);
   const [filterUsers, setFilterUsers] = React.useState(false);
   const [filterOther, setFilterOther] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(0);
-
-  const handleTabChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const handleChange = (event) => {
     setClient(event.target.value);
   };
@@ -841,7 +784,6 @@ export default function Active() {
               color="success"
               startIcon={<AddIcon />}
               sx={{ borderRadius: "20px" }}
-              onClick={handleOpen}
             >
               New Request
             </Button>
@@ -922,67 +864,6 @@ export default function Active() {
             />
           </div>
         </Box>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography
-              id="modal-modal-title"
-              variant="h4"
-              fontWeight="700"
-              component="h2"
-            >
-              New request
-            </Typography>
-            <Box sx={{ width: "100%" }}>
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                  value={value}
-                  onChange={handleTabChange}
-                  aria-label="basic tabs example"
-                >
-                  <Tab
-                    icon={<span className="active" />}
-                    label={
-                      <Box className="tabBtn">
-                        <span style={{ color: "white" }}>
-                          Basic Information
-                        </span>
-                      </Box>
-                    }
-                    {...a11yProps(0)}
-                  />
-                  <Tab
-                    icon={<span className="archive" />}
-                    label={
-                      <Box className="tabBtn">
-                        <span style={{ color: "white" }}>
-                          Cargo Information
-                        </span>
-                      </Box>
-                    }
-                    {...a11yProps(1)}
-                  />
-                </Tabs>
-              </Box>
-              <TabPanel value={value} index={0}>
-                <Basic />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <Cargo />
-              </TabPanel>
-            </Box>
-
-            <Box display="flex" justifyContent="end" m={2}>
-              <Button variant="contained" color="success" onClick={handleClose}>
-                Save
-              </Button>
-            </Box>
-          </Box>
-        </Modal>
       </div>
     </>
   );

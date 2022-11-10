@@ -5,9 +5,11 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Orders from "./Orders";
-import Cargos from "./Cargos";
-import Trips from "./Trips";
+import Organization from "./Organization";
+import Templates from "./Templates";
+import Classifiers from "./Classifiers";
+import System from "./System";
+import Log from "./Log";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -62,7 +64,7 @@ export default function Index() {
               icon={<span className="orders" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Orders</span>
+                  <span style={{ color: "white" }}>Organization</span>
                 </Box>
               }
               {...a11yProps(0)}
@@ -71,7 +73,7 @@ export default function Index() {
               icon={<span className="cargos" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Cargos</span>
+                  <span style={{ color: "white" }}>Templates</span>
                 </Box>
               }
               {...a11yProps(1)}
@@ -80,21 +82,45 @@ export default function Index() {
               icon={<span className="trips" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Trips</span>
+                  <span style={{ color: "white" }}>Classifiers</span>
+                </Box>
+              }
+              {...a11yProps(2)}
+            />
+            <Tab
+              icon={<span className="trips" />}
+              label={
+                <Box className="tabBtn">
+                  <span style={{ color: "white" }}>System</span>
                 </Box>
               }
               {...a11yProps(3)}
             />
+            <Tab
+              icon={<span className="trips" />}
+              label={
+                <Box className="tabBtn">
+                  <span style={{ color: "white" }}>Log</span>
+                </Box>
+              }
+              {...a11yProps(4)}
+            />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Orders />
+          <Organization />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Cargos />
+          <Templates />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Trips />
+          <Classifiers />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <System />
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <Log />
         </TabPanel>
       </Box>
     </>

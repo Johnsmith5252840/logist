@@ -1,17 +1,19 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { TextField, Divider } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import { styled } from "@mui/material/styles";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Switch from "@mui/material/Switch";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DataGrid } from "@mui/x-data-grid";
@@ -20,93 +22,83 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const columns = [
-  { field: "id", headerName: "Request Number", width: 120 },
-  { field: "status", headerName: "Status" },
-  { field: "purpose", headerName: "Request Purpose", width: 150 },
-  { field: "created", headerName: "Created" },
-  { field: "transport", headerName: "Transport Type", width: 120 },
-  { field: "cargo", headerName: "Cargo Information", width: 150 },
-  { field: "loading", headerName: "Loading Place", width: 150 },
-  { field: "unloading", headerName: "Unloading Place", width: 150 },
-  { field: "ldate", headerName: "Loading Date", width: 150 },
-  { field: "udate", headerName: "Unloading Date", width: 150 },
-  { field: "status", headerName: "Status" },
-  { field: "client", headerName: "Client" },
-  { field: "seller", headerName: "Seller" },
-  { field: "price", headerName: "Price propoals", width: 150 },
+  { field: "id", headerName: "Order Number", width: 120 },
+  { field: "date", headerName: "Order Date" },
+  { field: "status", headerName: "Order Status", width: 150 },
+  { field: "cient", headerName: "Client" },
+  { field: "carriers", headerName: "Carriers", width: 120 },
+  { field: "trip", headerName: "Trip Number", width: 150 },
+  { field: "routes", headerName: "Routes", width: 100 },
+  { field: "cargo", headerName: "Cargo parameters", width: 150 },
+  { field: "freight", headerName: "Freight", width: 100 },
+  { field: "additional", headerName: "Additional expenses", width: 150 },
+  { field: "profit", headerName: "Profit" },
+  { field: "document", headerName: "Documents" },
 ];
 
 const rows = [
   {
     id: 1,
-    status: "Snow",
-    purpose: "Jon",
-    created: "",
-    transport: "",
-    cargo: "",
-    loading: "IE",
-    unloading: "AM",
-    ldate: "",
+    date: "Snow",
+    status: "Jon",
+    carriers: "",
+    trip: "",
+    routes: "",
+    cargo: "IE",
+    freight: "AM",
+    additional: "",
     udate: "",
-    client: "UAB",
-    seller: "Darius",
-    price: "",
+    profit: "UAB",
+    document: "Darius",
   },
   {
     id: 2,
-    status: "Snow",
-    purpose: "Jon",
-    created: "",
-    transport: "",
-    cargo: "",
-    loading: "IE",
-    unloading: "AM",
-    ldate: "",
+    date: "Snow",
+    status: "Jon",
+    carriers: "",
+    trip: "",
+    routes: "",
+    cargo: "IE",
+    freight: "AM",
+    additional: "",
     udate: "",
-    client: "UAB",
-    seller: "Darius",
-    price: "",
+    profit: "UAB",
+    document: "Darius",
   },
   {
     id: 3,
-    status: "Snow",
-    purpose: "Jon",
-    created: "",
-    transport: "",
-    cargo: "",
-    loading: "IE",
-    unloading: "AM",
-    ldate: "",
+    date: "Snow",
+    status: "Jon",
+    carriers: "",
+    trip: "",
+    routes: "",
+    cargo: "IE",
+    freight: "AM",
+    additional: "",
     udate: "",
-    client: "UAB",
-    seller: "Darius",
-    price: "",
+    profit: "UAB",
+    document: "Darius",
   },
 ];
-
-export default function Payments() {
-  const [paymentValue, setPaymentValue] = React.useState([null, null]);
+export default function Trips() {
+  const [orderValue, setOrderValue] = React.useState([null, null]);
   const [filterID, setFilterID] = React.useState(true);
-  const [filterDate, setFilterDate] = React.useState(false);
-  const [filterClients, setFilterClients] = React.useState(false);
-  const [filterUsers, setFilterUsers] = React.useState(false);
-  const [filterPayments, setFilterPayments] = React.useState(false);
+  const [filterOrder, setFilterOrder] = React.useState(true);
+  const [filterEmployee, setFilterEmployee] = React.useState(true);
+  const [filterContragents, setFilterContragents] = React.useState(true);
   const Delete = (filterItem) => {
     switch (filterItem) {
       case 1:
         setFilterID(false);
         break;
       case 2:
-        setFilterDate(false);
+        setFilterOrder(false);
         break;
       case 3:
-        setFilterClients(false);
+        setFilterEmployee(false);
         break;
       case 4:
-        setFilterUsers(false);
-        break;
-      case 5:
-        setFilterPayments(false);
+        setFilterContragents(false);
         break;
     }
   };
@@ -116,16 +108,13 @@ export default function Payments() {
         setFilterID(true);
         break;
       case 2:
-        setFilterDate(true);
+        setFilterOrder(true);
         break;
       case 3:
-        setFilterClients(true);
+        setFilterEmployee(true);
         break;
       case 4:
-        setFilterUsers(true);
-        break;
-      case 5:
-        setFilterPayments(true);
+        setFilterContragents(true);
         break;
     }
   };
@@ -133,7 +122,7 @@ export default function Payments() {
     <>
       <div>
         <Box p={1}>
-          <Box className="filterBox" gap={1}>
+          <Box className="filterBox" gap={3}>
             <Typography sx={{ position: "absolute" }}>
               Show Filters:{" "}
             </Typography>
@@ -145,34 +134,27 @@ export default function Payments() {
               ID
             </Button>
             <Button
-              variant={filterDate === false ? "outlined" : "contained"}
+              variant={filterOrder === false ? "outlined" : "contained"}
               onClick={() => Display(2)}
             >
-              Date
+              Order Status
             </Button>
             <Button
-              variant={filterClients === false ? "outlined" : "contained"}
+              variant={filterEmployee === false ? "outlined" : "contained"}
               onClick={() => Display(3)}
             >
-              Clients
+              Employee
             </Button>
             <Button
-              variant={filterUsers === false ? "outlined" : "contained"}
+              variant={filterContragents === false ? "outlined" : "contained"}
               onClick={() => Display(4)}
             >
-              Users
-            </Button>
-            <Button
-              variant={filterPayments === false ? "outlined" : "contained"}
-              onClick={() => Display(5)}
-            >
-              Payments
+              Contragents
             </Button>
           </Box>
-
           <Box
             className="filterBox"
-            gap={1}
+            gap={3}
             mt="30px"
             display={filterID == true ? "flex" : "none"}
           >
@@ -186,27 +168,33 @@ export default function Payments() {
             >
               Del
             </Button>
-            <TextField
-              id="outlined-basic"
-              label="Order Number"
-              variant="outlined"
-              sx={{ ml: "60px" }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Invoices Number"
-              variant="outlined"
-            />
+            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Order Number
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Age"
+              >
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
           <Divider
             sx={{ mt: 1, display: filterID === true ? "flex" : "none" }}
           />
           <Box
             className="filterBox"
-            gap={1}
-            display={filterDate == true ? "flex" : "none"}
+            gap={3}
+            display={filterOrder == true ? "flex" : "none"}
           >
-            <Typography sx={{ position: "absolute" }}>Date: </Typography>
+            <Typography sx={{ position: "absolute" }}>
+              Order Status:{" "}
+            </Typography>
             <Button
               variant="contained"
               color="warning"
@@ -216,16 +204,31 @@ export default function Payments() {
             >
               Del
             </Button>
+            <FormControl sx={{ minWidth: 320, ml: "60px", mt: "50px" }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Status
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Age"
+              >
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
+              <Box>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
-                  Payment date From:
+                  Order Status date From:
                 </Typography>
                 <DateRangePicker
                   calendars={1}
-                  value={paymentValue}
+                  value={orderValue}
                   onChange={(newValue) => {
-                    setPaymentValue(newValue);
+                    setOrderValue(newValue);
                   }}
                   renderInput={(startProps, endProps) => (
                     <React.Fragment>
@@ -239,17 +242,15 @@ export default function Payments() {
             </LocalizationProvider>
           </Box>
           <Divider
-            sx={{
-              mt: 1,
-              display: filterDate === true ? "flex" : "none",
-            }}
+            sx={{ mt: 1, display: filterOrder === true ? "flex" : "none" }}
           />
           <Box
             className="filterBox"
-            gap={1}
-            display={filterClients == true ? "flex" : "none"}
+            gap={3}
+            mt="30px"
+            display={filterEmployee == true ? "flex" : "none"}
           >
-            <Typography sx={{ position: "absolute" }}>Clients: </Typography>
+            <Typography sx={{ position: "absolute" }}>Employee: </Typography>
             <Button
               variant="contained"
               color="warning"
@@ -259,33 +260,7 @@ export default function Payments() {
             >
               Del
             </Button>
-            <TextField
-              id="outlined-basic"
-              label="Client"
-              variant="outlined"
-              sx={{ ml: "60px" }}
-            />
-          </Box>
-
-          <Divider
-            sx={{ mt: 1, display: filterClients === true ? "flex" : "none" }}
-          />
-          <Box
-            className="filterBox"
-            gap={1}
-            display={filterUsers == true ? "flex" : "none"}
-          >
-            <Typography sx={{ position: "absolute" }}>Users: </Typography>
-            <Button
-              variant="contained"
-              color="warning"
-              startIcon={<ClearIcon />}
-              sx={{ ml: "120px" }}
-              onClick={() => Delete(4)}
-            >
-              Del
-            </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Seller
               </InputLabel>
@@ -302,14 +277,15 @@ export default function Payments() {
             </FormControl>
           </Box>
           <Divider
-            sx={{ mt: 1, display: filterUsers === true ? "flex" : "none" }}
+            sx={{ mt: 1, display: filterEmployee === true ? "flex" : "none" }}
           />
           <Box
             className="filterBox"
-            gap={1}
-            display={filterPayments == true ? "flex" : "none"}
+            gap={3}
+            mt="30px"
+            display={filterContragents == true ? "flex" : "none"}
           >
-            <Typography sx={{ position: "absolute" }}>Payments: </Typography>
+            <Typography sx={{ position: "absolute" }}>Contragents: </Typography>
             <Button
               variant="contained"
               color="warning"
@@ -319,9 +295,39 @@ export default function Payments() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
               <InputLabel id="demo-simple-select-helper-label">
-                Payment Type
+                Client
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Age"
+              >
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ minWidth: 320 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Carrier
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Age"
+              >
+                <MenuItem value={1}>VIP</MenuItem>
+                <MenuItem value={2}>SUper klientas</MenuItem>
+                <MenuItem value={3}>Paprastas klientas</MenuItem>
+                <MenuItem value={4}>NEDIRBTI</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ minWidth: 320 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Company
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -336,16 +342,14 @@ export default function Payments() {
             </FormControl>
           </Box>
           <Divider
-            sx={{ mt: 1, display: filterPayments === true ? "flex" : "none" }}
+            sx={{
+              mt: 1,
+              display: filterContragents === true ? "flex" : "none",
+            }}
           />
         </Box>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          mt={2}
-          alignItems="center"
-        >
-          <Box display="flex" gap={1}>
+        <Box display="flex" justifyContent="space-between" mt={2}>
+          <Box display="flex" gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -361,20 +365,6 @@ export default function Payments() {
             >
               To Filter
             </Button>
-          </Box>
-          <Box display="flex" gap={1} alignItems="center">
-            <Typography>Payments sum:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
-            >
-              0
-            </span>
-            <Typography>USD</Typography>
           </Box>
         </Box>
         <Box mt={2}>

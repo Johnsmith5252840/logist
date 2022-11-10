@@ -5,9 +5,11 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Orders from "./Orders";
-import Cargos from "./Cargos";
-import Trips from "./Trips";
+import Carriers from "./Carriers";
+import Terminals from "./Terminals";
+import Vehicle from "./Vehicle";
+import Drivers from "./Drivers";
+import Search from "./Search";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -62,7 +64,7 @@ export default function Index() {
               icon={<span className="orders" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Orders</span>
+                  <span style={{ color: "white" }}>Carriers</span>
                 </Box>
               }
               {...a11yProps(0)}
@@ -71,7 +73,7 @@ export default function Index() {
               icon={<span className="cargos" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Cargos</span>
+                  <span style={{ color: "white" }}>Terminals</span>
                 </Box>
               }
               {...a11yProps(1)}
@@ -80,21 +82,45 @@ export default function Index() {
               icon={<span className="trips" />}
               label={
                 <Box className="tabBtn">
-                  <span style={{ color: "white" }}>Trips</span>
+                  <span style={{ color: "white" }}>Vehicle</span>
+                </Box>
+              }
+              {...a11yProps(2)}
+            />
+            <Tab
+              icon={<span className="trips" />}
+              label={
+                <Box className="tabBtn">
+                  <span style={{ color: "white" }}>Drivers</span>
                 </Box>
               }
               {...a11yProps(3)}
             />
+            <Tab
+              icon={<span className="trips" />}
+              label={
+                <Box className="tabBtn">
+                  <span style={{ color: "white" }}>Search for duplicates</span>
+                </Box>
+              }
+              {...a11yProps(4)}
+            />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Orders />
+          <Carriers />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Cargos />
+          <Terminals />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Trips />
+          <Vehicle />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <Drivers />
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <Search />
         </TabPanel>
       </Box>
     </>
