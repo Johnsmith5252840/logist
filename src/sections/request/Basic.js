@@ -7,7 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider, Grid } from "@mui/material";
+import { TextField, Divider, Grid, useMediaQuery } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -68,6 +68,7 @@ const IOSSwitch = styled((props) => (
   },
 }));
 export default function Active() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
   const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
   return (
@@ -75,26 +76,29 @@ export default function Active() {
       <div>
         <Box mt={2}>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
-              <Box display="flex" gap={2}>
+            <Grid item xs={desktop ? 6 : 12}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
                 <TextField
                   id="outlined-basic"
                   label="User"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Logistician"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Department"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Client
                   </InputLabel>
@@ -108,7 +112,7 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Contact person
                   </InputLabel>
@@ -127,8 +131,8 @@ export default function Active() {
                 control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                 label="Extremely Urgent"
               />
-              <Box display="flex" gap={2}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Request is received
                   </InputLabel>
@@ -142,7 +146,7 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Request purpose
                   </InputLabel>
@@ -159,20 +163,22 @@ export default function Active() {
               </Box>
               <Divider sx={{ mt: 1 }} />
               <Typography fontWeight="700">Loading place</Typography>
-              <Box display="flex" gap={2}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
                 <TextField
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Country
                   </InputLabel>
@@ -190,25 +196,26 @@ export default function Active() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextareaAutosize
                   aria-label="minimum height"
                   minRows={5}
                   placeholder="Address"
-                  style={{ width: "50%" }}
+                  style={{ width: desktop ? "50%" : "100%" }}
                 />
                 <TextareaAutosize
                   aria-label="minimum height"
                   minRows={5}
                   placeholder="Contact person and telephone"
-                  style={{ width: "50%" }}
+                  style={{ width: desktop ? "50%" : "100%" }}
                 />
               </Box>
             </Grid>
-            <Grid item xs={6}>
-              <Box display="flex" gap={2}>
+            <Grid item xs={desktop ? 6 : 12}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ textAlign: "left" }}>
@@ -253,8 +260,13 @@ export default function Active() {
                   </Box>
                 </LocalizationProvider>
               </Box>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 220 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl
+                  sx={{
+                    minWidth: desktop ? 220 : 320,
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Client
                   </InputLabel>
@@ -268,7 +280,12 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 150 }}>
+                <FormControl
+                  sx={{
+                    minWidth: desktop ? 150 : 320,
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Contact person
                   </InputLabel>
@@ -286,7 +303,12 @@ export default function Active() {
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                   label="Extremely Urgent"
                 />
-                <FormControl sx={{ minWidth: 120 }}>
+                <FormControl
+                  sx={{
+                    minWidth: desktop ? 120 : 320,
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Currency
                   </InputLabel>
@@ -301,18 +323,25 @@ export default function Active() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Price(Standard)"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="With VIT"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 120 }}>
+                <FormControl
+                  sx={{
+                    minWidth: desktop ? 120 : 320,
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     VIT rate
                   </InputLabel>
@@ -326,7 +355,12 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 120 }}>
+                <FormControl
+                  sx={{
+                    minWidth: desktop ? 120 : 320,
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Tags
                   </InputLabel>
@@ -343,20 +377,22 @@ export default function Active() {
               </Box>
               <Divider sx={{ mt: 2 }} />
               <Typography fontWeight="700">Unloading place</Typography>
-              <Box display="flex" gap={2}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
                 <TextField
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Country
                   </InputLabel>
@@ -374,20 +410,21 @@ export default function Active() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextareaAutosize
                   aria-label="minimum height"
                   minRows={5}
                   placeholder="Address"
-                  style={{ width: "50%" }}
+                  style={{ width: desktop ? "50%" : "100%" }}
                 />
                 <TextareaAutosize
                   aria-label="minimum height"
                   minRows={5}
                   placeholder="Contact person and telephone"
-                  style={{ width: "50%" }}
+                  style={{ width: desktop ? "50%" : "100%" }}
                 />
               </Box>
             </Grid>

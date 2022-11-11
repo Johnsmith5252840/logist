@@ -353,7 +353,7 @@ export default function Active() {
               variant="outlined"
               sx={{
                 ml: desktop ? "60px" : "0px",
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "" : 2,
               }}
             />
@@ -361,7 +361,7 @@ export default function Active() {
               id="outlined-basic"
               label="Client's order Number"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "" : 2 }}
             />
           </Box>
           <Divider
@@ -484,7 +484,10 @@ export default function Active() {
               id="outlined-basic"
               label="Client"
               variant="outlined"
-              sx={{ ml: desktop ? "60px" : "0px", width: 320 }}
+              sx={{
+                ml: desktop ? "60px" : "0px",
+                width: desktop ? "200" : 320,
+              }}
             />
             <FormControl sx={{ m: 1, minWidth: 320 }}>
               <InputLabel id="demo-simple-select-helper-label">
@@ -583,7 +586,7 @@ export default function Active() {
                 id="outlined-basic"
                 label="City"
                 variant="outlined"
-                sx={{ width: 320 }}
+                sx={{ width: desktop ? "200" : 320 }}
               />
             </Box>
             <Box>
@@ -594,7 +597,7 @@ export default function Active() {
                 id="outlined-basic"
                 label="City"
                 variant="outlined"
-                sx={{ width: 320 }}
+                sx={{ width: desktop ? "200" : 320 }}
               />
             </Box>
             <Box>
@@ -605,7 +608,7 @@ export default function Active() {
                 id="outlined-basic"
                 label="postcode"
                 variant="outlined"
-                sx={{ width: 320 }}
+                sx={{ width: desktop ? "200" : 320 }}
               />
             </Box>
             <Box>
@@ -616,7 +619,7 @@ export default function Active() {
                 id="outlined-basic"
                 label="postcode"
                 variant="outlined"
-                sx={{ width: 320 }}
+                sx={{ width: desktop ? "200" : 320 }}
               />
             </Box>
           </Box>
@@ -974,7 +977,12 @@ export default function Active() {
             </Button>
           </Box>
           <Box display={desktop ? "flex" : "block"} gap={1} alignItems="center">
-            <Box display="flex" gap={1} alignItems="center">
+            <Box
+              display="flex"
+              gap={1}
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
+            >
               <Typography>Total:</Typography>
               <span
                 style={{
@@ -985,6 +993,13 @@ export default function Active() {
               >
                 2
               </span>
+            </Box>
+            <Box
+              display="flex"
+              gap={1}
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
+            >
               <Typography>Confirmed:</Typography>
               <span
                 style={{
@@ -995,6 +1010,13 @@ export default function Active() {
               >
                 0
               </span>
+            </Box>
+            <Box
+              display="flex"
+              gap={1}
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
+            >
               <Typography>Not Confirmed:</Typography>
               <span
                 style={{
@@ -1047,7 +1069,11 @@ export default function Active() {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          style={{ display: "flex" }}
+          style={{
+            display: "flex",
+            height: desktop ? "" : "100%",
+            overflow: desktop ? "hidden" : "scroll",
+          }}
         >
           <Box sx={style}>
             <Typography
@@ -1063,6 +1089,8 @@ export default function Active() {
                 <Tabs
                   value={value}
                   onChange={handleTabChange}
+                  scrollButtons="auto"
+                  variant="scrollable"
                   aria-label="basic tabs example"
                 >
                   <Tab

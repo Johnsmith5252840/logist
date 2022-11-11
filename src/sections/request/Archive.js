@@ -353,7 +353,7 @@ export default function Archive() {
               variant="outlined"
               sx={{
                 ml: desktop ? "60px" : "0px",
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "" : 2,
               }}
             />
@@ -361,7 +361,7 @@ export default function Archive() {
               id="outlined-basic"
               label="Client's order Number"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "" : 2 }}
             />
           </Box>
           <Divider
@@ -484,7 +484,10 @@ export default function Archive() {
               id="outlined-basic"
               label="Client"
               variant="outlined"
-              sx={{ ml: desktop ? "60px" : "0px", width: 320 }}
+              sx={{
+                ml: desktop ? "60px" : "0px",
+                width: desktop ? "200" : 320,
+              }}
             />
             <FormControl sx={{ m: 1, minWidth: 320 }}>
               <InputLabel id="demo-simple-select-helper-label">
@@ -583,7 +586,7 @@ export default function Archive() {
                 id="outlined-basic"
                 label="City"
                 variant="outlined"
-                sx={{ width: 320 }}
+                sx={{ width: desktop ? "200" : 320 }}
               />
             </Box>
             <Box>
@@ -594,7 +597,7 @@ export default function Archive() {
                 id="outlined-basic"
                 label="City"
                 variant="outlined"
-                sx={{ width: 320 }}
+                sx={{ width: desktop ? "200" : 320 }}
               />
             </Box>
             <Box>
@@ -605,7 +608,7 @@ export default function Archive() {
                 id="outlined-basic"
                 label="postcode"
                 variant="outlined"
-                sx={{ width: 320 }}
+                sx={{ width: desktop ? "200" : 320 }}
               />
             </Box>
             <Box>
@@ -616,7 +619,7 @@ export default function Archive() {
                 id="outlined-basic"
                 label="postcode"
                 variant="outlined"
-                sx={{ width: 320 }}
+                sx={{ width: desktop ? "200" : 320 }}
               />
             </Box>
           </Box>
@@ -965,7 +968,12 @@ export default function Archive() {
             </Button>
           </Box>
           <Box display={desktop ? "flex" : "block"} gap={1} alignItems="center">
-            <Box display="flex" gap={1} alignItems="center">
+            <Box
+              display="flex"
+              gap={1}
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
+            >
               <Typography>Total:</Typography>
               <span
                 style={{
@@ -976,6 +984,13 @@ export default function Archive() {
               >
                 2
               </span>
+            </Box>
+            <Box
+              display="flex"
+              gap={1}
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
+            >
               <Typography>Confirmed:</Typography>
               <span
                 style={{
@@ -986,6 +1001,13 @@ export default function Archive() {
               >
                 0
               </span>
+            </Box>
+            <Box
+              display="flex"
+              gap={1}
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
+            >
               <Typography>Not Confirmed:</Typography>
               <span
                 style={{
@@ -1038,6 +1060,11 @@ export default function Archive() {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          style={{
+            display: "flex",
+            height: desktop ? "" : "100%",
+            overflow: desktop ? "hidden" : "scroll",
+          }}
         >
           <Box sx={style}>
             <Typography
@@ -1053,6 +1080,8 @@ export default function Archive() {
                 <Tabs
                   value={value}
                   onChange={handleTabChange}
+                  scrollButtons="auto"
+                  variant="scrollable"
                   aria-label="basic tabs example"
                 >
                   <Tab

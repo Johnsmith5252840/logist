@@ -200,7 +200,7 @@ export default function Payments() {
               label="Order Number"
               variant="outlined"
               sx={{
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "0px" : 2,
                 ml: desktop ? "60px" : "0px",
               }}
@@ -209,7 +209,7 @@ export default function Payments() {
               id="outlined-basic"
               label="Invoices Number"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -294,7 +294,7 @@ export default function Payments() {
               label="Client"
               variant="outlined"
               sx={{
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "0px" : 2,
                 ml: desktop ? "60px" : "0px",
               }}

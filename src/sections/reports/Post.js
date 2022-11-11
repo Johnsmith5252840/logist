@@ -237,7 +237,7 @@ export default function Post() {
               label="Order Number"
               variant="outlined"
               sx={{
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "0px" : 2,
                 ml: desktop ? "60px" : "0px",
               }}
@@ -306,7 +306,7 @@ export default function Post() {
               color="warning"
               startIcon={<ClearIcon />}
               sx={{ ml: "120px" }}
-              onClick={() => Delete(1)}
+              onClick={() => Delete(2)}
             >
               Del
             </Button>
@@ -437,7 +437,7 @@ export default function Post() {
               label="Client"
               variant="outlined"
               sx={{
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "0px" : 2,
                 ml: desktop ? "60px" : "0px",
               }}

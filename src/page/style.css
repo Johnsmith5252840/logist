@@ -5,7 +5,6 @@
   background-position: 0px 0px;
   margin: 0px 20px;
   border-bottom-color: #39badf;
-  border-left: 1px solid #191a1b;
 }
 .order {
   background-image: url("../assets/menu.png");
@@ -14,7 +13,6 @@
   background-position: -44px 0px;
   margin: 0px 20px;
   border-bottom-color: #55df39;
-  border-left: 1px solid #191a1b;
 }
 .finance {
   background-image: url("../assets/menu.png");
@@ -81,6 +79,10 @@
   padding: 3px;
   border-radius: 2px;
 }
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: #1976d2;
+  background-color: #7de9e2;
+}
 @media only screen and (max-width: 1024px) {
   .filterBox {
     display: block;
@@ -93,7 +95,6 @@
     background-position: 0px 0px;
     margin: 0px 0px;
     border-bottom-color: #39badf;
-    border-left: 1px solid #191a1b;
   }
   .order {
     background-image: url("../assets/menu.png");
@@ -102,7 +103,6 @@
     background-position: -44px 0px;
     margin: 0px 0px;
     border-bottom-color: #55df39;
-    border-left: 1px solid #191a1b;
   }
   .finance {
     background-image: url("../assets/menu.png");

@@ -305,13 +305,19 @@ export default function Carriers() {
                   id="outlined-basic"
                   label="Company Name"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "50px" : 2 }}
+                  sx={{
+                    width: desktop ? "200" : 320,
+                    mt: desktop ? "50px" : 2,
+                  }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Company code(INN, EGRPOU, VAT, BIN, UNN)"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "50px" : 2 }}
+                  sx={{
+                    width: desktop ? "200" : 320,
+                    mt: desktop ? "50px" : 2,
+                  }}
                 />
                 <FormControl sx={{ minWidth: 320, mt: desktop ? "50px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
@@ -370,7 +376,7 @@ export default function Carriers() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
@@ -406,7 +412,7 @@ export default function Carriers() {
                   id="outlined-basic"
                   label="Phone"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -550,13 +556,13 @@ export default function Carriers() {
                   id="outlined-basic"
                   label="Departure City"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Destination City"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -613,7 +619,7 @@ export default function Carriers() {
               id="outlined-basic"
               label="Contact person"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
 
@@ -689,7 +695,7 @@ export default function Carriers() {
               id="outlined-basic"
               label="Carrier contract number with carrier"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "50px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "50px" : 2 }}
             />
             <FormControl sx={{ minWidth: 320, mt: desktop ? "50px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
@@ -801,6 +807,11 @@ export default function Carriers() {
         <Modal
           open={open}
           onClose={handleClose}
+          style={{
+            display: "flex",
+            height: desktop ? "" : "100%",
+            overflow: desktop ? "hidden" : "scroll",
+          }}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >

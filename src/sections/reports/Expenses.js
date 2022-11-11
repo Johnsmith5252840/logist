@@ -225,7 +225,7 @@ export default function Expenses() {
                   label="Order Number"
                   variant="outlined"
                   sx={{
-                    width: 320,
+                    width: desktop ? "200" : 320,
                     mt: desktop ? "0px" : 2,
                     ml: desktop ? "60px" : "0px",
                   }}
@@ -234,13 +234,13 @@ export default function Expenses() {
                   id="outlined-basic"
                   label="Number Invoices"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Name"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">

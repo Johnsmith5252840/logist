@@ -227,7 +227,7 @@ export default function Contacts() {
               label="Client"
               variant="outlined"
               sx={{
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "0px" : 2,
                 ml: desktop ? "60px" : "0px",
               }}

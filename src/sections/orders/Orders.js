@@ -483,7 +483,7 @@ export default function Orders() {
               variant="outlined"
               sx={{
                 ml: desktop ? "60px" : "0px",
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "0px" : 2,
               }}
             />
@@ -491,19 +491,19 @@ export default function Orders() {
               id="outlined-basic"
               label="Status"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Client's order Number"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Tags"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -659,7 +659,7 @@ export default function Orders() {
                     id="outlined-basic"
                     label="Week"
                     variant="outlined"
-                    sx={{ width: 320 }}
+                    sx={{ width: desktop ? "200" : 320 }}
                   />
                 </Box>
                 <Box>
@@ -670,7 +670,7 @@ export default function Orders() {
                     id="outlined-basic"
                     label="Year"
                     variant="outlined"
-                    sx={{ width: 320 }}
+                    sx={{ width: desktop ? "200" : 320 }}
                   />
                 </Box>
 
@@ -747,7 +747,10 @@ export default function Orders() {
               id="outlined-basic"
               label="Client"
               variant="outlined"
-              sx={{ ml: desktop ? "60px" : "0px", width: 320 }}
+              sx={{
+                ml: desktop ? "60px" : "0px",
+                width: desktop ? "200" : 320,
+              }}
             />
             <FormControlLabel
               control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
@@ -809,7 +812,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
                   <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
@@ -834,7 +837,10 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{
+                    wwidth: desktop ? "200" : 320,
+                    mt: desktop ? "0px" : 2,
+                  }}
                 />
                 <Box>
                   <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
@@ -860,13 +866,13 @@ export default function Orders() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
               <Box display="flex" gap={3} ml={desktop ? "60px" : "0px"}>
@@ -904,7 +910,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
                   <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
@@ -929,7 +935,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
                   <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
@@ -955,13 +961,13 @@ export default function Orders() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
               <Box display="flex" gap={3} ml={desktop ? "60px" : "0px"}>
@@ -1012,13 +1018,13 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Cargo Name"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Container Number"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -1061,7 +1067,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
                   <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
@@ -1086,7 +1092,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
                   <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
@@ -1112,13 +1118,13 @@ export default function Orders() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
               <Box display="flex" gap={3} ml={desktop ? "60px" : "0px"}>
@@ -1156,7 +1162,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
                   <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
@@ -1181,7 +1187,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
                   <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
@@ -1207,13 +1213,13 @@ export default function Orders() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
               <Box display="flex" gap={3} ml={desktop ? "60px" : "0px"}>
@@ -1264,13 +1270,13 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Cargo Name"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Container Number"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -1471,13 +1477,13 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Invoice number"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Contract number"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
@@ -1499,7 +1505,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="CMR number"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -1535,7 +1541,7 @@ export default function Orders() {
               label="Carrier"
               variant="outlined"
               sx={{
-                width: 320,
+                width: desktop ? "200" : 320,
                 ml: desktop ? "60px" : "0px",
                 mt: desktop ? "0px" : 2,
               }}
@@ -1560,13 +1566,13 @@ export default function Orders() {
               id="outlined-basic"
               label="Vehicle Number"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Driver"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -1622,13 +1628,13 @@ export default function Orders() {
               id="outlined-basic"
               label="Comments"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Costs per order"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -1880,6 +1886,11 @@ export default function Orders() {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          style={{
+            display: "flex",
+            height: desktop ? "" : "100%",
+            overflow: desktop ? "hidden" : "scroll",
+          }}
         >
           <Box sx={style}>
             <Typography

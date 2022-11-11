@@ -7,28 +7,25 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider, Grid } from "@mui/material";
+import { TextField, useMediaQuery, Grid } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
 export default function Active() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   return (
     <>
       <div>
         <Box mt={2}>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+            <Grid item xs={desktop ? 6 : 12}>
               <Typography fontWeight="700" mt={2}>
                 Legal Address
               </Typography>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Country
                   </InputLabel>
@@ -46,38 +43,49 @@ export default function Active() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Telephone"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
-                <TextField id="outlined-basic" label="Fax" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Fax"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
+                />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Email"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Website"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Grid>
@@ -85,8 +93,8 @@ export default function Active() {
               <Typography fontWeight="700" mt={2}>
                 Postal Address
               </Typography>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Country
                   </InputLabel>
@@ -104,38 +112,49 @@ export default function Active() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Telephone"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
-                <TextField id="outlined-basic" label="Fax" variant="outlined" />
+                <TextField
+                  id="outlined-basic"
+                  label="Fax"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
+                />
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Email"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Website"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Grid>

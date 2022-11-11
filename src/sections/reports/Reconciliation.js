@@ -539,13 +539,13 @@ export default function Reconciliation() {
               id="outlined-basic"
               label="Maximum positive deviation"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Maximum negative deviation"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider

@@ -334,7 +334,7 @@ export default function Cargos() {
               label="Client"
               variant="outlined"
               sx={{
-                width: 320,
+                width: desktop ? "200" : 320,
                 ml: desktop ? "60px" : "0px",
                 mt: desktop ? "0px" : 2,
               }}
@@ -343,7 +343,7 @@ export default function Cargos() {
               id="outlined-basic"
               label="Carrier"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -396,19 +396,19 @@ export default function Cargos() {
               id="outlined-basic"
               label="Post Code"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="City"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Address"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Box>
@@ -479,19 +479,19 @@ export default function Cargos() {
               id="outlined-basic"
               label="Post Code"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="City"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Address"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Box>
@@ -614,7 +614,7 @@ export default function Cargos() {
               label="Order Number"
               variant="outlined"
               sx={{
-                width: 320,
+                width: desktop ? "200" : 320,
                 mt: desktop ? "0px" : 2,
                 ml: desktop ? "60px" : "0px",
               }}
@@ -693,7 +693,7 @@ export default function Cargos() {
                   label="Vehicle Number"
                   variant="outlined"
                   sx={{
-                    width: 320,
+                    width: desktop ? "200" : 320,
                     ml: desktop ? "60px" : "0px",
                     mt: desktop ? "0px" : 2,
                   }}
@@ -755,7 +755,7 @@ export default function Cargos() {
                   id="outlined-basic"
                   label="Cargo Name"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">

@@ -7,7 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider, Grid } from "@mui/material";
+import { TextField, Divider, Grid, useMediaQuery } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -18,19 +18,21 @@ import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
 export default function Active() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
   const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
   return (
     <>
       <div>
         <Box mt={2}>
-          <Box display="flex" gap={2}>
+          <Box display={desktop ? "flex" : "block"} gap={2}>
             <TextField
               id="outlined-basic"
               label="Order Number"
               variant="outlined"
+              sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
             />
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">Tags</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -44,12 +46,12 @@ export default function Active() {
             </FormControl>
           </Box>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+            <Grid item xs={desktop ? 6 : 12}>
               <Typography fontWeight="700" mt={2}>
                 Contracts
               </Typography>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Client
                   </InputLabel>
@@ -63,7 +65,7 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Contract number
                   </InputLabel>
@@ -78,8 +80,8 @@ export default function Active() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Contract person
                   </InputLabel>
@@ -93,7 +95,7 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Manager
                   </InputLabel>
@@ -108,8 +110,8 @@ export default function Active() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Default Forwarder
                   </InputLabel>
@@ -123,7 +125,7 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Additional Managers
                   </InputLabel>
@@ -138,8 +140,8 @@ export default function Active() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Comapny
                   </InputLabel>
@@ -155,17 +157,18 @@ export default function Active() {
                 </FormControl>
               </Box>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={desktop ? 6 : 12}>
               <Typography fontWeight="700" mt={2}>
                 Unloading place
               </Typography>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Price"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Currency
                   </InputLabel>
@@ -180,13 +183,19 @@ export default function Active() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
                   label="Price With VIT"
                   variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 120 }}>
+                <FormControl
+                  sx={{
+                    minWidth: desktop ? 120 : 320,
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     VIT rate
                   </InputLabel>
@@ -201,8 +210,8 @@ export default function Active() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Deferred Payment terms
                   </InputLabel>
@@ -216,7 +225,7 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Deferred Payment(days)
                   </InputLabel>

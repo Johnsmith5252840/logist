@@ -258,13 +258,13 @@ export default function Clients() {
                   id="outlined-basic"
                   label="Company Name"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Company code(INN, EGRPOU, VAT, BIN, UNN)"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
@@ -300,19 +300,19 @@ export default function Clients() {
                   id="outlined-basic"
                   label="Email"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Website"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Phone"
                   variant="outlined"
-                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
               <Box display={desktop ? "flex" : "block"} gap={1}>
@@ -410,13 +410,13 @@ export default function Clients() {
               id="outlined-basic"
               label="Departure City"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "50px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "50px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Destination City"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "50px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "50px" : 2 }}
             />
           </Box>
           <Divider
@@ -470,7 +470,7 @@ export default function Clients() {
               id="outlined-basic"
               label="Contact person"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -545,7 +545,7 @@ export default function Clients() {
               id="outlined-basic"
               label="Contact number"
               variant="outlined"
-              sx={{ width: 320, mt: desktop ? "50px" : 2 }}
+              sx={{ width: desktop ? "200" : 320, mt: desktop ? "50px" : 2 }}
             />
             <FormControl sx={{ minWidth: 320, mt: desktop ? "50px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
@@ -699,6 +699,11 @@ export default function Clients() {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          style={{
+            display: "flex",
+            height: desktop ? "" : "100%",
+            overflow: desktop ? "hidden" : "scroll",
+          }}
         >
           <Box sx={style}>
             <Typography

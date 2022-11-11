@@ -65,7 +65,10 @@ export default function Home() {
           <Tabs
             value={value}
             onChange={handleChange}
+            scrollButtons="auto"
+            variant="scrollable"
             aria-label="basic tabs example"
+            indicatorColor="secondary"
             style={{ backgroundColor: "#23282a" }}
           >
             <Tab

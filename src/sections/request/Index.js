@@ -54,8 +54,10 @@ export default function Index() {
           <Tabs
             value={value}
             onChange={handleChange}
+            scrollButtons="auto"
+            variant="scrollable"
             aria-label="basic tabs example"
-            style={{ backgroundColor: "#23282a" }}
+            style={{ backgroundColor: "#7de9e2" }}
           >
             <Tab
               icon={<span className="active" />}
