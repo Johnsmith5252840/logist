@@ -83,6 +83,9 @@
   color: #1976d2;
   background-color: #7de9e2;
 }
+.css-1tnnsql.Mui-selected{
+  background-color: #7de9e2;
+}
 @media only screen and (max-width: 1024px) {
   .filterBox {
     display: block;
