@@ -6,11 +6,12 @@ import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { Select } from "@mui/material";
+import { Select, useMediaQuery } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 export default function Index() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [show, setShow] = React.useState(false);
   const handleHide = () => {
     setShow(false);
@@ -46,7 +47,7 @@ export default function Index() {
         </Box>
         {show === false ? (
           <Box>
-            <Box display="flex" gap={2}>
+            <Box display={desktop ? "flex" : "block"} gap={2}>
               <Box>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Author:
@@ -128,7 +129,7 @@ export default function Index() {
                 </FormControl>
               </Box>
             </Box>
-            <Box display="flex" gap={2}>
+            <Box display={desktop ? "flex" : "block"} gap={2}>
               <Box>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Status:

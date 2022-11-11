@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -81,6 +81,7 @@ const rows = [
   },
 ];
 export default function Trips() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [orderValue, setOrderValue] = React.useState([null, null]);
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
   const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
@@ -145,7 +146,15 @@ export default function Trips() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -157,7 +166,13 @@ export default function Trips() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Order Number
               </InputLabel>
@@ -172,7 +187,7 @@ export default function Trips() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Forwarder
               </InputLabel>
@@ -187,7 +202,7 @@ export default function Trips() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">Tags</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -208,7 +223,15 @@ export default function Trips() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterTrips == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterTrips == true
+                  ? "flex"
+                  : "none"
+                : filterTrips == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Trips: </Typography>
             <Button
@@ -220,7 +243,13 @@ export default function Trips() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">Trip</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -233,7 +262,7 @@ export default function Trips() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Trip Type
               </InputLabel>
@@ -255,7 +284,15 @@ export default function Trips() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -268,7 +305,7 @@ export default function Trips() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box sx={{ ml: "60px" }}>
+              <Box sx={{ ml: desktop ? "60px" : "0px" }}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Order date From:
                 </Typography>
@@ -335,8 +372,12 @@ export default function Trips() {
             sx={{ mt: 1, display: filterDate === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -353,62 +394,92 @@ export default function Trips() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={3} alignItems="center">
-            <Typography>Amount:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
+            <Box
+              display="flex"
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
             >
-              0
-            </span>
-            <Typography>Order Freight:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
+              <Typography>Amount:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                  color: "green",
+                }}
+              >
+                0
+              </span>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
             >
-              0
-            </span>
-            <Typography>Transportation expenses:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
+              <Typography>Order Freight:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                  color: "green",
+                }}
+              >
+                0
+              </span>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
             >
-              0
-            </span>
-            <Typography>Additional expenses:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
+              <Typography>Transportation expenses:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                  color: "green",
+                }}
+              >
+                0
+              </span>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
             >
-              0
-            </span>
-            <Typography>Profit:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
+              <Typography>Additional expenses:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                  color: "green",
+                }}
+              >
+                0
+              </span>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
             >
-              0 USD
-            </span>
+              <Typography>Profit:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                  color: "green",
+                }}
+              >
+                0 USD
+              </span>
+            </Box>
           </Box>
         </Box>
         <Box mt={2}>

@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
@@ -136,6 +136,7 @@ const IOSSwitch = styled((props) => (
   },
 }));
 export default function Trips() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
   const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
   const [orderValue, setOrderValue] = React.useState([null, null]);
@@ -254,7 +255,15 @@ export default function Trips() {
             className="filterBox"
             gap={1}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -270,7 +279,11 @@ export default function Trips() {
               id="outlined-basic"
               label="Trip Number"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
           </Box>
           <Divider
@@ -279,7 +292,15 @@ export default function Trips() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -292,7 +313,7 @@ export default function Trips() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
+              <Box ml={desktop ? "60px" : "0px"}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Order date From:
                 </Typography>
@@ -322,7 +343,15 @@ export default function Trips() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterCarriers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCarriers == true
+                  ? "flex"
+                  : "none"
+                : filterCarriers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Carriers: </Typography>
             <Button
@@ -338,7 +367,11 @@ export default function Trips() {
               id="outlined-basic"
               label="Carrier"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
           </Box>
           <Divider
@@ -347,7 +380,15 @@ export default function Trips() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterTrips == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterTrips == true
+                  ? "flex"
+                  : "none"
+                : filterTrips == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Trips: </Typography>
             <Button
@@ -360,7 +401,7 @@ export default function Trips() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={3} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={3} mt={1}>
                 <Button variant="contained" sx={{ ml: "60px" }}>
                   Loading place
                 </Button>
@@ -368,9 +409,10 @@ export default function Trips() {
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Country
                     </InputLabel>
@@ -390,9 +432,10 @@ export default function Trips() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Region
                     </InputLabel>
@@ -413,14 +456,20 @@ export default function Trips() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+              >
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -444,7 +493,7 @@ export default function Trips() {
                 </LocalizationProvider>
               </Box>
               <Divider sx={{ mt: 1 }} />
-              <Box display="flex" gap={3} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={3} mt={1}>
                 <Button variant="contained" sx={{ ml: "60px" }}>
                   Unloading place
                 </Button>
@@ -452,9 +501,10 @@ export default function Trips() {
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Country
                     </InputLabel>
@@ -474,9 +524,10 @@ export default function Trips() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Region
                     </InputLabel>
@@ -497,14 +548,20 @@ export default function Trips() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+              >
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -535,7 +592,15 @@ export default function Trips() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterOther == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOther == true
+                  ? "flex"
+                  : "none"
+                : filterOther == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Other: </Typography>
             <Button
@@ -548,14 +613,18 @@ export default function Trips() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={3}>
+              <Box display={desktop ? "flex" : "block"} gap={3}>
                 <TextField
                   id="outlined-basic"
                   label="Vehicle Number"
                   variant="outlined"
-                  sx={{ ml: "60px" }}
+                  sx={{
+                    width: 320,
+                    mt: desktop ? "0px" : 2,
+                    ml: desktop ? "60px" : "0px",
+                  }}
                 />
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Forwarder
                   </InputLabel>
@@ -573,15 +642,24 @@ export default function Trips() {
                   id="outlined-basic"
                   label="Driver"
                   variant="outlined"
-                  sx={{ ml: "60px" }}
+                  sx={{
+                    width: 320,
+                    mt: desktop ? "0px" : 2,
+                    ml: desktop ? "60px" : "0px",
+                  }}
                 />
                 <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                   label="No receive invoice"
                 />
               </Box>
-              <Box display="flex" gap={3} ml="60px" mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+                mt={1}
+              >
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Consolidation
                   </InputLabel>
@@ -595,7 +673,7 @@ export default function Trips() {
                     <MenuItem value={3}>No</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Tags
                   </InputLabel>
@@ -618,7 +696,15 @@ export default function Trips() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterSort == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterSort == true
+                  ? "flex"
+                  : "none"
+                : filterSort == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Sort: </Typography>
             <Button
@@ -630,7 +716,13 @@ export default function Trips() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">By</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -642,7 +734,7 @@ export default function Trips() {
                 <MenuItem value={3}>No</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Order
               </InputLabel>
@@ -663,7 +755,15 @@ export default function Trips() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterStatuses == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterStatuses == true
+                  ? "flex"
+                  : "none"
+                : filterStatuses == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Statuses: </Typography>
             <Button
@@ -675,11 +775,11 @@ export default function Trips() {
             >
               Del
             </Button>
-            <Box ml="60px">
+            <Box ml={desktop ? "60px" : "0px"}>
               <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                 Trip Status:
               </Typography>
-              <FormControl sx={{ minWidth: 320 }}>
+              <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                 <InputLabel id="demo-simple-select-helper-label">
                   Trip Status
                 </InputLabel>
@@ -719,7 +819,7 @@ export default function Trips() {
               <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                 Distribution:
               </Typography>
-              <FormControl sx={{ minWidth: 320 }}>
+              <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                 <InputLabel id="demo-simple-select-helper-label">
                   Distribution
                 </InputLabel>
@@ -740,12 +840,12 @@ export default function Trips() {
           />
         </Box>
         <Box
-          display="flex"
+          display={desktop ? "flex" : "block"}
           justifyContent="space-between"
           mt={2}
           alignItems="center"
         >
-          <Box display="flex" gap={1}>
+          <Box display={desktop ? "flex" : "block"} gap={1}>
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -762,7 +862,12 @@ export default function Trips() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={1} alignItems="center">
+          <Box
+            display="flex"
+            justifyContent={desktop ? "" : "center"}
+            gap={1}
+            alignItems="center"
+          >
             <Typography>Cost of Trips:</Typography>
             <span
               style={{

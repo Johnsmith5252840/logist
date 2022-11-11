@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -126,7 +126,8 @@ const IOSSwitch = styled((props) => (
   },
 }));
 export default function Templates() {
-  const [tree, setTree] = React.useState(1);
+  const desktop = useMediaQuery("(min-width: 1024px)");
+  const [tree, setTree] = React.useState(3);
   const [filterOther, setFilterOther] = React.useState(true);
   const Delete = (filterItem) => {
     switch (filterItem) {
@@ -146,7 +147,7 @@ export default function Templates() {
     <>
       <Box sx={{ width: "100%", mt: "30px" }}>
         <Grid container spacing={3}>
-          <Grid item xs={4}>
+          <Grid item xs={desktop ? 4 : 12}>
             <Box backgroundColor="green" p={2} borderRadius="10px">
               <Typography
                 color="white"
@@ -154,7 +155,7 @@ export default function Templates() {
                 fontWeight="700"
                 textAlign="left"
               >
-                Template section
+                Organization section
               </Typography>
             </Box>
             <Box p={1} textAlign="left">
@@ -165,7 +166,7 @@ export default function Templates() {
                 }}
                 backgroundColor={tree === 1 ? "grey" : "white"}
               >
-                <Typography>Requests</Typography>
+                <Typography>Companies</Typography>
               </Box>
               <Box
                 className="tree"
@@ -196,7 +197,7 @@ export default function Templates() {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={desktop ? 8 : 12}>
             <Box backgroundColor="green" p={2} borderRadius="10px">
               <Typography color="white" fontSize="24" fontWeight="700">
                 Companies
@@ -274,7 +275,15 @@ export default function Templates() {
                     className="filterBox"
                     gap={3}
                     mt="30px"
-                    display={filterOther == true ? "flex" : "none"}
+                    display={
+                      desktop
+                        ? filterOther == true
+                          ? "flex"
+                          : "none"
+                        : filterOther == true
+                        ? "block"
+                        : "none"
+                    }
                   >
                     <Typography sx={{ position: "absolute" }}>
                       Driver:{" "}
@@ -292,9 +301,15 @@ export default function Templates() {
                       id="outlined-basic"
                       label="User"
                       variant="outlined"
-                      sx={{ ml: "60px" }}
+                      sx={{
+                        width: 320,
+                        mt: desktop ? "0px" : 2,
+                        ml: desktop ? "60px" : "0px",
+                      }}
                     />
-                    <FormControl sx={{ minWidth: 320 }}>
+                    <FormControl
+                      sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}
+                    >
                       <InputLabel id="demo-simple-select-helper-label">
                         Group
                       </InputLabel>
@@ -312,7 +327,10 @@ export default function Templates() {
                     <FormControlLabel
                       control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                       label="Show only active"
-                      sx={{ ml: "60px" }}
+                      sx={{
+                        ml: desktop ? "60px" : "0px",
+                        mt: desktop ? "0px" : 2,
+                      }}
                     />
                   </Box>
                   <Divider
@@ -322,8 +340,16 @@ export default function Templates() {
                     }}
                   />
                 </Box>
-                <Box display="flex" justifyContent="space-between" mt={2}>
-                  <Box display="flex" gap={3} alignItems="center">
+                <Box
+                  display={desktop ? "flex" : "block"}
+                  justifyContent="space-between"
+                  mt={2}
+                >
+                  <Box
+                    display={desktop ? "flex" : "block"}
+                    gap={3}
+                    alignItems="center"
+                  >
                     <Button
                       variant="outlined"
                       startIcon={<ClearIcon />}
@@ -340,7 +366,11 @@ export default function Templates() {
                       To Filter
                     </Button>
                   </Box>
-                  <Box display="flex" gap={3} alignItems="center">
+                  <Box
+                    display={desktop ? "flex" : "block"}
+                    gap={3}
+                    alignItems="center"
+                  >
                     <Button
                       variant="outlined"
                       color="success"

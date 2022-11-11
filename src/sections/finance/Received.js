@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
@@ -136,6 +136,7 @@ const IOSSwitch = styled((props) => (
   },
 }));
 export default function Received() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [payValue, setPayValue] = React.useState([null, null]);
   const [issueValue, setIssueValue] = React.useState([null, null]);
   const [orderValue, setOrderValue] = React.useState([null, null]);
@@ -215,7 +216,15 @@ export default function Received() {
             className="filterBox"
             gap={1}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -228,19 +237,26 @@ export default function Received() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={1}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
                 <TextField
                   id="outlined-basic"
                   label="Order Number"
                   variant="outlined"
-                  sx={{ ml: "60px" }}
+                  sx={{
+                    width: 320,
+                    mt: desktop ? "0px" : 2,
+                    ml: desktop ? "60px" : "0px",
+                  }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Number Invoices"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                <FormControl
+                  sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Invoices are seen
                   </InputLabel>
@@ -255,7 +271,9 @@ export default function Received() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                <FormControl
+                  sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Prepayment
                   </InputLabel>
@@ -271,12 +289,18 @@ export default function Received() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={1} ml="60px">
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={1}
+                ml={desktop ? "60px" : "0px"}
+              >
                 <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                   label="Group by contragents"
                 />
-                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                <FormControl
+                  sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Order Status
                   </InputLabel>
@@ -291,7 +315,9 @@ export default function Received() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ m: 1, minWidth: 320 }}>
+                <FormControl
+                  sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Tags
                   </InputLabel>
@@ -315,7 +341,15 @@ export default function Received() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -328,9 +362,9 @@ export default function Received() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={1}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box ml="60px">
+                  <Box ml={desktop ? "60px" : "0px"}>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                       Pay until From:
                     </Typography>
@@ -351,7 +385,7 @@ export default function Received() {
                   </Box>
                 </LocalizationProvider>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box ml="60px">
+                  <Box ml={desktop ? "60px" : "0px"}>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                       Issued From:
                     </Typography>
@@ -373,7 +407,7 @@ export default function Received() {
                 </LocalizationProvider>
 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box ml="60px">
+                  <Box ml={desktop ? "60px" : "0px"}>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                       Received From:
                     </Typography>
@@ -395,7 +429,7 @@ export default function Received() {
                 </LocalizationProvider>
 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box ml="60px">
+                  <Box ml={desktop ? "60px" : "0px"}>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                       Order Status date From:
                     </Typography>
@@ -416,8 +450,15 @@ export default function Received() {
                   </Box>
                 </LocalizationProvider>
               </Box>
-              <Box display="flex" gap={1}>
-                <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
+                <FormControl
+                  sx={{
+                    m: 1,
+                    minWidth: 320,
+                    ml: desktop ? "60px" : "0px",
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Payment type
                   </InputLabel>
@@ -444,7 +485,15 @@ export default function Received() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterContragents == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterContragents == true
+                  ? "flex"
+                  : "none"
+                : filterContragents == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Contragents: </Typography>
             <Button
@@ -456,7 +505,14 @@ export default function Received() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                m: 1,
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Received from
               </InputLabel>
@@ -481,7 +537,15 @@ export default function Received() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterOther == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOther == true
+                  ? "flex"
+                  : "none"
+                : filterOther == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Other: </Typography>
             <Button
@@ -497,9 +561,9 @@ export default function Received() {
             <FormControlLabel
               control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
               label="No receive invoice"
-              sx={{ ml: "60px" }}
+              sx={{ ml: desktop ? "60px" : "0px" }}
             />
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Category
               </InputLabel>
@@ -514,7 +578,7 @@ export default function Received() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 SubCategory
               </InputLabel>
@@ -535,12 +599,12 @@ export default function Received() {
           />
         </Box>
         <Box
-          display="flex"
+          display={desktop ? "flex" : "block"}
           justifyContent="space-between"
           mt={2}
           alignItems="center"
         >
-          <Box display="flex" gap={1}>
+          <Box display={desktop ? "flex" : "block"} gap={1}>
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -557,7 +621,7 @@ export default function Received() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={1} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={1} alignItems="center">
             <Button
               variant="outlined"
               color="success"

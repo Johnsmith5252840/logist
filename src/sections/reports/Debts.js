@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
@@ -86,6 +86,7 @@ const rows = [
 ];
 
 export default function Debts() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [filterID, setFilterID] = React.useState(true);
   const Delete = (filterItem) => {
     switch (filterItem) {
@@ -122,7 +123,15 @@ export default function Debts() {
             className="filterBox"
             gap={1}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -138,10 +147,22 @@ export default function Debts() {
               id="outlined-basic"
               label="Clients"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
-            <TextField id="outlined-basic" label="TIN" variant="outlined" />
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <TextField
+              id="outlined-basic"
+              label="TIN"
+              variant="outlined"
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+              }}
+            />
+            <FormControl sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -154,7 +175,7 @@ export default function Debts() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Order Status
               </InputLabel>
@@ -169,7 +190,7 @@ export default function Debts() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Invoicing Company
               </InputLabel>
@@ -190,12 +211,12 @@ export default function Debts() {
           />
         </Box>
         <Box
-          display="flex"
+          display={desktop ? "flex" : "block"}
           justifyContent="space-between"
           mt={2}
           alignItems="center"
         >
-          <Box display="flex" gap={1}>
+          <Box display={desktop ? "flex" : "block"} gap={1}>
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -212,7 +233,7 @@ export default function Debts() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={1} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={1} alignItems="center">
             <Button
               variant="outlined"
               color="success"

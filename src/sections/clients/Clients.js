@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -133,6 +133,7 @@ function a11yProps(index) {
 }
 
 export default function Clients() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [contactValue, setContactValue] = React.useState([null, null]);
   const [creationValue, setCreationValue] = React.useState([null, null]);
   const [filterCompany, setFilterCompany] = React.useState(true);
@@ -231,7 +232,15 @@ export default function Clients() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterCompany == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCompany == true
+                  ? "flex"
+                  : "none"
+                : filterCompany == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Company: </Typography>
             <Button
@@ -243,19 +252,21 @@ export default function Clients() {
             >
               Del
             </Button>
-            <Box sx={{ ml: "60px" }}>
-              <Box display="flex" gap={1}>
+            <Box sx={{ ml: desktop ? "60px" : "0px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
                 <TextField
                   id="outlined-basic"
                   label="Company Name"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Company code(INN, EGRPOU, VAT, BIN, UNN)"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Activity Area
                   </InputLabel>
@@ -270,7 +281,7 @@ export default function Clients() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Country
                   </InputLabel>
@@ -289,19 +300,22 @@ export default function Clients() {
                   id="outlined-basic"
                   label="Email"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Website"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Phone"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={1}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -332,7 +346,15 @@ export default function Clients() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDirections == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDirections == true
+                  ? "flex"
+                  : "none"
+                : filterDirections == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Directions: </Typography>
             <Button
@@ -344,11 +366,11 @@ export default function Clients() {
             >
               Del
             </Button>
-            <Box sx={{ ml: "60px" }}>
+            <Box sx={{ ml: desktop ? "60px" : "0px" }}>
               <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                 Direction From:
               </Typography>
-              <FormControl sx={{ minWidth: 320 }}>
+              <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                 <InputLabel id="demo-simple-select-helper-label">
                   Country
                 </InputLabel>
@@ -368,7 +390,7 @@ export default function Clients() {
               <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                 To:
               </Typography>
-              <FormControl sx={{ minWidth: 320 }}>
+              <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                 <InputLabel id="demo-simple-select-helper-label">
                   Country
                 </InputLabel>
@@ -388,13 +410,13 @@ export default function Clients() {
               id="outlined-basic"
               label="Departure City"
               variant="outlined"
-              sx={{ mt: "50px" }}
+              sx={{ width: 320, mt: desktop ? "50px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Destination City"
               variant="outlined"
-              sx={{ mt: "50px" }}
+              sx={{ width: 320, mt: desktop ? "50px" : 2 }}
             />
           </Box>
           <Divider
@@ -403,7 +425,15 @@ export default function Clients() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterUsers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterUsers == true
+                  ? "flex"
+                  : "none"
+                : filterUsers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Users: </Typography>
             <Button
@@ -415,7 +445,13 @@ export default function Clients() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Manager
               </InputLabel>
@@ -434,6 +470,7 @@ export default function Clients() {
               id="outlined-basic"
               label="Contact person"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -442,7 +479,15 @@ export default function Clients() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -455,7 +500,7 @@ export default function Clients() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
+              <Box ml={desktop ? "60px" : "0px"}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Contact date From:
                 </Typography>
@@ -476,7 +521,7 @@ export default function Clients() {
               </Box>
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
+              <Box ml={desktop ? "60px" : "0px"}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Date of Creation From:
                 </Typography>
@@ -500,9 +545,9 @@ export default function Clients() {
               id="outlined-basic"
               label="Contact number"
               variant="outlined"
-              sx={{ mt: "50px" }}
+              sx={{ width: 320, mt: desktop ? "50px" : 2 }}
             />
-            <FormControl sx={{ minWidth: 320, mt: "50px" }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "50px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Has Contract
               </InputLabel>
@@ -524,7 +569,15 @@ export default function Clients() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterOther == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOther == true
+                  ? "flex"
+                  : "none"
+                : filterOther == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Other: </Typography>
             <Button
@@ -536,7 +589,13 @@ export default function Clients() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Client Type
               </InputLabel>
@@ -555,8 +614,12 @@ export default function Clients() {
             sx={{ mt: 1, display: filterOther === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="contained"
               color="success"
@@ -582,7 +645,7 @@ export default function Clients() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={3} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Typography>Clients:</Typography>
             <span
               style={{
@@ -709,7 +772,11 @@ export default function Clients() {
               </TabPanel> */}
             </Box>
 
-            <Box display="flex" justifyContent="end" m={2}>
+            <Box
+              display={desktop ? "flex" : "block"}
+              justifyContent="end"
+              m={2}
+            >
               <Button variant="contained" color="success" onClick={handleClose}>
                 Save
               </Button>

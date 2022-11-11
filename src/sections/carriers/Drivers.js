@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -70,6 +70,7 @@ const rows = [
   },
 ];
 export default function Vehicle() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [filterDriver, setFilterDriver] = React.useState(true);
   const Delete = (filterItem) => {
     switch (filterItem) {
@@ -106,7 +107,15 @@ export default function Vehicle() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterDriver == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDriver == true
+                  ? "flex"
+                  : "none"
+                : filterDriver == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Driver: </Typography>
             <Button
@@ -122,20 +131,32 @@ export default function Vehicle() {
               id="outlined-basic"
               label="Driver' Name"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
             <TextField
               id="outlined-basic"
               label="Driver' surname"
               variant="outlined"
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+              }}
             />
           </Box>
           <Divider
             sx={{ mt: 1, display: filterDriver === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -152,7 +173,7 @@ export default function Vehicle() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={3} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               color="success"

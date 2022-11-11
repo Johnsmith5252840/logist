@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -180,6 +180,7 @@ const style = {
   p: 4,
 };
 export default function Orders() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [orderValue, setOrderValue] = React.useState([null, null]);
   const [creationValue, setCreationValue] = React.useState([null, null]);
   const [actValue, setActValue] = React.useState([null, null]);
@@ -456,7 +457,15 @@ export default function Orders() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -472,15 +481,30 @@ export default function Orders() {
               id="outlined-basic"
               label="Order Number"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                ml: desktop ? "60px" : "0px",
+                width: 320,
+                mt: desktop ? "0px" : 2,
+              }}
             />
-            <TextField id="outlined-basic" label="Status" variant="outlined" />
+            <TextField
+              id="outlined-basic"
+              label="Status"
+              variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+            />
             <TextField
               id="outlined-basic"
               label="Client's order Number"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
-            <TextField id="outlined-basic" label="Tags" variant="outlined" />
+            <TextField
+              id="outlined-basic"
+              label="Tags"
+              variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+            />
           </Box>
           <Divider
             sx={{ mt: 1, display: filterID === true ? "flex" : "none" }}
@@ -488,7 +512,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -501,9 +533,9 @@ export default function Orders() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={3}>
+              <Box display={desktop ? "flex" : "block"} gap={3}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box sx={{ ml: "60px" }}>
+                  <Box sx={{ ml: desktop ? "60px" : "0px" }}>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                       Order date From:
                     </Typography>
@@ -566,7 +598,11 @@ export default function Orders() {
                   </Box>
                 </LocalizationProvider>
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+              >
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -610,7 +646,11 @@ export default function Orders() {
                   </Box>
                 </LocalizationProvider>
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+              >
                 <Box>
                   <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                     Week:
@@ -619,6 +659,7 @@ export default function Orders() {
                     id="outlined-basic"
                     label="Week"
                     variant="outlined"
+                    sx={{ width: 320 }}
                   />
                 </Box>
                 <Box>
@@ -629,6 +670,7 @@ export default function Orders() {
                     id="outlined-basic"
                     label="Year"
                     variant="outlined"
+                    sx={{ width: 320 }}
                   />
                 </Box>
 
@@ -662,7 +704,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterClients == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterClients == true
+                  ? "flex"
+                  : "none"
+                : filterClients == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Clients: </Typography>
             <Button
@@ -674,7 +724,9 @@ export default function Orders() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{ m: 1, minWidth: 320, ml: desktop ? "60px" : "0px" }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Client Type
               </InputLabel>
@@ -695,7 +747,7 @@ export default function Orders() {
               id="outlined-basic"
               label="Client"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{ ml: desktop ? "60px" : "0px", width: 320 }}
             />
             <FormControlLabel
               control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
@@ -725,7 +777,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterCargos == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCargos == true
+                  ? "flex"
+                  : "none"
+                : filterCargos == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Cargos: </Typography>
             <Button
@@ -738,17 +798,21 @@ export default function Orders() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={3}>
-                <Button variant="contained" sx={{ ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={3}>
+                <Button
+                  variant="contained"
+                  sx={{ ml: "60px", mt: desktop ? "0px" : 2 }}
+                >
                   Loading place
                 </Button>
                 <TextField
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Country
                     </InputLabel>
@@ -770,9 +834,10 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Region
                     </InputLabel>
@@ -795,14 +860,16 @@ export default function Orders() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box display="flex" gap={3} ml={desktop ? "60px" : "0px"}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -826,17 +893,21 @@ export default function Orders() {
                 </LocalizationProvider>
               </Box>
               <Divider sx={{ mt: 1 }} />
-              <Box display="flex" gap={3} mt={1}>
-                <Button variant="contained" sx={{ ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={3} mt={1}>
+                <Button
+                  variant="contained"
+                  sx={{ ml: "60px", mt: desktop ? "0px" : 2 }}
+                >
                   Unloading place
                 </Button>
                 <TextField
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Country
                     </InputLabel>
@@ -858,9 +929,10 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Region
                     </InputLabel>
@@ -883,14 +955,16 @@ export default function Orders() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box display="flex" gap={3} ml={desktop ? "60px" : "0px"}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -914,8 +988,10 @@ export default function Orders() {
                 </LocalizationProvider>
               </Box>
 
-              <Box display="flex" gap={3} mt={1}>
-                <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={3} mt={1}>
+                <FormControl
+                  sx={{ minWidth: 320, ml: desktop ? "60px" : "0px" }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Partial Cargo
                   </InputLabel>
@@ -936,11 +1012,13 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Cargo Name"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Container Number"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -951,7 +1029,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterTrips == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterTrips == true
+                  ? "flex"
+                  : "none"
+                : filterTrips == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Trips: </Typography>
             <Button
@@ -964,46 +1050,30 @@ export default function Orders() {
               Del
             </Button>
             <Box>
-              <Box display="flex" justifyContent="start">
-                <FormControl sx={{ minWidth: 320, ml: "60px" }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Trip
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={trip}
-                    label="Age"
-                    onChange={handleTripChange}
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <Divider sx={{ mt: 1 }} />
-              <Box display="flex" gap={3} mt={1}>
-                <Button variant="contained" sx={{ ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={3}>
+                <Button
+                  variant="contained"
+                  sx={{ ml: "60px", mt: desktop ? "0px" : 2 }}
+                >
                   Loading place
                 </Button>
                 <TextField
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Country
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
-                      value={tripLoadingCountry}
+                      value={cargoLoadingCountry}
                       label="Age"
-                      onChange={handleTripLoadingCountryChange}
+                      onChange={handleCargoLoadingCountryChange}
                     >
                       <MenuItem value={1}>VIP</MenuItem>
                       <MenuItem value={2}>SUper klientas</MenuItem>
@@ -1016,18 +1086,19 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Region
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
-                      value={tripregion}
+                      value={region}
                       label="Age"
-                      onChange={handleTripRegionChange}
+                      onChange={handleRegionChange}
                     >
                       <MenuItem value={1}>VIP</MenuItem>
                       <MenuItem value={2}>SUper klientas</MenuItem>
@@ -1041,14 +1112,16 @@ export default function Orders() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box display="flex" gap={3} ml={desktop ? "60px" : "0px"}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -1056,9 +1129,9 @@ export default function Orders() {
                     </Typography>
                     <DateRangePicker
                       calendars={1}
-                      value={tripLoadingValue}
+                      value={cargosLoadingValue}
                       onChange={(newValue) => {
-                        setTripLoadingValue(newValue);
+                        setCargosLoadingValue(newValue);
                       }}
                       renderInput={(startProps, endProps) => (
                         <React.Fragment>
@@ -1072,26 +1145,30 @@ export default function Orders() {
                 </LocalizationProvider>
               </Box>
               <Divider sx={{ mt: 1 }} />
-              <Box display="flex" gap={3} mt={1}>
-                <Button variant="contained" sx={{ ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={3} mt={1}>
+                <Button
+                  variant="contained"
+                  sx={{ ml: "60px", mt: desktop ? "0px" : 2 }}
+                >
                   Unloading place
                 </Button>
                 <TextField
                   id="outlined-basic"
                   label="Place/Company"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Country
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
-                      value={tripUnloadingCountry}
+                      value={cargoUnloadingCountry}
                       label="Age"
-                      onChange={handleTripUnloadingCountryChange}
+                      onChange={handleCargoUnloadingCountryChange}
                     >
                       <MenuItem value={1}>VIP</MenuItem>
                       <MenuItem value={2}>SUper klientas</MenuItem>
@@ -1104,18 +1181,19 @@ export default function Orders() {
                   id="outlined-basic"
                   label="Post Code"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <Box>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Region
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
-                      value={tripunregion}
+                      value={unregion}
                       label="Age"
-                      onChange={handleTripUnregionChange}
+                      onChange={handleUnregionChange}
                     >
                       <MenuItem value={1}>VIP</MenuItem>
                       <MenuItem value={2}>SUper klientas</MenuItem>
@@ -1129,14 +1207,16 @@ export default function Orders() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Address"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box display="flex" gap={3} ml={desktop ? "60px" : "0px"}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -1144,9 +1224,9 @@ export default function Orders() {
                     </Typography>
                     <DateRangePicker
                       calendars={1}
-                      value={tripUnloadingValue}
+                      value={cargosUnloadingValue}
                       onChange={(newValue) => {
-                        setTripUnloadingValue(newValue);
+                        setCargosUnloadingValue(newValue);
                       }}
                       renderInput={(startProps, endProps) => (
                         <React.Fragment>
@@ -1158,6 +1238,40 @@ export default function Orders() {
                     />
                   </Box>
                 </LocalizationProvider>
+              </Box>
+
+              <Box display={desktop ? "flex" : "block"} gap={3} mt={1}>
+                <FormControl
+                  sx={{ minWidth: 320, ml: desktop ? "60px" : "0px" }}
+                >
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Partial Cargo
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={partial}
+                    label="Age"
+                    onChange={handlePartialChange}
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+                <TextField
+                  id="outlined-basic"
+                  label="Cargo Name"
+                  variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Container Number"
+                  variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+                />
               </Box>
             </Box>
           </Box>
@@ -1167,7 +1281,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterUsers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterUsers == true
+                  ? "flex"
+                  : "none"
+                : filterUsers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Users: </Typography>
             <Button
@@ -1179,7 +1301,13 @@ export default function Orders() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Manager
               </InputLabel>
@@ -1196,7 +1324,7 @@ export default function Orders() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Department
               </InputLabel>
@@ -1213,7 +1341,7 @@ export default function Orders() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Forwarder
               </InputLabel>
@@ -1230,7 +1358,7 @@ export default function Orders() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Additional managers
               </InputLabel>
@@ -1254,7 +1382,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDocuments == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDocuments == true
+                  ? "flex"
+                  : "none"
+                : filterDocuments == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Documents: </Typography>
             <Button
@@ -1267,7 +1403,11 @@ export default function Orders() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+              >
                 <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                   label="Without received trip invoices"
@@ -1276,7 +1416,13 @@ export default function Orders() {
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                   label="No invoices"
                 />
-                <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+                <FormControl
+                  sx={{
+                    minWidth: 320,
+                    ml: desktop ? "60px" : "0px",
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Outgoing invoices are paid
                   </InputLabel>
@@ -1292,7 +1438,13 @@ export default function Orders() {
                     <MenuItem value={3}>No</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+                <FormControl
+                  sx={{
+                    minWidth: 320,
+                    ml: desktop ? "60px" : "0px",
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Received invoices are paid
                   </InputLabel>
@@ -1309,18 +1461,25 @@ export default function Orders() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={3} ml="60px" mt={1}>
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+                mt={1}
+              >
                 <TextField
                   id="outlined-basic"
                   label="Invoice number"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Contract number"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     There is an act
                   </InputLabel>
@@ -1340,6 +1499,7 @@ export default function Orders() {
                   id="outlined-basic"
                   label="CMR number"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -1350,7 +1510,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterTransport == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterTransport == true
+                  ? "flex"
+                  : "none"
+                : filterTransport == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Tranport: </Typography>
             <Button
@@ -1366,9 +1534,13 @@ export default function Orders() {
               id="outlined-basic"
               label="Carrier"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
             />
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Transport Type
               </InputLabel>
@@ -1388,8 +1560,14 @@ export default function Orders() {
               id="outlined-basic"
               label="Vehicle Number"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
-            <TextField id="outlined-basic" label="Driver" variant="outlined" />
+            <TextField
+              id="outlined-basic"
+              label="Driver"
+              variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+            />
           </Box>
           <Divider
             sx={{ mt: 1, display: filterTransport === true ? "flex" : "none" }}
@@ -1398,7 +1576,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterOther == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOther == true
+                  ? "flex"
+                  : "none"
+                : filterOther == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Other: </Typography>
             <Button
@@ -1410,7 +1596,13 @@ export default function Orders() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Currency
               </InputLabel>
@@ -1430,11 +1622,13 @@ export default function Orders() {
               id="outlined-basic"
               label="Comments"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Costs per order"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -1443,7 +1637,15 @@ export default function Orders() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterSort == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterSort == true
+                  ? "flex"
+                  : "none"
+                : filterSort == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Sort: </Typography>
             <Button
@@ -1455,7 +1657,13 @@ export default function Orders() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">By</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -1469,7 +1677,13 @@ export default function Orders() {
                 <MenuItem value={3}>No</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Order
               </InputLabel>
@@ -1490,8 +1704,12 @@ export default function Orders() {
             sx={{ mt: 1, display: filterSort === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="contained"
               color="success"
@@ -1517,7 +1735,7 @@ export default function Orders() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={3} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <FormControl sx={{ minWidth: 320 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Status

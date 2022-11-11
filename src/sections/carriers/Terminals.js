@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import InputLabel from "@mui/material/InputLabel";
@@ -76,6 +76,7 @@ const rows = [
   },
 ];
 export default function Orders() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [filterOther, setFilterOther] = React.useState(true);
   const Delete = (filterItem) => {
     switch (filterItem) {
@@ -112,7 +113,15 @@ export default function Orders() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterOther == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOther == true
+                  ? "flex"
+                  : "none"
+                : filterOther == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Carriers: </Typography>
             <Button
@@ -124,7 +133,14 @@ export default function Orders() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                m: 1,
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Store
               </InputLabel>
@@ -144,8 +160,12 @@ export default function Orders() {
             sx={{ mt: 1, display: filterOther === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -162,7 +182,7 @@ export default function Orders() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={3} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               color="success"

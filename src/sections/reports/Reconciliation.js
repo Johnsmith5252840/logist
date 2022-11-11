@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -130,7 +130,8 @@ const IOSSwitch = styled((props) => (
     }),
   },
 }));
-export default function Post() {
+export default function Reconciliation() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [orderValue, setOrderValue] = React.useState([null, null]);
   const [statusValue, setStatusValue] = React.useState([null, null]);
   const [filterDate, setFilterDate] = React.useState(true);
@@ -235,7 +236,15 @@ export default function Post() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -248,7 +257,7 @@ export default function Post() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box sx={{ ml: "60px" }}>
+              <Box sx={{ ml: desktop ? "60px" : "0px" }}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Order date From:
                 </Typography>
@@ -297,7 +306,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterOrder == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOrder == true
+                  ? "flex"
+                  : "none"
+                : filterOrder == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>
               Order Status:{" "}
@@ -311,7 +328,13 @@ export default function Post() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Order Status
               </InputLabel>
@@ -333,7 +356,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterCompany == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCompany == true
+                  ? "flex"
+                  : "none"
+                : filterCompany == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Company: </Typography>
             <Button
@@ -345,7 +376,13 @@ export default function Post() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Company
               </InputLabel>
@@ -367,7 +404,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterClients == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterClients == true
+                  ? "flex"
+                  : "none"
+                : filterClients == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Clients: </Typography>
             <Button
@@ -379,7 +424,13 @@ export default function Post() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Clients
               </InputLabel>
@@ -401,7 +452,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterUsers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterUsers == true
+                  ? "flex"
+                  : "none"
+                : filterUsers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>
               Order Status:{" "}
@@ -415,7 +474,13 @@ export default function Post() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Manager
               </InputLabel>
@@ -437,7 +502,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterReconciliation == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterReconciliation == true
+                  ? "flex"
+                  : "none"
+                : filterReconciliation == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>
               Reconciliation:{" "}
@@ -455,7 +528,7 @@ export default function Post() {
             <FormControlLabel
               control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
               label="Freight is not equal to the issued invoices"
-              sx={{ ml: "60px" }}
+              sx={{ ml: desktop ? "60px" : "0px" }}
             />
 
             <FormControlLabel
@@ -466,11 +539,13 @@ export default function Post() {
               id="outlined-basic"
               label="Maximum positive deviation"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
               label="Maximum negative deviation"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -480,8 +555,12 @@ export default function Post() {
             }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}

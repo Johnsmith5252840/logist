@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
@@ -124,6 +124,7 @@ const IOSSwitch = styled((props) => (
   },
 }));
 export default function Access() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [filterOther, setFilterOther] = React.useState(true);
   const Delete = (filterItem) => {
     switch (filterItem) {
@@ -158,7 +159,15 @@ export default function Access() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterOther == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOther == true
+                  ? "flex"
+                  : "none"
+                : filterOther == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Other: </Typography>
             <Button
@@ -174,7 +183,11 @@ export default function Access() {
               id="outlined-basic"
               label="User"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
 
             <FormControlLabel
@@ -186,8 +199,12 @@ export default function Access() {
             sx={{ mt: 1, display: filterOther === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -204,7 +221,7 @@ export default function Access() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={3} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               color="success"

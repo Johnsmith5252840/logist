@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -81,6 +81,7 @@ const rows = [
   },
 ];
 export default function Post() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [orderValue, setOrderValue] = React.useState([null, null]);
   const [statusValue, setStatusValue] = React.useState([null, null]);
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
@@ -183,7 +184,14 @@ export default function Post() {
           </Box>
           <Box className="filterBox" gap={3} mt="30px">
             <Typography sx={{ position: "absolute" }}>To group: </Typography>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "180px" }}>
+            <FormControl
+              sx={{
+                m: 1,
+                minWidth: 320,
+                ml: desktop ? "180px" : "0px",
+                mt: desktop ? "0px" : 5,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Report About
               </InputLabel>
@@ -204,7 +212,15 @@ export default function Post() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -220,9 +236,18 @@ export default function Post() {
               id="outlined-basic"
               label="Order Number"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "180px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Outgoing invoices are paid
               </InputLabel>
@@ -237,7 +262,12 @@ export default function Post() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "180px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Received invoices are paid
               </InputLabel>
@@ -260,7 +290,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -273,9 +311,9 @@ export default function Post() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={3}>
+              <Box display={desktop ? "flex" : "block"} gap={3}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box sx={{ ml: "60px" }}>
+                  <Box sx={{ ml: desktop ? "60px" : "0px" }}>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                       Order date From:
                     </Typography>
@@ -338,7 +376,11 @@ export default function Post() {
                   </Box>
                 </LocalizationProvider>
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+              >
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -369,7 +411,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterClients == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterClients == true
+                  ? "flex"
+                  : "none"
+                : filterClients == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Clients: </Typography>
             <Button
@@ -386,9 +436,13 @@ export default function Post() {
               id="outlined-basic"
               label="Client"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Client Type
               </InputLabel>
@@ -403,7 +457,7 @@ export default function Post() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Exclude clients type
               </InputLabel>
@@ -425,7 +479,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDirections == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDirections == true
+                  ? "flex"
+                  : "none"
+                : filterDirections == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Directions: </Typography>
             <Button
@@ -437,7 +499,13 @@ export default function Post() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Country
               </InputLabel>
@@ -452,7 +520,7 @@ export default function Post() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Region
               </InputLabel>
@@ -467,7 +535,7 @@ export default function Post() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Country
               </InputLabel>
@@ -482,7 +550,7 @@ export default function Post() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Region
               </InputLabel>
@@ -504,7 +572,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterUsers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterUsers == true
+                  ? "flex"
+                  : "none"
+                : filterUsers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Users: </Typography>
             <Button
@@ -516,7 +592,13 @@ export default function Post() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -536,7 +618,15 @@ export default function Post() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterOrder == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOrder == true
+                  ? "flex"
+                  : "none"
+                : filterOrder == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Order: </Typography>
             <Button
@@ -548,7 +638,13 @@ export default function Post() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Other Status
               </InputLabel>
@@ -568,8 +664,12 @@ export default function Post() {
             sx={{ mt: 1, display: filterOrder === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -586,7 +686,7 @@ export default function Post() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={3} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               color="success"

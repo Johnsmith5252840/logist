@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
@@ -136,6 +136,7 @@ const IOSSwitch = styled((props) => (
   },
 }));
 export default function Cargos() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
   const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
   const [cargo, setCargoValue] = React.useState([null, null]);
@@ -266,7 +267,15 @@ export default function Cargos() {
             className="filterBox"
             gap={1}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -278,7 +287,9 @@ export default function Cargos() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{ m: 1, minWidth: 320, ml: desktop ? "60px" : "0px" }}
+            >
               <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -298,7 +309,15 @@ export default function Cargos() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterContragents == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterContragents == true
+                  ? "flex"
+                  : "none"
+                : filterContragents == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Contragents: </Typography>
             <Button
@@ -314,9 +333,18 @@ export default function Cargos() {
               id="outlined-basic"
               label="Client"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
             />
-            <TextField id="outlined-basic" label="Carrier" variant="outlined" />
+            <TextField
+              id="outlined-basic"
+              label="Carrier"
+              variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+            />
           </Box>
           <Divider
             sx={{
@@ -327,7 +355,15 @@ export default function Cargos() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterLoading == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterLoading == true
+                  ? "flex"
+                  : "none"
+                : filterLoading == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Loading: </Typography>
             <Button
@@ -339,7 +375,9 @@ export default function Cargos() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{ m: 1, minWidth: 320, ml: desktop ? "60px" : "0px" }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Country
               </InputLabel>
@@ -358,9 +396,20 @@ export default function Cargos() {
               id="outlined-basic"
               label="Post Code"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
-            <TextField id="outlined-basic" label="City" variant="outlined" />
-            <TextField id="outlined-basic" label="Address" variant="outlined" />
+            <TextField
+              id="outlined-basic"
+              label="City"
+              variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Address"
+              variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+            />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Box>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -389,7 +438,15 @@ export default function Cargos() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterUnloading == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterUnloading == true
+                  ? "flex"
+                  : "none"
+                : filterUnloading == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Unloading: </Typography>
             <Button
@@ -401,7 +458,9 @@ export default function Cargos() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{ m: 1, minWidth: 320, ml: desktop ? "60px" : "0px" }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Country
               </InputLabel>
@@ -420,9 +479,20 @@ export default function Cargos() {
               id="outlined-basic"
               label="Post Code"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
-            <TextField id="outlined-basic" label="City" variant="outlined" />
-            <TextField id="outlined-basic" label="Address" variant="outlined" />
+            <TextField
+              id="outlined-basic"
+              label="City"
+              variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Address"
+              variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
+            />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Box>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -451,7 +521,15 @@ export default function Cargos() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterCargoStatuses == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCargoStatuses == true
+                  ? "flex"
+                  : "none"
+                : filterCargoStatuses == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>
               Cargo Statuses:{" "}
@@ -466,7 +544,7 @@ export default function Cargos() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
+              <Box ml={desktop ? "60px" : "0px"}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Cargo status setting date From:
                 </Typography>
@@ -486,7 +564,7 @@ export default function Cargos() {
                 />
               </Box>
             </LocalizationProvider>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Cargo Statuses
               </InputLabel>
@@ -511,7 +589,15 @@ export default function Cargos() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterOrders == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOrders == true
+                  ? "flex"
+                  : "none"
+                : filterOrders == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Orders: </Typography>
             <Button
@@ -527,9 +613,13 @@ export default function Cargos() {
               id="outlined-basic"
               label="Order Number"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Status
               </InputLabel>
@@ -543,7 +633,7 @@ export default function Cargos() {
                 <MenuItem value={3}>No</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Issued invoice in order
               </InputLabel>
@@ -557,7 +647,7 @@ export default function Cargos() {
                 <MenuItem value={3}>No</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">Tags</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -576,7 +666,15 @@ export default function Cargos() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterCargos == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCargos == true
+                  ? "flex"
+                  : "none"
+                : filterCargos == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Cargos: </Typography>
             <Button
@@ -589,14 +687,18 @@ export default function Cargos() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={3}>
+              <Box display={desktop ? "flex" : "block"} gap={3}>
                 <TextField
                   id="outlined-basic"
                   label="Vehicle Number"
                   variant="outlined"
-                  sx={{ ml: "60px" }}
+                  sx={{
+                    width: 320,
+                    ml: desktop ? "60px" : "0px",
+                    mt: desktop ? "0px" : 2,
+                  }}
                 />
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Invoice for cargos
                   </InputLabel>
@@ -610,7 +712,7 @@ export default function Cargos() {
                     <MenuItem value={3}>No</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Trip
                   </InputLabel>
@@ -629,8 +731,13 @@ export default function Cargos() {
                   label="Consignment without trip"
                 />
               </Box>
-              <Box display="flex" gap={3} ml="60px" mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+                mt={1}
+              >
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Consignment with consolidation
                   </InputLabel>
@@ -648,8 +755,9 @@ export default function Cargos() {
                   id="outlined-basic"
                   label="Cargo Name"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Attributes
                   </InputLabel>
@@ -672,7 +780,15 @@ export default function Cargos() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterSort == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterSort == true
+                  ? "flex"
+                  : "none"
+                : filterSort == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Sort: </Typography>
             <Button
@@ -684,7 +800,13 @@ export default function Cargos() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">By</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -696,7 +818,7 @@ export default function Cargos() {
                 <MenuItem value={3}>No</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Order
               </InputLabel>
@@ -716,12 +838,12 @@ export default function Cargos() {
           />
         </Box>
         <Box
-          display="flex"
+          display={desktop ? "flex" : "block"}
           justifyContent="space-between"
           mt={2}
           alignItems="center"
         >
-          <Box display="flex" gap={1}>
+          <Box display={desktop ? "flex" : "block"} gap={1}>
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -738,7 +860,7 @@ export default function Cargos() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={1} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={1} alignItems="center">
             <Button
               variant="outlined"
               color="success"

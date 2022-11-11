@@ -4,19 +4,35 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DataGrid } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
-
+import Modal from "@mui/material/Modal";
+import Basic from "./Basic";
+import Cargo from "./Cargo";
+const style = {
+  position: "absolute",
+  top: "5%",
+  left: "5%",
+  width: "90%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
 const columns = [
   { field: "id", headerName: "Request Number", width: 120 },
   { field: "status", headerName: "Status" },
@@ -82,7 +98,41 @@ const rows = [
   },
 ];
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
 export default function Archive() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [requestValue, setRequestValue] = React.useState([null, null]);
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
   const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
@@ -108,6 +158,14 @@ export default function Archive() {
   const [filterCargos, setFilterCargos] = React.useState(false);
   const [filterUsers, setFilterUsers] = React.useState(false);
   const [filterOther, setFilterOther] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const handleChange = (event) => {
     setClient(event.target.value);
   };
@@ -269,7 +327,15 @@ export default function Archive() {
             className="filterBox"
             gap={1}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -285,12 +351,17 @@ export default function Archive() {
               id="outlined-basic"
               label="Request Number"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                ml: desktop ? "60px" : "0px",
+                width: 320,
+                mt: desktop ? "" : 2,
+              }}
             />
             <TextField
               id="outlined-basic"
               label="Client's order Number"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "" : 2 }}
             />
           </Box>
           <Divider
@@ -299,7 +370,15 @@ export default function Archive() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -312,7 +391,7 @@ export default function Archive() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box sx={{ ml: "60px" }}>
+              <Box sx={{ ml: desktop ? "60px" : "0px" }}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Request date From:
                 </Typography>
@@ -381,7 +460,15 @@ export default function Archive() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterClients == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterClients == true
+                  ? "flex"
+                  : "none"
+                : filterClients == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Clients: </Typography>
             <Button
@@ -397,7 +484,7 @@ export default function Archive() {
               id="outlined-basic"
               label="Client"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{ ml: desktop ? "60px" : "0px", width: 320 }}
             />
             <FormControl sx={{ m: 1, minWidth: 320 }}>
               <InputLabel id="demo-simple-select-helper-label">
@@ -423,7 +510,15 @@ export default function Archive() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterDirections == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDirections == true
+                  ? "flex"
+                  : "none"
+                : filterDirections == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Directions: </Typography>
             <Button
@@ -435,7 +530,7 @@ export default function Archive() {
             >
               Del
             </Button>
-            <Box sx={{ ml: "60px" }}>
+            <Box sx={{ ml: desktop ? "60px" : "0px" }}>
               <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                 Country From:
               </Typography>
@@ -484,13 +579,23 @@ export default function Archive() {
               <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                 City From:
               </Typography>
-              <TextField id="outlined-basic" label="City" variant="outlined" />
+              <TextField
+                id="outlined-basic"
+                label="City"
+                variant="outlined"
+                sx={{ width: 320 }}
+              />
             </Box>
             <Box>
               <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                 City To:
               </Typography>
-              <TextField id="outlined-basic" label="City" variant="outlined" />
+              <TextField
+                id="outlined-basic"
+                label="City"
+                variant="outlined"
+                sx={{ width: 320 }}
+              />
             </Box>
             <Box>
               <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -500,6 +605,7 @@ export default function Archive() {
                 id="outlined-basic"
                 label="postcode"
                 variant="outlined"
+                sx={{ width: 320 }}
               />
             </Box>
             <Box>
@@ -510,6 +616,7 @@ export default function Archive() {
                 id="outlined-basic"
                 label="postcode"
                 variant="outlined"
+                sx={{ width: 320 }}
               />
             </Box>
           </Box>
@@ -519,7 +626,15 @@ export default function Archive() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterTransport == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterTransport == true
+                  ? "flex"
+                  : "none"
+                : filterTransport == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Transport: </Typography>
             <Button
@@ -531,7 +646,13 @@ export default function Archive() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Transport Type
               </InputLabel>
@@ -548,7 +669,7 @@ export default function Archive() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Carrier
               </InputLabel>
@@ -572,7 +693,15 @@ export default function Archive() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterCargos == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCargos == true
+                  ? "flex"
+                  : "none"
+                : filterCargos == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Cargos: </Typography>
             <Button
@@ -584,7 +713,13 @@ export default function Archive() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Patial Cargos
               </InputLabel>
@@ -607,7 +742,15 @@ export default function Archive() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterUsers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterUsers == true
+                  ? "flex"
+                  : "none"
+                : filterUsers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Users: </Typography>
             <Button
@@ -619,7 +762,13 @@ export default function Archive() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Seller
               </InputLabel>
@@ -635,7 +784,7 @@ export default function Archive() {
                 <MenuItem value={3}>No</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Logistician
               </InputLabel>
@@ -658,7 +807,15 @@ export default function Archive() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterOther == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOther == true
+                  ? "flex"
+                  : "none"
+                : filterOther == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Other: </Typography>
             <Button
@@ -671,8 +828,14 @@ export default function Archive() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={1}>
-                <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
+                <FormControl
+                  sx={{
+                    minWidth: 320,
+                    ml: desktop ? "60px" : "0px",
+                    mt: desktop ? "" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Request Purpose
                   </InputLabel>
@@ -688,7 +851,7 @@ export default function Archive() {
                     <MenuItem value={3}>No</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Status
                   </InputLabel>
@@ -704,7 +867,7 @@ export default function Archive() {
                     <MenuItem value={3}>No</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Tags
                   </InputLabel>
@@ -721,8 +884,10 @@ export default function Archive() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={1} mt="20px">
-                <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={1} mt="20px">
+                <FormControl
+                  sx={{ minWidth: 320, ml: desktop ? "60px" : "0px" }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Request Received
                   </InputLabel>
@@ -738,7 +903,7 @@ export default function Archive() {
                     <MenuItem value={3}>No</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Request expired
                   </InputLabel>
@@ -754,7 +919,7 @@ export default function Archive() {
                     <MenuItem value={3}>No</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Department
                   </InputLabel>
@@ -777,16 +942,12 @@ export default function Archive() {
             sx={{ mt: 1, display: filterOther === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={1}>
-            <Button
-              variant="contained"
-              color="success"
-              startIcon={<AddIcon />}
-              sx={{ borderRadius: "20px" }}
-            >
-              New Request
-            </Button>
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={1}>
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -803,54 +964,62 @@ export default function Archive() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={1} alignItems="center">
-            <Typography>Total:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-              }}
+          <Box display={desktop ? "flex" : "block"} gap={1} alignItems="center">
+            <Box display="flex" gap={1} alignItems="center">
+              <Typography>Total:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                }}
+              >
+                2
+              </span>
+              <Typography>Confirmed:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                }}
+              >
+                0
+              </span>
+              <Typography>Not Confirmed:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                  color: "red",
+                }}
+              >
+                0
+              </span>
+            </Box>
+            <Box
+              display={desktop ? "flex" : "block"}
+              gap={1}
+              alignItems="center"
             >
-              2
-            </span>
-            <Typography>Confirmed:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-              }}
-            >
-              0
-            </span>
-            <Typography>Not Confirmed:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "red",
-              }}
-            >
-              0
-            </span>
-            <Button
-              variant="outlined"
-              color="success"
-              startIcon={<AddIcon />}
-              sx={{ borderRadius: "20px" }}
-            >
-              Import From Excel
-            </Button>
-            <Button
-              variant="outlined"
-              color="success"
-              startIcon={<AddIcon />}
-              sx={{ borderRadius: "20px" }}
-            >
-              Export To Excel
-            </Button>
+              <Button
+                variant="outlined"
+                color="success"
+                startIcon={<AddIcon />}
+                sx={{ borderRadius: "20px" }}
+              >
+                Import From Excel
+              </Button>
+              <Button
+                variant="outlined"
+                color="success"
+                startIcon={<AddIcon />}
+                sx={{ borderRadius: "20px" }}
+              >
+                Export To Excel
+              </Button>
+            </Box>
           </Box>
         </Box>
         <Box mt={2}>
@@ -864,6 +1033,67 @@ export default function Archive() {
             />
           </div>
         </Box>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography
+              id="modal-modal-title"
+              variant="h4"
+              fontWeight="700"
+              component="h2"
+            >
+              New request
+            </Typography>
+            <Box sx={{ width: "100%" }}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <Tabs
+                  value={value}
+                  onChange={handleTabChange}
+                  aria-label="basic tabs example"
+                >
+                  <Tab
+                    icon={<span className="active" />}
+                    label={
+                      <Box className="tabBtn">
+                        <span style={{ color: "white" }}>
+                          Basic Information
+                        </span>
+                      </Box>
+                    }
+                    {...a11yProps(0)}
+                  />
+                  <Tab
+                    icon={<span className="archive" />}
+                    label={
+                      <Box className="tabBtn">
+                        <span style={{ color: "white" }}>
+                          Cargo Information
+                        </span>
+                      </Box>
+                    }
+                    {...a11yProps(1)}
+                  />
+                </Tabs>
+              </Box>
+              <TabPanel value={value} index={0}>
+                <Basic />
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                <Cargo />
+              </TabPanel>
+            </Box>
+
+            <Box display="flex" justifyContent="end" m={2}>
+              <Button variant="contained" color="success" onClick={handleClose}>
+                Save
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
       </div>
     </>
   );

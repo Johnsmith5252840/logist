@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -132,6 +132,7 @@ const IOSSwitch = styled((props) => (
   },
 }));
 export default function Expenses() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [orderValue, setOrderValue] = React.useState([null, null]);
   const [issuedValue, setIssuedValue] = React.useState([null, null]);
   const [expensesValue, setExpensesValue] = React.useState([null, null]);
@@ -197,7 +198,15 @@ export default function Expenses() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -210,24 +219,30 @@ export default function Expenses() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={1}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
                 <TextField
                   id="outlined-basic"
                   label="Order Number"
                   variant="outlined"
-                  sx={{ ml: "60px" }}
+                  sx={{
+                    width: 320,
+                    mt: desktop ? "0px" : 2,
+                    ml: desktop ? "60px" : "0px",
+                  }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Number Invoices"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Name"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Expenses
                   </InputLabel>
@@ -242,7 +257,7 @@ export default function Expenses() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Show if
                   </InputLabel>
@@ -258,8 +273,14 @@ export default function Expenses() {
                   </Select>
                 </FormControl>
               </Box>
-              <Box display="flex" gap={1} mt={1}>
-                <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={1} mt={1}>
+                <FormControl
+                  sx={{
+                    minWidth: 320,
+                    ml: desktop ? "60px" : "0px",
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
                   <InputLabel id="demo-simple-select-helper-label">
                     Order Status
                   </InputLabel>
@@ -274,7 +295,7 @@ export default function Expenses() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Invoicing company
                   </InputLabel>
@@ -307,7 +328,15 @@ export default function Expenses() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -320,9 +349,9 @@ export default function Expenses() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={3}>
+              <Box display={desktop ? "flex" : "block"} gap={3}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box sx={{ ml: "60px" }}>
+                  <Box sx={{ ml: desktop ? "60px" : "0px" }}>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                       Order date From:
                     </Typography>
@@ -385,7 +414,11 @@ export default function Expenses() {
                   </Box>
                 </LocalizationProvider>
               </Box>
-              <Box display="flex" gap={3} ml="60px">
+              <Box
+                display={desktop ? "flex" : "block"}
+                gap={3}
+                ml={desktop ? "60px" : "0px"}
+              >
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box>
                     <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
@@ -416,7 +449,15 @@ export default function Expenses() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterContragents == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterContragents == true
+                  ? "flex"
+                  : "none"
+                : filterContragents == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Contragents: </Typography>
             <Button
@@ -428,7 +469,13 @@ export default function Expenses() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Contragent
               </InputLabel>
@@ -443,7 +490,7 @@ export default function Expenses() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Customer
               </InputLabel>
@@ -466,8 +513,12 @@ export default function Expenses() {
             }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}

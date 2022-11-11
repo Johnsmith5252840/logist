@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -79,6 +79,7 @@ const rows = [
 ];
 
 export default function Contacts() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [dateValue, setDateValue] = React.useState([null, null]);
   const [filterDate, setFilterDate] = React.useState(true);
   const [filterClients, setFilterClients] = React.useState(true);
@@ -153,7 +154,15 @@ export default function Contacts() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -166,7 +175,7 @@ export default function Contacts() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box sx={{ ml: "60px" }}>
+              <Box sx={{ ml: desktop ? "60px" : "0px" }}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Date From:
                 </Typography>
@@ -193,7 +202,15 @@ export default function Contacts() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterClients == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterClients == true
+                  ? "flex"
+                  : "none"
+                : filterClients == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Clients: </Typography>
             <Button
@@ -209,7 +226,11 @@ export default function Contacts() {
               id="outlined-basic"
               label="Client"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
           </Box>
           <Divider
@@ -221,7 +242,15 @@ export default function Contacts() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterUsers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterUsers == true
+                  ? "flex"
+                  : "none"
+                : filterUsers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Users: </Typography>
             <Button
@@ -233,7 +262,14 @@ export default function Contacts() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                m: 1,
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Employee
               </InputLabel>
@@ -258,7 +294,15 @@ export default function Contacts() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterOther == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOther == true
+                  ? "flex"
+                  : "none"
+                : filterOther == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Other: </Typography>
             <Button
@@ -270,7 +314,14 @@ export default function Contacts() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                m: 1,
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Contact Type
               </InputLabel>
@@ -293,8 +344,12 @@ export default function Contacts() {
             }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}

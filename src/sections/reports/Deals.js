@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -81,6 +81,7 @@ const rows = [
   },
 ];
 export default function Trips() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [orderValue, setOrderValue] = React.useState([null, null]);
   const [filterID, setFilterID] = React.useState(true);
   const [filterOrder, setFilterOrder] = React.useState(true);
@@ -156,7 +157,15 @@ export default function Trips() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -168,7 +177,13 @@ export default function Trips() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Order Number
               </InputLabel>
@@ -190,7 +205,15 @@ export default function Trips() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterOrder == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterOrder == true
+                  ? "flex"
+                  : "none"
+                : filterOrder == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>
               Order Status:{" "}
@@ -204,7 +227,13 @@ export default function Trips() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px", mt: "50px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "50px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Status
               </InputLabel>
@@ -248,7 +277,15 @@ export default function Trips() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterEmployee == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterEmployee == true
+                  ? "flex"
+                  : "none"
+                : filterEmployee == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Employee: </Typography>
             <Button
@@ -260,7 +297,13 @@ export default function Trips() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Seller
               </InputLabel>
@@ -283,7 +326,15 @@ export default function Trips() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterContragents == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterContragents == true
+                  ? "flex"
+                  : "none"
+                : filterContragents == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Contragents: </Typography>
             <Button
@@ -295,7 +346,13 @@ export default function Trips() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Client
               </InputLabel>
@@ -310,7 +367,7 @@ export default function Trips() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Carrier
               </InputLabel>
@@ -325,7 +382,7 @@ export default function Trips() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ minWidth: 320 }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Company
               </InputLabel>
@@ -348,8 +405,12 @@ export default function Trips() {
             }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}

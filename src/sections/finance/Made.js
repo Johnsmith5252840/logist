@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
@@ -85,6 +85,7 @@ const rows = [
 ];
 
 export default function Made() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [paymentValue, setPaymentValue] = React.useState([null, null]);
   const [filterID, setFilterID] = React.useState(true);
   const [filterDate, setFilterDate] = React.useState(false);
@@ -161,7 +162,15 @@ export default function Made() {
             className="filterBox"
             gap={1}
             mt="30px"
-            display={filterID == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterID == true
+                  ? "flex"
+                  : "none"
+                : filterID == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>ID: </Typography>
             <Button
@@ -177,12 +186,17 @@ export default function Made() {
               id="outlined-basic"
               label="Order Number"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
             <TextField
               id="outlined-basic"
               label="Invoices Number"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
           <Divider
@@ -191,7 +205,15 @@ export default function Made() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -204,7 +226,7 @@ export default function Made() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
+              <Box ml={desktop ? "60px" : "0px"}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Payment date From:
                 </Typography>
@@ -234,7 +256,15 @@ export default function Made() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterCarriers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCarriers == true
+                  ? "flex"
+                  : "none"
+                : filterCarriers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Carriers: </Typography>
             <Button
@@ -250,7 +280,11 @@ export default function Made() {
               id="outlined-basic"
               label="Carrier"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
           </Box>
 
@@ -260,7 +294,15 @@ export default function Made() {
           <Box
             className="filterBox"
             gap={1}
-            display={filterPayments == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterPayments == true
+                  ? "flex"
+                  : "none"
+                : filterPayments == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Payments: </Typography>
             <Button
@@ -272,7 +314,14 @@ export default function Made() {
             >
               Del
             </Button>
-            <FormControl sx={{ m: 1, minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                m: 1,
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Payment Type
               </InputLabel>
@@ -293,12 +342,12 @@ export default function Made() {
           />
         </Box>
         <Box
-          display="flex"
+          display={desktop ? "flex" : "block"}
           justifyContent="space-between"
           mt={2}
           alignItems="center"
         >
-          <Box display="flex" gap={1}>
+          <Box display={desktop ? "flex" : "block"} gap={1}>
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -315,7 +364,12 @@ export default function Made() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={1} alignItems="center">
+          <Box
+            display="flex"
+            justifyContent={desktop ? "" : "center"}
+            gap={1}
+            alignItems="center"
+          >
             <Typography>Payments sum:</Typography>
             <span
               style={{

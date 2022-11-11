@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
@@ -188,6 +188,7 @@ function a11yProps(index) {
 }
 
 export default function Carriers() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [creationCarrierValue, setCreationCarrierValue] = React.useState([
     null,
     null,
@@ -278,7 +279,15 @@ export default function Carriers() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterCarriers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterCarriers == true
+                  ? "flex"
+                  : "none"
+                : filterCarriers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Carriers: </Typography>
             <Button
@@ -290,21 +299,21 @@ export default function Carriers() {
             >
               Del
             </Button>
-            <Box sx={{ ml: "60px" }}>
-              <Box display="flex" gap={1}>
+            <Box sx={{ ml: desktop ? "60px" : "0px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
                 <TextField
                   id="outlined-basic"
                   label="Company Name"
                   variant="outlined"
-                  sx={{ mt: "50px" }}
+                  sx={{ width: 320, mt: desktop ? "50px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Company code(INN, EGRPOU, VAT, BIN, UNN)"
                   variant="outlined"
-                  sx={{ mt: "50px" }}
+                  sx={{ width: 320, mt: desktop ? "50px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 320, mt: "50px" }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "50px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Activity Area
                   </InputLabel>
@@ -341,8 +350,8 @@ export default function Carriers() {
                   </Box>
                 </LocalizationProvider>
               </Box>
-              <Box display="flex" gap={1} mt={1}>
-                <FormControl sx={{ minWidth: 320 }}>
+              <Box display={desktop ? "flex" : "block"} gap={1} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Country
                   </InputLabel>
@@ -361,8 +370,9 @@ export default function Carriers() {
                   id="outlined-basic"
                   label="City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Transport Type
                   </InputLabel>
@@ -377,7 +387,7 @@ export default function Carriers() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320 }}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Type of Carrier
                   </InputLabel>
@@ -396,6 +406,7 @@ export default function Carriers() {
                   id="outlined-basic"
                   label="Phone"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -406,7 +417,15 @@ export default function Carriers() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDirections == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDirections == true
+                  ? "flex"
+                  : "none"
+                : filterDirections == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Directions: </Typography>
             <Button
@@ -419,12 +438,12 @@ export default function Carriers() {
               Del
             </Button>
             <Box>
-              <Box display="flex" gap={1}>
-                <Box sx={{ ml: "60px" }}>
+              <Box display={desktop ? "flex" : "block"} gap={1}>
+                <Box sx={{ ml: desktop ? "60px" : "0px" }}>
                   <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                     Direction From:
                   </Typography>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Country
                     </InputLabel>
@@ -444,7 +463,7 @@ export default function Carriers() {
                   <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                     To:
                   </Typography>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Country
                     </InputLabel>
@@ -464,7 +483,7 @@ export default function Carriers() {
                   <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                     Licences
                   </Typography>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Licences
                     </InputLabel>
@@ -484,7 +503,7 @@ export default function Carriers() {
                   <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                     Departure region
                   </Typography>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Region
                     </InputLabel>
@@ -504,7 +523,7 @@ export default function Carriers() {
                   <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                     Region of arrival
                   </Typography>
-                  <FormControl sx={{ minWidth: 320 }}>
+                  <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Region
                     </InputLabel>
@@ -521,21 +540,23 @@ export default function Carriers() {
                   </FormControl>
                 </Box>
               </Box>
-              <Box display="flex" gap={1} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={1} mt={1}>
                 <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                   label="Exact routes only"
-                  sx={{ ml: "60px" }}
+                  sx={{ ml: desktop ? "60px" : "0px" }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Departure City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Destination City"
                   variant="outlined"
+                  sx={{ width: 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
             </Box>
@@ -547,7 +568,15 @@ export default function Carriers() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterUsers == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterUsers == true
+                  ? "flex"
+                  : "none"
+                : filterUsers == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Users: </Typography>
             <Button
@@ -559,7 +588,13 @@ export default function Carriers() {
             >
               Del
             </Button>
-            <FormControl sx={{ minWidth: 320, ml: "60px" }}>
+            <FormControl
+              sx={{
+                minWidth: 320,
+                ml: desktop ? "60px" : "0px",
+                mt: desktop ? "0px" : 2,
+              }}
+            >
               <InputLabel id="demo-simple-select-helper-label">
                 Manager
               </InputLabel>
@@ -578,6 +613,7 @@ export default function Carriers() {
               id="outlined-basic"
               label="Contact person"
               variant="outlined"
+              sx={{ width: 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
 
@@ -587,7 +623,15 @@ export default function Carriers() {
           <Box
             className="filterBox"
             gap={3}
-            display={filterDate == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterDate == true
+                  ? "flex"
+                  : "none"
+                : filterDate == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Date: </Typography>
             <Button
@@ -600,7 +644,7 @@ export default function Carriers() {
               Del
             </Button>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
+              <Box ml={desktop ? "60px" : "0px"}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Contact date From:
                 </Typography>
@@ -621,7 +665,7 @@ export default function Carriers() {
               </Box>
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box ml="60px">
+              <Box ml={desktop ? "60px" : "0px"}>
                 <Typography sx={{ mt: 2, mb: 1, textAlign: "left" }}>
                   Date of Creation From:
                 </Typography>
@@ -645,9 +689,9 @@ export default function Carriers() {
               id="outlined-basic"
               label="Carrier contract number with carrier"
               variant="outlined"
-              sx={{ mt: "50px" }}
+              sx={{ width: 320, mt: desktop ? "50px" : 2 }}
             />
-            <FormControl sx={{ minWidth: 320, mt: "50px" }}>
+            <FormControl sx={{ minWidth: 320, mt: desktop ? "50px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Has Contract
               </InputLabel>
@@ -669,12 +713,12 @@ export default function Carriers() {
           sx={{ mt: 1, display: filterDate === true ? "flex" : "none" }}
         />
         <Box
-          display="flex"
+          display={desktop ? "flex" : "block"}
           justifyContent="space-between"
           mt={2}
           alignItems="center"
         >
-          <Box display="flex" gap={1}>
+          <Box display={desktop ? "flex" : "block"} gap={1}>
             <Button
               variant="contained"
               color="success"
@@ -700,18 +744,31 @@ export default function Carriers() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={1} alignItems="center">
-            <Typography>Carriers:</Typography>
-            <span
-              style={{
-                backgroundColor: "#e0dddd",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                color: "green",
-              }}
+          <Box display={desktop ? "flex" : "block"} gap={1} alignItems="center">
+            <Box
+              display="flex"
+              justifyContent={desktop ? "" : "center"}
+              alignItems="center"
             >
-              1
-            </span>
+              <Typography>Carriers:</Typography>
+              <span
+                style={{
+                  backgroundColor: "#e0dddd",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                  color: "green",
+                }}
+              >
+                1
+              </span>
+            </Box>
+            <Button
+              variant="contained"
+              color="success"
+              sx={{ borderRadius: "20px" }}
+            >
+              Export
+            </Button>
             <Button
               variant="outlined"
               color="success"
@@ -727,13 +784,6 @@ export default function Carriers() {
               sx={{ borderRadius: "20px" }}
             >
               XML Unloading
-            </Button>
-            <Button
-              variant="contained"
-              color="success"
-              sx={{ borderRadius: "20px" }}
-            >
-              Export
             </Button>
           </Box>
         </Box>

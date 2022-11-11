@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, Divider } from "@mui/material";
+import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { styled } from "@mui/material/styles";
@@ -81,6 +81,7 @@ const rows = [
   },
 ];
 export default function Vehicle() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [filterTransport, setFilterTransport] = React.useState(true);
   const Delete = (filterItem) => {
     switch (filterItem) {
@@ -117,7 +118,15 @@ export default function Vehicle() {
             className="filterBox"
             gap={3}
             mt="30px"
-            display={filterTransport == true ? "flex" : "none"}
+            display={
+              desktop
+                ? filterTransport == true
+                  ? "flex"
+                  : "none"
+                : filterTransport == true
+                ? "block"
+                : "none"
+            }
           >
             <Typography sx={{ position: "absolute" }}>Transport: </Typography>
             <Button
@@ -133,9 +142,13 @@ export default function Vehicle() {
               id="outlined-basic"
               label="Vehicle Number"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Transport Type
               </InputLabel>
@@ -150,7 +163,7 @@ export default function Vehicle() {
                 <MenuItem value={4}>NEDIRBTI</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 320 }}>
+            <FormControl sx={{ m: 1, minWidth: 320, mt: desktop ? "0px" : 2 }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Group
               </InputLabel>
@@ -169,15 +182,23 @@ export default function Vehicle() {
               id="outlined-basic"
               label="Carrier"
               variant="outlined"
-              sx={{ ml: "60px" }}
+              sx={{
+                width: 320,
+                mt: desktop ? "0px" : 2,
+                ml: desktop ? "60px" : "0px",
+              }}
             />
           </Box>
           <Divider
             sx={{ mt: 1, display: filterTransport === true ? "flex" : "none" }}
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Box display="flex" gap={3} alignItems="center">
+        <Box
+          display={desktop ? "flex" : "block"}
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
@@ -194,7 +215,7 @@ export default function Vehicle() {
               To Filter
             </Button>
           </Box>
-          <Box display="flex" gap={3} alignItems="center">
+          <Box display={desktop ? "flex" : "block"} gap={3} alignItems="center">
             <Button
               variant="outlined"
               color="success"

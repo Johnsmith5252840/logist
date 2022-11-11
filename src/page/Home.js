@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { useMediaQuery } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Request from "../sections/request/Index";
@@ -49,6 +50,7 @@ function a11yProps(index) {
 }
 
 export default function Home() {
+  const desktop = useMediaQuery("(min-width: 1024px)");
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -108,31 +110,32 @@ export default function Home() {
             />
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0}>
-          <Request />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Orders />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Finance />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <Clients />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <Carriers />
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          <Reports />
-        </TabPanel>
-        <TabPanel value={value} index={6}>
-          <Tasks />
-        </TabPanel>
-        <TabPanel value={value} index={7}>
-          <Settings />
-        </TabPanel>
       </Box>
+
+      <TabPanel value={value} index={0}>
+        <Request />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Orders />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Finance />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <Clients />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <Carriers />
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        <Reports />
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        <Tasks />
+      </TabPanel>
+      <TabPanel value={value} index={7}>
+        <Settings />
+      </TabPanel>
     </>
   );
 }
