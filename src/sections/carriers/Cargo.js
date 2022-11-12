@@ -68,97 +68,22 @@ export default function Cargo() {
     <>
       <div>
         <Box mt={2}>
-          <Box display={desktop ? "flex" : "block"} gap={2}>
-            <TextField
-              id="outlined-basic"
-              label="Name"
-              variant="outlined"
-              sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-            />
-            <FormControl
-              sx={{ minWidth: desktop ? 250 : 320, mt: desktop ? "0px" : 2 }}
-            >
-              <InputLabel id="demo-simple-select-helper-label">
-                Loading Method
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-              >
-                <MenuItem value={1}>VIP</MenuItem>
-                <MenuItem value={2}>SUper klientas</MenuItem>
-                <MenuItem value={3}>Paprastas klientas</MenuItem>
-                <MenuItem value={4}>NEDIRBTI</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl
-              sx={{ minWidth: desktop ? 250 : 320, mt: desktop ? "0px" : 2 }}
-            >
-              <InputLabel id="demo-simple-select-helper-label">
-                Transport type
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-              >
-                <MenuItem value={1}>VIP</MenuItem>
-                <MenuItem value={2}>SUper klientas</MenuItem>
-                <MenuItem value={3}>Paprastas klientas</MenuItem>
-                <MenuItem value={4}>NEDIRBTI</MenuItem>
-              </Select>
-            </FormControl>
-            <Box display={desktop ? "flex" : "block"}>
-              <TextField
-                id="outlined-basic"
-                label="Consignment"
-                variant="outlined"
-                sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-              />
-              <FormControl
-                sx={{ minWidth: desktop ? 100 : 320, mt: desktop ? "0px" : 2 }}
-              >
-                <InputLabel id="demo-simple-select-helper-label">
-                  Currency
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                >
-                  <MenuItem value={1}>VIP</MenuItem>
-                  <MenuItem value={2}>SUper klientas</MenuItem>
-                  <MenuItem value={3}>Paprastas klientas</MenuItem>
-                  <MenuItem value={4}>NEDIRBTI</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Box>
           <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-            <Box display={desktop ? "flex" : "block"}>
-              <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
-                <InputLabel id="demo-simple-select-helper-label">
-                  Packing type/quantity
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                >
-                  <MenuItem value={1}>VIP</MenuItem>
-                  <MenuItem value={2}>SUper klientas</MenuItem>
-                  <MenuItem value={3}>Paprastas klientas</MenuItem>
-                  <MenuItem value={4}>NEDIRBTI</MenuItem>
-                </Select>
-              </FormControl>
-              <TextField id="outlined-basic" variant="outlined" type="number" />
-            </Box>
             <TextField
               id="outlined-basic"
-              label="Weight"
+              label="Vehicle empty Weight"
               variant="outlined"
               sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
             />
             <TextField
               id="outlined-basic"
-              label="LDM"
+              label="Vehicle Full Weight"
+              variant="outlined"
+              sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Vehicle axels"
               variant="outlined"
               sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
             />
@@ -168,9 +93,11 @@ export default function Cargo() {
               variant="outlined"
               sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
             />
+          </Box>
+          <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
             <TextField
               id="outlined-basic"
-              label="Width"
+              label="Wdith"
               variant="outlined"
               sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
             />
@@ -182,23 +109,24 @@ export default function Cargo() {
             />
             <TextField
               id="outlined-basic"
-              label="Volume"
+              label="MAx Weight"
+              variant="outlined"
+              sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Max Euro pallets"
               variant="outlined"
               sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
             />
           </Box>
-
-          <FormControlLabel
-            control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-            label="Partial Cargo"
-          />
-          <TextareaAutosize
-            aria-label="minimum height"
-            minRows={5}
-            placeholder="Additional Information"
-            style={{ width: "100%", marginTop: "20px" }}
-          />
         </Box>
+        <TextareaAutosize
+          aria-label="minimum height"
+          minRows={5}
+          placeholder="Additional Information"
+          style={{ width: "100%", marginTop: "20px" }}
+        />
       </div>
     </>
   );

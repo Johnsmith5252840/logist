@@ -156,13 +156,13 @@ export default function Expenses() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 3:
-        setFilterContragents(true);
+        setFilterContragents(!filterContragents);
         break;
     }
   };

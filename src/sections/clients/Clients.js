@@ -171,19 +171,19 @@ export default function Clients() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterCompany(true);
+        setFilterCompany(!filterCompany);
         break;
       case 2:
-        setFilterDirections(true);
+        setFilterDirections(!filterDirections);
         break;
       case 3:
-        setFilterUsers(true);
+        setFilterUsers(!filterUsers);
         break;
       case 4:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 5:
-        setFilterOther(true);
+        setFilterOther(!filterOther);
         break;
     }
   };

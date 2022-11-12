@@ -114,19 +114,19 @@ export default function Payments() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 3:
-        setFilterClients(true);
+        setFilterClients(!filterClients);
         break;
       case 4:
-        setFilterUsers(true);
+        setFilterUsers(!filterUsers);
         break;
       case 5:
-        setFilterPayments(true);
+        setFilterPayments(!filterPayments);
         break;
     }
   };

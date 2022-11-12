@@ -72,41 +72,49 @@ export default function Home() {
             style={{ backgroundColor: "#23282a" }}
           >
             <Tab
+              className="requestTab"
               icon={<span className="request" />}
               label={<span style={{ color: "white" }}>Request</span>}
               {...a11yProps(0)}
             />
             <Tab
+              className="ordersTab"
               icon={<span className="order" />}
               label={<span style={{ color: "white" }}>Orders</span>}
               {...a11yProps(1)}
             />
             <Tab
+              className="financeTab"
               icon={<span className="finance" />}
               label={<span style={{ color: "white" }}>Finance</span>}
               {...a11yProps(2)}
             />
             <Tab
+              className="clientsTab"
               icon={<span className="client" />}
               label={<span style={{ color: "white" }}>Clients</span>}
               {...a11yProps(3)}
             />
             <Tab
+              className="carriersTab"
               icon={<span className="carrier" />}
               label={<span style={{ color: "white" }}>Carriers</span>}
               {...a11yProps(4)}
             />
             <Tab
+              className="reportsTab"
               icon={<span className="report" />}
               label={<span style={{ color: "white" }}>Reports</span>}
               {...a11yProps(5)}
             />
             <Tab
+              className="tasksTab"
               icon={<span className="task" />}
               label={<span style={{ color: "white" }}>Tasks</span>}
               {...a11yProps(6)}
             />
             <Tab
+              className="settingsTab"
               icon={<span className="setting" />}
               label={<span style={{ color: "white" }}>Settings</span>}
               {...a11yProps(7)}

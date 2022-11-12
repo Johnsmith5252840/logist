@@ -98,7 +98,7 @@ export default function Debts() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
     }
   };

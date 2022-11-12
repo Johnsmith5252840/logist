@@ -7,14 +7,10 @@ import Button from "@mui/material/Button";
 import { TextField, Divider, useMediaQuery } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
 import Modal from "@mui/material/Modal";
-import Basic from "./Basic";
-import Cargo from "./Cargo";
+import NewDriver from "./NewDriver";
 const style = {
   position: "absolute",
   top: "5%",
@@ -26,39 +22,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
 
 const columns = [
   { field: "id", headerName: "Order Number", width: 120 },
@@ -140,7 +103,7 @@ export default function Vehicle() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterDriver(true);
+        setFilterDriver(!filterDriver);
         break;
     }
   };
@@ -272,45 +235,10 @@ export default function Vehicle() {
               fontWeight="700"
               component="h2"
             >
-              New request
+              New Driver
             </Typography>
             <Box sx={{ width: "100%" }}>
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                  value={value}
-                  onChange={handleTabChange}
-                  aria-label="basic tabs example"
-                >
-                  <Tab
-                    icon={<span className="active" />}
-                    label={
-                      <Box className="tabBtn">
-                        <span style={{ color: "white" }}>
-                          Basic Information
-                        </span>
-                      </Box>
-                    }
-                    {...a11yProps(0)}
-                  />
-                  <Tab
-                    icon={<span className="archive" />}
-                    label={
-                      <Box className="tabBtn">
-                        <span style={{ color: "white" }}>
-                          Cargo Information
-                        </span>
-                      </Box>
-                    }
-                    {...a11yProps(1)}
-                  />
-                </Tabs>
-              </Box>
-              <TabPanel value={value} index={0}>
-                <Basic />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <Cargo />
-              </TabPanel>
+              <NewDriver />
             </Box>
 
             <Box display="flex" justifyContent="end" m={2}>

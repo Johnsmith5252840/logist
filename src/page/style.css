@@ -79,11 +79,71 @@
   padding: 3px;
   border-radius: 2px;
 }
-.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected {
+.css-1tnnsql.Mui-selected.requestTab {
   color: #1976d2;
-  background-color: #7de9e2;
+  background-color: #4dc437;
 }
-.css-1tnnsql.Mui-selected{
+.css-1tnnsql.Mui-selected.ordersTab {
+  color: #1976d2;
+  background-color: #60bdad;
+}
+.css-1tnnsql.Mui-selected.financeTab {
+  color: #1976d2;
+  background-color: #fa990e;
+}
+.css-1tnnsql.Mui-selected.clientsTab {
+  color: #1976d2;
+  background-color: #ae8c26;
+}
+.css-1tnnsql.Mui-selected.carriersTab {
+  color: #1976d2;
+  background-color: #df3633;
+}
+.css-1tnnsql.Mui-selected.reportsTab {
+  color: #1976d2;
+  background-color: #05f905;
+}
+.css-1tnnsql.Mui-selected.tasksTab {
+  color: #1976d2;
+  background-color: #3b2565;
+}
+.css-1tnnsql.Mui-selected.settingsTab {
+  color: #1976d2;
+  background-color: #5dc1dd;
+}
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected.requestTab {
+  color: #1976d2;
+  background-color: #4dc437;
+}
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected.ordersTab {
+  color: #1976d2;
+  background-color: #60bdad;
+}
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected.financeTab {
+  color: #1976d2;
+  background-color: #fa990e;
+}
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected.clientsTab {
+  color: #1976d2;
+  background-color: #ae8c26;
+}
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected.carriersTab {
+  color: #1976d2;
+  background-color: #df3633;
+}
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected.reportsTab {
+  color: #1976d2;
+  background-color: #05f905;
+}
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected.tasksTab {
+  color: #1976d2;
+  background-color: #3b2565;
+}
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected.settingsTab {
+  color: #1976d2;
+  background-color: #5dc1dd;
+}
+.css-1tnnsql.Mui-selected.requestTab {
   background-color: #7de9e2;
 }
 @media only screen and (max-width: 1024px) {

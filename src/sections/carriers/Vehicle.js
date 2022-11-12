@@ -144,7 +144,7 @@ export default function Vehicle() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterTransport(true);
+        setFilterTransport(!filterTransport);
         break;
     }
   };

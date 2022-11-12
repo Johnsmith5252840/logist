@@ -7,12 +7,15 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { TextField, useMediaQuery, Grid } from "@mui/material";
+import { TextField, Divider, Grid, useMediaQuery } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
+import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -64,7 +67,7 @@ const IOSSwitch = styled((props) => (
     }),
   },
 }));
-export default function Active() {
+export default function NewDriver() {
   const desktop = useMediaQuery("(min-width: 1024px)");
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
   const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
@@ -74,52 +77,48 @@ export default function Active() {
         <Box mt={2}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
                 <TextField
                   id="outlined-basic"
-                  label="Vehicle Number"
+                  label="Driver's name"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320 }}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Driver's surname"
                   variant="outlined"
                   sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
-                  label="Trailer Number"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <TextField
-                  id="outlined-basic"
-                  label="Brand"
+                  label="Middle name"
                   variant="outlined"
                   sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
-                  label="Modal"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <TextField
-                  id="outlined-basic"
-                  label="Production Date"
+                  label="Phon number"
                   variant="outlined"
                   sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
-                  label="Body Number"
+                  label="Passport"
                   variant="outlined"
                   sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
               </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
+                <TextField
+                  id="outlined-basic"
+                  label="Driving licence number"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320 }}
+                />
                 <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
-                    Euro Emission Class
+                    Driving licence categories
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
@@ -133,49 +132,19 @@ export default function Active() {
                 </FormControl>
                 <TextField
                   id="outlined-basic"
-                  label="Registration date"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <TextField
-                  id="outlined-basic"
-                  label="Tech, Passport validity"
+                  label="Fuel card"
                   variant="outlined"
                   sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <TextField
                   id="outlined-basic"
-                  label="Licence Number"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <TextField
-                  id="outlined-basic"
-                  label="Licence Validity Data"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Carrier"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <TextField
-                  id="outlined-basic"
-                  label="Drivers"
+                  label="Date of employement"
                   variant="outlined"
                   sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
                 <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">
-                    Transport Type
+                    Carrier
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
@@ -187,20 +156,24 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Group
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
+                <FormControlLabel
+                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                  label="Is active"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Bank account"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
+                />
+              </Box>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <TextField
+                  id="outlined-basic"
+                  label="Email"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
+                />
               </Box>
             </Grid>
           </Grid>

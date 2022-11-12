@@ -227,16 +227,16 @@ export default function Carriers() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterCarriers(true);
+        setFilterCarriers(!filterCarriers);
         break;
       case 2:
-        setFilterDirections(true);
+        setFilterDirections(!filterDirections);
         break;
       case 3:
-        setFilterUsers(true);
+        setFilterUsers(!filterUsers);
         break;
       case 4:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
     }
   };

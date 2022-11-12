@@ -67,7 +67,7 @@ const IOSSwitch = styled((props) => (
     }),
   },
 }));
-export default function Active() {
+export default function Basic() {
   const desktop = useMediaQuery("(min-width: 1024px)");
   const [loadingValue, setLoadingValue] = React.useState([null, null]);
   const [unloadingValue, setUnloadingValue] = React.useState([null, null]);
@@ -76,191 +76,66 @@ export default function Active() {
       <div>
         <Box mt={2}>
           <Grid container spacing={3}>
-            <Grid item xs={desktop ? 6 : 12}>
+            <Grid item xs={desktop ? 3 : 12}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Template
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>
+                <TextField
+                  id="outlined-basic"
+                  label="Invoice Number"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320 }}
+                />
+              </Box>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Contractor
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                </FormControl>{" "}
+                <TextField
+                  id="outlined-basic"
+                  label="Player"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320 }}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={desktop ? 3 : 12}>
               <Box display={desktop ? "flex" : "block"} gap={2}>
                 <TextField
                   id="outlined-basic"
-                  label="User"
+                  label="Invoice Issued"
                   variant="outlined"
                   sx={{ width: desktop ? 200 : 320 }}
                 />
                 <TextField
                   id="outlined-basic"
-                  label="Logistician"
+                  label="Pay until"
                   variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
+                  sx={{ width: desktop ? 200 : 320 }}
                 />
-                <TextField
-                  id="outlined-basic"
-                  label="Department"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Client
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Contact person
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <FormControlLabel
-                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                label="Extremely Urgent"
-              />
-              <Box display={desktop ? "flex" : "block"} gap={2}>
-                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Request is received
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Request purpose
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <Divider sx={{ mt: 1 }} />
-              <Typography fontWeight="700">Loading place</Typography>
-              <Box display={desktop ? "flex" : "block"} gap={2}>
-                <TextField
-                  id="outlined-basic"
-                  label="Place/Company"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="City"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Country
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField
-                  id="outlined-basic"
-                  label="Post Code"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <TextareaAutosize
-                  aria-label="minimum height"
-                  minRows={5}
-                  placeholder="Address"
-                  style={{ width: desktop ? "50%" : "100%" }}
-                />
-                <TextareaAutosize
-                  aria-label="minimum height"
-                  minRows={5}
-                  placeholder="Contact person and telephone"
-                  style={{ width: desktop ? "50%" : "100%" }}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={desktop ? 6 : 12}>
-              <Box display={desktop ? "flex" : "block"} gap={2}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box>
-                    <Typography sx={{ textAlign: "left" }}>
-                      Loading date From:
-                    </Typography>
-                    <DateRangePicker
-                      calendars={1}
-                      value={loadingValue}
-                      onChange={(newValue) => {
-                        setLoadingValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
-                    />
-                  </Box>
-                </LocalizationProvider>
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box>
-                    <Typography sx={{ textAlign: "left" }}>
-                      Unloading date From:
-                    </Typography>
-                    <DateRangePicker
-                      calendars={1}
-                      value={unloadingValue}
-                      onChange={(newValue) => {
-                        setUnloadingValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
-                    />
-                  </Box>
-                </LocalizationProvider>
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <FormControl
                   sx={{
                     minWidth: desktop ? 220 : 320,
@@ -268,7 +143,7 @@ export default function Active() {
                   }}
                 >
                   <InputLabel id="demo-simple-select-helper-label">
-                    Client
+                    Language
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
@@ -280,32 +155,23 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl
-                  sx={{
-                    minWidth: desktop ? 150 : 320,
-                    mt: desktop ? "0px" : 2,
-                  }}
-                >
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Contact person
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControlLabel
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="Extremely Urgent"
+              </Box>
+              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
+                <TextField
+                  id="outlined-basic"
+                  label="Without VAT"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320 }}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="With VAT"
+                  variant="outlined"
+                  sx={{ width: desktop ? 200 : 320 }}
                 />
                 <FormControl
                   sx={{
-                    minWidth: desktop ? 120 : 320,
+                    minWidth: desktop ? 220 : 320,
                     mt: desktop ? "0px" : 2,
                   }}
                 >
@@ -326,13 +192,7 @@ export default function Active() {
               <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
                 <TextField
                   id="outlined-basic"
-                  label="Price(Standard)"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="With VIT"
+                  label="Orders"
                   variant="outlined"
                   sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
                 />
@@ -343,7 +203,7 @@ export default function Active() {
                   }}
                 >
                   <InputLabel id="demo-simple-select-helper-label">
-                    VIT rate
+                    Pricing Type
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
@@ -355,87 +215,46 @@ export default function Active() {
                     <MenuItem value={4}>NEDIRBTI</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl
-                  sx={{
-                    minWidth: desktop ? 120 : 320,
-                    mt: desktop ? "0px" : 2,
-                  }}
-                >
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Tags
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <Divider sx={{ mt: 2 }} />
-              <Typography fontWeight="700">Unloading place</Typography>
-              <Box display={desktop ? "flex" : "block"} gap={2}>
-                <TextField
-                  id="outlined-basic"
-                  label="Place/Company"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="City"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <FormControl sx={{ minWidth: 320, mt: desktop ? "0px" : 2 }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Country
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                  >
-                    <MenuItem value={1}>VIP</MenuItem>
-                    <MenuItem value={2}>SUper klientas</MenuItem>
-                    <MenuItem value={3}>Paprastas klientas</MenuItem>
-                    <MenuItem value={4}>NEDIRBTI</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField
-                  id="outlined-basic"
-                  label="Post Code"
-                  variant="outlined"
-                  sx={{ width: desktop ? 200 : 320, mt: desktop ? "0px" : 2 }}
-                />
-              </Box>
-              <Box display={desktop ? "flex" : "block"} gap={2} mt={1}>
-                <TextareaAutosize
-                  aria-label="minimum height"
-                  minRows={5}
-                  placeholder="Address"
-                  style={{ width: desktop ? "50%" : "100%" }}
-                />
-                <TextareaAutosize
-                  aria-label="minimum height"
-                  minRows={5}
-                  placeholder="Contact person and telephone"
-                  style={{ width: desktop ? "50%" : "100%" }}
-                />
               </Box>
             </Grid>
+            <Grid item xs={desktop ? 3 : 12}>
+              <Box display={desktop ? "flex" : "block"} gap={2}>
+                <FormControl
+                  sx={{
+                    minWidth: desktop ? 220 : 320,
+                    mt: desktop ? "0px" : 2,
+                  }}
+                >
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Made
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                  >
+                    <MenuItem value={1}>VIP</MenuItem>
+                    <MenuItem value={2}>SUper klientas</MenuItem>
+                    <MenuItem value={3}>Paprastas klientas</MenuItem>
+                    <MenuItem value={4}>NEDIRBTI</MenuItem>
+                  </Select>
+                  <TextareaAutosize
+                    aria-label="minimum height"
+                    minRows={5}
+                    placeholder="Additional Information"
+                    style={{ width: "100%", marginTop: "20px" }}
+                  />
+                </FormControl>
+              </Box>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                label="Use nonstandard invoice template"
+              />
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                label="Without stamps and signature"
+              />
+            </Grid>
           </Grid>
-
-          <TextareaAutosize
-            aria-label="minimum height"
-            minRows={5}
-            placeholder="Additional Information"
-            style={{ width: "100%", marginTop: "20px" }}
-          />
         </Box>
       </div>
     </>

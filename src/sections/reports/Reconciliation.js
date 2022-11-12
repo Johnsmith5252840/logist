@@ -165,22 +165,22 @@ export default function Reconciliation() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 2:
-        setFilterOrder(true);
+        setFilterOrder(!filterOrder);
         break;
       case 3:
-        setFilterComapny(true);
+        setFilterComapny(!filterCompany);
         break;
       case 4:
-        setFilterClients(true);
+        setFilterClients(!filterClients);
         break;
       case 5:
-        setFilterUsers(true);
+        setFilterUsers(!filterUsers);
         break;
       case 6:
-        setFilterReconciliation(true);
+        setFilterReconciliation(!filterReconciliation);
         break;
     }
   };

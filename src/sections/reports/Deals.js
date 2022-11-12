@@ -106,16 +106,16 @@ export default function Trips() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterOrder(true);
+        setFilterOrder(!filterOrder);
         break;
       case 3:
-        setFilterEmployee(true);
+        setFilterEmployee(!filterEmployee);
         break;
       case 4:
-        setFilterContragents(true);
+        setFilterContragents(!filterContragents);
         break;
     }
   };

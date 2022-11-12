@@ -239,28 +239,28 @@ export default function Active() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 3:
-        setFilterClients(true);
+        setFilterClients(!filterClients);
         break;
       case 4:
-        setFilterDirections(true);
+        setFilterDirections(!filterDirections);
         break;
       case 5:
-        setFilterTransport(true);
+        setFilterTransport(!filterTransport);
         break;
       case 6:
-        setFilterCargos(true);
+        setFilterCargos(!filterCargos);
         break;
       case 7:
-        setFilterUsers(true);
+        setFilterUsers(!filterUsers);
         break;
       case 8:
-        setFilterOther(true);
+        setFilterOther(!filterOther);
         break;
     }
   };

@@ -351,34 +351,34 @@ export default function Orders() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 3:
-        setFilterClients(true);
+        setFilterClients(!filterClients);
         break;
       case 4:
-        setFilterCargos(true);
+        setFilterCargos(!filterCargos);
         break;
       case 5:
-        setFilterTrips(true);
+        setFilterTrips(!filterTrips);
         break;
       case 6:
-        setFilterUsers(true);
+        setFilterUsers(!filterUsers);
         break;
       case 7:
-        setFilterDocuments(true);
+        setFilterDocuments(!filterDocuments);
         break;
       case 8:
-        setFilterTransport(true);
+        setFilterTransport(!filterTransport);
         break;
       case 9:
-        setFilterOther(true);
+        setFilterOther(!filterOther);
         break;
       case 10:
-        setFilterSort(true);
+        setFilterSort(!filterSort);
         break;
     }
   };

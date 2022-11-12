@@ -110,16 +110,16 @@ export default function Made() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 3:
-        setFilterCarriers(true);
+        setFilterCarriers(!filterCarriers);
         break;
       case 4:
-        setFilterPayments(true);
+        setFilterPayments(!filterPayments);
         break;
     }
   };

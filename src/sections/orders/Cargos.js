@@ -179,28 +179,28 @@ export default function Cargos() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterContragents(true);
+        setFilterContragents(!filterContragents);
         break;
       case 3:
-        setFilterLoading(true);
+        setFilterLoading(!filterLoading);
         break;
       case 4:
-        setFilterUnloading(true);
+        setFilterUnloading(!filterUnloading);
         break;
       case 5:
-        setFilterCargosStatuses(true);
+        setFilterCargosStatuses(!filterCargoStatuses);
         break;
       case 6:
-        setFilterOrders(true);
+        setFilterOrders(!filterOrders);
         break;
       case 7:
-        setFilterCargos(true);
+        setFilterCargos(!filterCargos);
         break;
       case 8:
-        setFilterSort(true);
+        setFilterSort(!filterSort);
         break;
     }
   };

@@ -23,7 +23,7 @@ import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
 import Modal from "@mui/material/Modal";
-import Basic from "./Basic";
+import TripBasic from "./TripBasic";
 import Cargo from "./Cargo";
 const style = {
   position: "absolute",
@@ -233,25 +233,25 @@ export default function Trips() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 3:
-        setFilterCarriers(true);
+        setFilterCarriers(!filterCarriers);
         break;
       case 4:
-        setFilterTrips(true);
+        setFilterTrips(!filterTrips);
         break;
       case 5:
-        setFilterOther(true);
+        setFilterOther(!filterOther);
         break;
       case 6:
-        setFilterSort(true);
+        setFilterSort(!filterSort);
         break;
       case 7:
-        setFilterStatuses(true);
+        setFilterStatuses(!filterStatuses);
         break;
     }
   };
@@ -1002,7 +1002,7 @@ export default function Trips() {
                     label={
                       <Box className="tabBtn">
                         <span style={{ color: "white" }}>
-                          Cargo Information
+                          Cargos and Routes
                         </span>
                       </Box>
                     }
@@ -1011,7 +1011,7 @@ export default function Trips() {
                 </Tabs>
               </Box>
               <TabPanel value={value} index={0}>
-                <Basic />
+                <TripBasic />
               </TabPanel>
               <TabPanel value={value} index={1}>
                 <Cargo />

@@ -60,7 +60,7 @@ export default function Index() {
             scrollButtons="auto"
             variant="scrollable"
             aria-label="basic tabs example"
-            style={{ backgroundColor: "#7de9e2" }}
+            style={{ backgroundColor: "#fa990e" }}
           >
             <Tab
               icon={<span className="orders" />}

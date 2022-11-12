@@ -104,16 +104,16 @@ export default function Contacts() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 2:
-        filterClients(true);
+        filterClients(!filterClients);
         break;
       case 3:
-        filterUsers(true);
+        filterUsers(!filterUsers);
         break;
       case 4:
-        filterOther(true);
+        filterOther(!filterOther);
         break;
     }
   };

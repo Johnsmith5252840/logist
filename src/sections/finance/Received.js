@@ -221,16 +221,16 @@ export default function Received() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
       case 3:
-        setFilterContragents(true);
+        setFilterContragents(!filterContragents);
         break;
       case 4:
-        setFilterOther(true);
+        setFilterOther(!filterOther);
         break;
     }
   };
@@ -767,9 +767,7 @@ export default function Received() {
                     icon={<span className="archive" />}
                     label={
                       <Box className="tabBtn">
-                        <span style={{ color: "white" }}>
-                          Cargo Information
-                        </span>
+                        <span style={{ color: "white" }}>Distribution</span>
                       </Box>
                     }
                     {...a11yProps(1)}

@@ -104,13 +104,13 @@ export default function Trips() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterID(true);
+        setFilterID(!filterID);
         break;
       case 2:
-        setFilterTrips(true);
+        setFilterTrips(!filterTrips);
         break;
       case 3:
-        setFilterDate(true);
+        setFilterDate(!filterDate);
         break;
     }
   };

@@ -146,7 +146,7 @@ export default function Orders() {
   const Display = (filterItem) => {
     switch (filterItem) {
       case 1:
-        setFilterOther(true);
+        setFilterOther(!filterOther);
         break;
     }
   };
